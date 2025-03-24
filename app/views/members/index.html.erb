@@ -1,0 +1,12 @@
+<h1>Ceci est l'index des membres</h1>
+<h1> Nos membres </h1>
+<div class="members-list">
+  <% @members.each do |member| %>
+    <div class="member-card">
+      <img src="<%= asset_path(member.photos) %>" alt="<%= member.pseudo %>">
+      <h2><%= member.pseudo %></h2>
+      <p><%= member.presentation %></p>
+      <p><%=link_to member.reseau_social %> </p>
+    </div>
+  <% end %>
+</div>
