@@ -68,3 +68,9 @@ group :test do
   gem "capybara"
   gem "selenium-webdriver"
 end
+
+gem "sassc", "~> 2.4"
+
+gem "mini_magick", "~> 5.2"
+gem 'image_processing', '~> 1.2'
+

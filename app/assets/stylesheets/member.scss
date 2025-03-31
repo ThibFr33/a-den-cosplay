@@ -1,0 +1,19 @@
+.members-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 80px;
+  justify-content: space-evenly;
+}
+.members-list h1 {
+  color: rgb(206, 177, 177) ;
+  display: flex;
+}
+.member-card {
+  width: 200px;
+  text-align: center;
+  color: rgb(206, 177, 177);
+}
+.member-card img {
+  width: 100%;
+  border-radius: 10px;
+}

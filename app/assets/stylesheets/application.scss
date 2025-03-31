@@ -13,17 +13,21 @@
  *= require_tree .
  *= require_self
  */
- .members-list {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-}
-.member-card {
-  width: 200px;
-  text-align: center;
-}
-.member-card img {
-  width: 100%;
-  border-radius: 10px;
-}
 
+body {
+  background-image: image-url("background.png");
+  background-size: cover;  /* Ajuste l'image pour couvrir toute la page */
+  background-position: center; /* Centre l'image */
+  background-attachment: fixed; /* L'image reste fixe au scroll */
+  background-repeat: no-repeat; /* Empêche la répétition */
+  font-family: orbitron;
+  color: rgb(206, 177, 177);
+}
+h1 {
+  color: rgb(206, 177, 177);
+}
+.container_nav {
+  display: flex;
+  text-decoration: none;
+  color: rgb(206, 177, 177);
+}
