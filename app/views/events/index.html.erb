@@ -1,15 +1,17 @@
 
 <h1>Retrouvez nous lors de ces évènements :</h1>
-<div class="events-list">
-  <% @events.each do |event| %>
-    <div class="event-card">
-        <%= link_to event.url, target: "_blank", rel: "noopener noreferrer" do %>
-          <img src="<%= asset_path(event.photo) %>" alt="<%= event.name %>">
-        <% end %>
-        <h2><%= event.name %></h2>
-        <p> <%= event.localisation %></p>
-        <p><%= event.description %></p>
-        <p> <%= event.start_date %> au <%= event.end_date %></p>
-    </div>
-  <% end %>
+<div class="container">
+  <div class="events-list">
+    <% @events.each do |event| %>
+      <div class="event-card">
+          <%= link_to event.url, target: "_blank", rel: "noopener noreferrer" do %>
+            <img src="<%= asset_path(event.photo) %>" alt="<%= event.name %>">
+          <% end %>
+          <h2><%= event.name %></h2>
+          <p> <%= event.localisation %></p>
+          <p><%= event.description %></p>
+          <p> Du <%= event.start_date.strftime("%d/%m/%Y") %> au <%= event.end_date.strftime("%d/%m/%Y") %></p>
+      </div>
+    <% end %>
+  </div>
 </div>

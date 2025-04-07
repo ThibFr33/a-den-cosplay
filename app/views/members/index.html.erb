@@ -5,9 +5,9 @@
     <div class="member-card">
       <%= link_to member_path(member) do %>
         <img src="<%= asset_path(member.photos) %>" alt="<%= member.pseudo %>">
+      <% end %>
         <h2><%= member.pseudo %></h2>
         <p><%= member.presentation %></p>
-      <% end %>
     </div>
   <% end %>
 </div>

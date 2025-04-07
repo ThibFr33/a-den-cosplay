@@ -1,0 +1,17 @@
+class ContactFormController < ApplicationController
+  def new
+  end
+
+
+  def create
+    @name = params[:contact_form][:name]
+    @last_name = params[:contact_form][:last_name]
+    @email = params[:contact_form][:email]
+    @message = params[:contact_form][:message]
+
+    # Perform any necessary actions with the form data
+    flash[:success] = "Votre demande a bien été envoyée"
+    redirect_to :root
+  end
+
+end
