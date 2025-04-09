@@ -1,0 +1,5 @@
+<%= form_with model: @member, local: true do |f| %>
+  <%= f.label :photos, "Photos du membre" %><br>
+  <%= f.file_field :photos, multiple: true, direct_upload: true %>
+  <%= f.submit %>
+<% end %>

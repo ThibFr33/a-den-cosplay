@@ -1,9 +1,20 @@
 <h1>Voici le mando que vous avez choisi :</h1>
 
 
-      <%# <img src="<%= asset_path(@member.photos) %>" alt="<%= @member.pseudo %>">
-      <%# <%= @member.pseudo %>
-        <%# <%= link_to @member.reseau_social, target: "_blank", rel: "noopener noreferrer" do %>
-          <%# <%= @member.reseau_social %>
-        <%# <% end %>
-      <%# <%= @member.presentation %>
+<div class="carousel">
+  <div class="carousel-track">
+    <% @member.photos.each do |photo| %>
+      <div class="carousel-slide">
+        <%= image_tag photo, alt: @member.pseudo %>
+      </div>
+    <% end %>
+  </div>
+
+  <button class="carousel-button prev">&#10094;</button>
+  <button class="carousel-button next">&#10095;</button>
+</div>
+<%= @member.pseudo %>
+       <%= link_to @member.reseau_social, target: "_blank", rel: "noopener noreferrer" do %>
+          <%= @member.reseau_social %>
+      <% end %>
+      <%= @member.presentation %>

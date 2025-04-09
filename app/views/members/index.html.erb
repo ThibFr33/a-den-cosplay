@@ -4,8 +4,11 @@
   <% @members.each do |member| %>
     <div class="member-card">
       <%= link_to member_path(member) do %>
-        <img src="<%= asset_path(member.photos) %>" alt="<%= member.pseudo %>">
+        <% if member.photos.attached? %>
+          <%= image_tag member.photos.first.variant(resize_to_limit: [200, 200]), alt: member.pseudo %>
+        <% end %>
       <% end %>
+
         <h2><%= member.pseudo %></h2>
         <p><%= member.presentation %></p>
     </div>
