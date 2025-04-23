@@ -2,12 +2,12 @@
 
 <%= form_with scope: :contact_form, url: contact_form_index_path, method: :post, local: true, class: "form-container" do |form| %>
   <div class="form-group">
-    <%= form.label :Prénom, class: "form-label" %>
-    <%= form.text_field :Prénom, class: "form-input" %>
+    <%= form.label :prenom, class: "form-label" %>
+    <%= form.text_field :prenom, class: "form-input" %>
   </div>
   <div class="form-group">
-    <%= form.label :Nom, class: "form-label" %>
-    <%= form.text_field :Nom, class: "form-input" %>
+    <%= form.label :nom, class: "form-label" %>
+    <%= form.text_field :nom, class: "form-input" %>
   </div>
   <div class="form-group">
     <%= form.label :email, class: "form-label" %>
@@ -19,4 +19,3 @@
   </div>
   <%= form.submit "Envoyer", class: "form-submit" %>
 <% end %>
-
