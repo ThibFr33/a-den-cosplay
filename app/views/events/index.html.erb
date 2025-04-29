@@ -5,7 +5,7 @@
     <% @events.each do |event| %>
       <div class="event-card">
           <%= link_to event.url, target: "_blank", rel: "noopener noreferrer" do %>
-            <img src="<%= asset_path(event.photo) %>" alt="<%= event.name %>">
+            <%= image_tag url_for(event.photo), alt: event.name %>
           <% end %>
           <h2><%= event.name %></h2>
           <p> <%= event.localisation %></p>

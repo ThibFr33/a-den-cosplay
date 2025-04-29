@@ -5,32 +5,26 @@
   gap: 80px;
   justify-content: space-evenly;
 }
-.members-list h1 {
-  padding-top: 50px;
-  color: #CEB1B1;
-  display: flex;
-}
 .member-card {
   width: 200px;
   text-align: center;
   color: #CEB1B1;
 }
+.member-card h2 {
+  color: whitesmoke;
+  text-align: center;
+}
 .member-card img {
+  object-fit: cover;
   width: 100%;
   border-radius: 10px;
+  height: 250px;
+}
+.member-card:hover {
+  margin-top: -10px;
+  margin-right: -10px;;
 }
 .member-card a{
   color: #CEB1B1;
   text-decoration: none;
-}
-.id-card {
-  border: solid rgb(4, 4, 4) 10px;
-  width: 800px;
-  text-align: center;
-
-}
-.id-card img {
-  width: 100%;
-  border-radius: 30%;
-
 }

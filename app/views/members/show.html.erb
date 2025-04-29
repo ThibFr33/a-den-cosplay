@@ -1,20 +1,79 @@
-<h1>Voici le mando que vous avez choisi :</h1>
+<div class="container mt-5">
+
+  <h1 class="mb-4 text-center">Vous avez choisi :</h1>
 
 
-<div class="carousel">
-  <div class="carousel-track">
-    <% @member.photos.each do |photo| %>
-      <div class="carousel-slide">
-        <%= image_tag photo, alt: @member.pseudo %>
+  <div class="card mx-auto" style="max-width: 600px;">
+    <% if @member.photos.attached? %>
+      <div id="memberPhotosCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="5000">
+        <div class="carousel-inner">
+          <% @member.photos.each_with_index do |photo, index| %>
+            <div class="carousel-item <%= 'active' if index == 0 %>">
+              <%= image_tag url_for(photo), class: "d-block w-100", alt: @member.pseudo %>
+            </div>
+          <% end %>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#memberPhotosCarousel" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Précédent</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#memberPhotosCarousel" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Suivant</span>
+        </button>
       </div>
     <% end %>
+
+    <div class="card-body text-center">
+      <h2 class="card-title mb-3"><%= @member.pseudo %></h2>
+
+      <% if @member.reseau_social.present? %>
+        <p class="card-text">
+          <%= link_to @member.reseau_social, target: "_blank", rel: "noopener noreferrer", class: "text-decoration-none" do %>
+            <i class="bi bi-link-45deg"></i> <%= @member.reseau_social %>
+          <% end %>
+        </p>
+      <% end %>
+
+      <% if @member.presentation.present? %>
+        <p class="card-text"><%= @member.presentation %></p>
+      <% end %>
+    </div>
   </div>
 
-  <button class="carousel-button prev">&#10094;</button>
-  <button class="carousel-button next">&#10095;</button>
 </div>
-<%= @member.pseudo %>
-       <%= link_to @member.reseau_social, target: "_blank", rel: "noopener noreferrer" do %>
-          <%= @member.reseau_social %>
-      <% end %>
-      <%= @member.presentation %>
+<div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <h5 class="modal-title" id="loginModalLabel">Connexion</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermer"></button>
+      </div>
+
+      <div class="modal-body">
+        <%= form_with url: new_user_session_path, local: true do |form| %>
+          <div class="mb-3">
+            <%= form.label :email, class: "form-label" %>
+            <%= form.email_field :email, class: "form-control", autofocus: true, required: true %>
+          </div>
+
+          <div class="mb-3">
+            <%= form.label :password, class: "form-label" %>
+            <%= form.password_field :password, class: "form-control", required: true %>
+          </div>
+
+          <div class="form-check mb-3">
+            <%= form.check_box :remember_me, class: "form-check-input" %>
+            <%= form.label :remember_me, class: "form-check-label" %>
+          </div>
+
+          <div class="d-grid gap-2">
+            <%= form.submit "Se connecter", class: "btn btn-primary" %>
+          </div>
+        <% end %>
+      </div>
+
+    </div>
+  </div>
+</div>

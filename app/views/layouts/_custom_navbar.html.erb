@@ -1,10 +1,29 @@
 <header class="custom-navbar">
-    <div class="container">
-      <ul class="nav">
-      <li><%= link_to "Accueil", home_path %></li>
-      <li><%= link_to "Membres", members_path %></li>
-      <li><%= link_to "Evènements", events_path %></li>
-      <li><%= link_to "Nous contacter", new_contact_form_path %></li>
-      </ul>
-    </div>
+  <div class="container">
+
+    <ul class="nav">
+      <li class="nav-item">
+        <%= link_to "Accueil", home_path, class: "nav-link" %>
+      </li>
+      <li class="nav-item">
+        <%= link_to "Membres", members_path, class: "nav-link" %>
+      </li>
+      <li class="nav-item">
+        <%= link_to "Evènements", events_path, class: "nav-link" %>
+      </li>
+      <li class="nav-item">
+        <%= link_to "Nous contacter", new_contact_form_path, class: "nav-link" %>
+      </li>
+
+     <% unless user_signed_in? %>
+        <% if controller_name == "members" && action_name == "show" %>
+          <li class="nav-item">
+            <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#loginModal">
+              <%= image_tag "https://img.icons8.com/windows/32/mandalorian.png", alt: "Se connecter", style: "width: 40px; height: 40px;" %>
+            </button>
+          </li>
+        <% end %>
+      <% end %>
+    </ul>
+  </div>
 </header>

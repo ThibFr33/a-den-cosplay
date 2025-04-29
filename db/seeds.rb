@@ -9,12 +9,36 @@
 #   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
-puts 'Seed in progress'
+# frozen_string_literal: true
 
-Member.destroy_all
+puts "🛠 Seed in progress..."
+
+# === Helpers ===
+
+def attach_member_photo(member, filename)
+  path = Rails.root.join("app/assets/images/#{filename}")
+  if File.exist?(path)
+    member.photos.attach(
+      io: File.open(path),
+      filename: filename,
+      content_type: "image/jpeg"
+    )
+  else
+    puts "⚠️ Image manquante pour #{member.pseudo} (#{filename})"
+  end
+end
+
+
+puts "Starting..."
+
+User.destroy_all
 Event.destroy_all
+Member.destroy_all
 
-# Membres
+# === Create Members ===
+
+puts "📸 Seeding Members..."
+
 members = [
   {
     pseudo: "Vok'sha",
@@ -26,7 +50,7 @@ members = [
     photo_filename: "vok'sha.jpg"
   },
   {
-    pseudo: 'Mando.bobafett',
+    pseudo: 'Mando bobafett',
     presentation: <<~TEXT,
       Notre cosplayer 100% mandalorien pur souche à l'humour déjanté sera prêt à tout pour vous faire dire :
       "Boba Fett c'est le meilleur"
@@ -39,7 +63,7 @@ members = [
     presentation: <<~TEXT,
       Que serait Boba Fett sans sa partenaire Fennec. Christine incarne Fennec Shand avec élégance et
       précision, reproduisant chaque détail de son costume emblématique. Malgré sa nouveauté dans le milieu,
-      elle impressionne par son authenticité et son dévouement
+      elle impressionne par son authenticité et son dévouement.
     TEXT
     reseau_social: '',
     photo_filename: 'fennec_shand.jpg'
@@ -61,13 +85,13 @@ members.each do |attrs|
     presentation: attrs[:presentation],
     reseau_social: attrs[:reseau_social]
   )
-  member.photos.attach(
-    io: File.open(Rails.root.join("app/assets/images/#{attrs[:photo_filename]}")),
-    filename: attrs[:photo_filename]
-  )
+  attach_member_photo(member, attrs[:photo_filename])
 end
 
-# Événements
+# === Create Events ===
+
+puts "🎉 Seeding Events..."
+
 Event.create!(
   name: 'Bordeaux GeekFest',
   photo: 'BGF2025.jpg',
@@ -85,13 +109,29 @@ Event.create!(
   description: <<~TEXT,
     Les Geek Days sont le rendez-vous incontesté des jeunes et des familles du territoire,
     leur permettant de se rencontrer autour d'une passion commune : les mangas, le gaming, le cosplay,
-    et bien plus encore. Cet événement gratuit vise non seulement à célébrer la culture geek, mais aussi
-    à sensibiliser sur les dangers d'une utilisation excessive des écrans, tout en favorisant la mixité
-    des publics et en animant nos territoires ruraux demandeurs d’activités culturelles.
+    et bien plus encore. Cet événement gratuit vise aussi à sensibiliser sur les dangers d'une utilisation excessive des écrans,
+    tout en favorisant la mixité des publics.
   TEXT
   start_date: '2025-04-26',
   end_date: '2025-04-26',
   url: 'https://www.grand-villeneuvois.fr/geek-days-2-346.html'
 )
 
-puts 'Seed finished'
+# === Create Admin User ===
+
+puts " Seeding Admin User..."
+
+User.create!(
+  email: ENV.fetch('ADMIN_EMAIL'),
+  password: ENV.fetch('ADMIN_PASSWORD'),
+  username: "Gar'ad",
+  admin: true
+)
+User.create! (
+  email: ENV.fetch("VOK'SHA_EMAIL"),
+  password:ENV.fetch("VOK'SHA_PASSWORD"),
+  username: "Vok'sha",
+  admin: false
+)
+
+puts "✅ Seed finished successfully!"

@@ -15,11 +15,26 @@
   </head>
 
   <body>
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
-
-    <%= render "layouts/custom_navbar" %>
+    
     <%= render "layouts/flash_alert" %>
+    <%= render "layouts/custom_navbar" %>
+    <% if user_signed_in? %>
+      <%= button_to "Se déconnecter", destroy_user_session_path, method: :delete, form: { data: { turbo_confirm: "Es-tu sûr de vouloir te déconnecter ?" } } %>
+    <% end %>
+
+
     <%= yield %>
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        const toastElements = document.querySelectorAll('.toast');
+        toastElements.forEach((toastEl) => {
+          const toast = new bootstrap.Toast(toastEl);
+          toast.show();
+        });
+      });
+    </script>
+
+
+
   </body>
 </html>

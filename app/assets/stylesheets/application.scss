@@ -13,6 +13,9 @@
  *= require_tree .
  *= require_self
  */
+@import"custom_navbar";
+@import "member";
+@import "bootstrap";
 
 body {
   background-image: image-url("background.jpg");
@@ -24,7 +27,7 @@ body {
   color: #CEB1B1;
 }
 h1 {
-  color: #CEB1B1;
+  color: whitesmoke;
   padding-top: 50px;
 }
 a {
