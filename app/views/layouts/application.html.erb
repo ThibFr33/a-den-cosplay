@@ -15,7 +15,7 @@
   </head>
 
   <body>
-    
+
     <%= render "layouts/flash_alert" %>
     <%= render "layouts/custom_navbar" %>
     <% if user_signed_in? %>
@@ -34,6 +34,9 @@
       });
     </script>
 
+
+  <%= render "layouts/login_modal" %>
+  <%= render "layouts/flash_toast" %>
 
 
   </body>

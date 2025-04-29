@@ -5,6 +5,11 @@ class ApplicationController < ActionController::Base
 
   protected
 
+  def after_sign_in_path_for(resource)
+    flash[:success] = "Bienvenue sur Dragon Krayt Aden, #{resource.email} !"
+    stored_location_for(resource) || request.referer || root_path
+  end
+
   def configure_permitted_parameters
     devise_parameter_sanitizer.permit(:sign_up, keys: [:username])
     devise_parameter_sanitizer.permit(:account_update, keys: [:username])

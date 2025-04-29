@@ -42,38 +42,3 @@
   </div>
 
 </div>
-<div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-
-      <div class="modal-header">
-        <h5 class="modal-title" id="loginModalLabel">Connexion</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermer"></button>
-      </div>
-
-      <div class="modal-body">
-        <%= form_with url: new_user_session_path, local: true do |form| %>
-          <div class="mb-3">
-            <%= form.label :email, class: "form-label" %>
-            <%= form.email_field :email, class: "form-control", autofocus: true, required: true %>
-          </div>
-
-          <div class="mb-3">
-            <%= form.label :password, class: "form-label" %>
-            <%= form.password_field :password, class: "form-control", required: true %>
-          </div>
-
-          <div class="form-check mb-3">
-            <%= form.check_box :remember_me, class: "form-check-input" %>
-            <%= form.label :remember_me, class: "form-check-label" %>
-          </div>
-
-          <div class="d-grid gap-2">
-            <%= form.submit "Se connecter", class: "btn btn-primary" %>
-          </div>
-        <% end %>
-      </div>
-
-    </div>
-  </div>
-</div>
