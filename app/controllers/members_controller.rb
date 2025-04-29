@@ -27,9 +27,9 @@ end
       return
     end
 
-    # D'abord mettre à jour les autres attributs
-    if @member.update(member_params)
-      # Ensuite attacher les nouvelles photos S'IL Y EN A
+    # 1. D'abord on met à jour les champs texte (sans les photos)
+    if @member.update(member_params.except(:photos))
+      # 2. Puis on ajoute les nouvelles photos sans supprimer les anciennes
       if params[:member][:photos]
         @member.photos.attach(params[:member][:photos])
       end
@@ -39,6 +39,7 @@ end
       render :edit, status: :unprocessable_entity
     end
   end
+
 
 
   def add_photo
