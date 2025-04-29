@@ -13,9 +13,10 @@
  *= require_tree .
  *= require_self
  */
-@import"custom_navbar";
-@import "member";
-@import "bootstrap";
+ @import"custom_navbar";
+ @import "member";
+ @import "bootstrap";
+ @import "animations";
 
 body {
   background-image: image-url("background.jpg");

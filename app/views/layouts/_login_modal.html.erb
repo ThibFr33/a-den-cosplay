@@ -1,0 +1,40 @@
+<!-- app/views/shared/_login_modal.html.erb -->
+<!-- Modale de connexion Bootstrap -->
+<div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <h5 class="modal-title" id="loginModalLabel">Connexion à Dragon Krayt Aden</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermer"></button>
+      </div>
+
+      <div class="modal-body">
+        <%= form_with(scope: :user, url: user_session_path, method: :post, local: true) do |form| %>
+          <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+
+          <div class="mb-3">
+            <%= form.label :email, "Adresse email", class: "form-label" %>
+            <%= form.email_field :email, class: "form-control", required: true, autofocus: true %>
+          </div>
+
+          <div class="mb-3">
+            <%= form.label :password, "Mot de passe", class: "form-label" %>
+            <%= form.password_field :password, class: "form-control", required: true %>
+          </div>
+
+          <div class="form-check mb-3">
+            <%= form.check_box :remember_me, class: "form-check-input" %>
+            <%= form.label :remember_me, "Se souvenir de moi", class: "form-check-label" %>
+          </div>
+
+          <div class="d-grid gap-2">
+            <%= form.submit "Se connecter", class: "btn btn-primary" %>
+          </div>
+        <% end %>
+      </div>
+
+    </div>
+  </div>
+</div>
+
