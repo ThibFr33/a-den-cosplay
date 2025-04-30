@@ -21,8 +21,20 @@
   height: 250px;
 }
 .member-card:hover {
-  margin-top: -10px;
-  margin-right: -10px;;
+  transform: scale(1.1);
+  animation-name: on-hover;
+  animation-duration: 5s;
+  animation-fill-mode: forwards;
+}
+@keyframes on-hover {
+  0% {
+    height: auto;
+    opacity: 0.7;
+  }
+ 100% {
+    width: 200px;
+    height: auto;
+  }
 }
 .member-card a{
   color: #CEB1B1;

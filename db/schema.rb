@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_04_29_112327) do
+ActiveRecord::Schema[7.1].define(version: 2025_04_30_130919) do
   create_table "action_mailbox_inbound_emails", force: :cascade do |t|
     t.integer "status", default: 0, null: false
     t.string "message_id", null: false
@@ -68,6 +68,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_04_29_112327) do
     t.datetime "updated_at", null: false
     t.string "reseau_social"
     t.integer "user_id"
+    t.string "role"
     t.index ["user_id"], name: "index_members_on_user_id"
   end
 

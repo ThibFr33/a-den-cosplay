@@ -91,6 +91,7 @@ members_data = [
       renforcer et réunir tous les mandos de la galaxie Nouvelle-Aquitaine
     TEXT
     reseau_social: 'https://www.instagram.com/revan_shan33/',
+    role: "Président",
     photo_filename: "vok'sha.jpg"
   },
   {
@@ -103,6 +104,7 @@ members_data = [
       "Boba Fett c'est le meilleur"
     TEXT
     reseau_social: 'https://www.instagram.com/mando.bobafett.cosplay/',
+    role: '',
     photo_filename: 'booba_fett.jpg'
   },
   {
@@ -116,6 +118,7 @@ members_data = [
       elle impressionne par son authenticité et son dévouement.
     TEXT
     reseau_social: '',
+    role: '',
     photo_filename: 'fennec_shand.jpg'
   },
   {
@@ -128,6 +131,7 @@ members_data = [
       Il excelle également dans la stratégie, un véritable atout pour le clan.
     TEXT
     reseau_social: '',
+    role: '',
     photo_filename: "buir burk'yc.jpg"
   }
 ]
@@ -143,7 +147,8 @@ members_data.each do |data|
   member = user.create_member!(
     pseudo: data[:pseudo],
     presentation: data[:presentation],
-    reseau_social: data[:reseau_social]
+    reseau_social: data[:reseau_social],
+    role: data[:role]
   )
 
   attach_member_photo(member, data[:photo_filename]) if data[:photo_filename].present?

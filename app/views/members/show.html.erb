@@ -10,6 +10,10 @@
           <% @member.photos.each_with_index do |photo, index| %>
             <div class="carousel-item <%= 'active' if index == 0 %>">
               <%= image_tag url_for(photo), class: "d-block w-100", alt: @member.pseudo %>
+             <% if user_signed_in? && (current_user.admin? || current_user == @member.user) %>
+              <%= link_to "🗑 Supprimer", member_photo_path(@member, photo.id), method: :delete, data: { confirm: "Supprimer cette photo ?" }, class: "btn btn-danger btn-sm mt-2" %>
+            <% end %>
+
             </div>
           <% end %>
         </div>
