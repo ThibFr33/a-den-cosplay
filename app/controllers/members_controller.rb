@@ -2,7 +2,9 @@
 
 class MembersController < ApplicationController
   before_action :authenticate_user!, only: [:edit, :update, :add_photo]
+  before_action :set_member, only: [:edit, :update, :add_photo, :destroy_photo, :show]
   before_action :authorize_member!, only: [:edit, :update, :add_photo]
+
 
 def authorize_member!
   unless current_user.admin? || current_user == @member.user
@@ -39,6 +41,14 @@ end
       render :edit, status: :unprocessable_entity
     end
   end
+  
+  def destroy_photo
+    @member = Member.find(params[:id])
+    photo = @member.photos.find(params[:photo_id])
+    photo.purge
+    redirect_to @member, notice: "Photo supprimée."
+  end
+
 
 
 
@@ -52,6 +62,11 @@ end
   private
 
   def member_params
-    params.require(:member).permit(:pseudo, :reseau_social, :presentation, photos: [])
+    params.require(:member).permit(:pseudo, :reseau_social, :presentation, :role, photos: [])
   end
+
+  def set_member
+    @member = Member.find(params[:id])
+  end
+
 end

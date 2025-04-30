@@ -10,7 +10,9 @@ Rails.application.routes.draw do
   get 'up' => 'rails/health#show', as: :rails_health_check
   get 'home', to: 'pages#home', as: :home
   get 'about', to: 'pages#about', as: :about
-  resources :members
+  resources :members do
+    delete 'photos/:photo_id', to: 'members#destroy_photo', as: 'photo'
+  end
   resources :events, only: [:index]
   resources :contact_form, only: %i[new create]
 
