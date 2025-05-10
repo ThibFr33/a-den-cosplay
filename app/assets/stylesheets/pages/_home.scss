@@ -1,20 +1,50 @@
-/* Animation de fade-in pour l'ensemble */
-@keyframes fadeIn {
-  0% {
+.home-logo {
+  max-width: 400px;
+  filter: drop-shadow(0 0 15px rgba(255, 215, 0, 0.5));
+  animation: logoFadeIn 2s ease-in-out forwards;
+}
+
+@keyframes logoFadeIn {
+  from {
     opacity: 0;
-    transform: translateY(-20px);
+    transform: scale(0.9) rotate(-5deg);
   }
-  100% {
+  to {
     opacity: 1;
-    transform: translateY(0);
+    transform: scale(1) rotate(0deg);
   }
 }
 
 .fade-in {
-  animation: fadeIn 2s ease-out forwards;
+  animation: fadeIn 2.5s cubic-bezier(0.33, 1, 0.68, 1) forwards;
 }
 
-/* Animation de switch de police uniquement sur le titre */
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(-60px) scale(0.95);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.welcome-title {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 3.2rem;
+  text-align: center;
+  animation: switchToMandalorian 15s ease forwards;
+  text-shadow: 0 0 10px rgba(255, 215, 0, 0.6), 0 0 20px rgba(255, 215, 0, 0.4);
+  letter-spacing: 2px;
+  padding: 1rem;
+  border: 1px solid rgba(255, 215, 0, 0.2);
+  border-radius: 8px;
+  background-color: rgba(0, 0, 0, 0.4);
+  display: inline-block;
+  color: #FFD700;
+}
+
 @keyframes switchToMandalorian {
   0% {
     font-family: 'Mandalore', sans-serif;
@@ -32,13 +62,6 @@
     font-family: 'Orbitron', sans-serif;
     opacity: 1;
   }
-}
-
-.welcome-title {
-  font-family: 'Orbitron', sans-serif;
-  font-size: 3rem;
-  text-align: center;
-  animation: switchToMandalorian 15s ease forwards;
 }
 
 @font-face {
