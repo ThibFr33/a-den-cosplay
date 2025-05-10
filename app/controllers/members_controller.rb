@@ -41,12 +41,12 @@ end
       render :edit, status: :unprocessable_entity
     end
   end
-  
+
   def destroy_photo
     @member = Member.find(params[:id])
     photo = @member.photos.find(params[:photo_id])
     photo.purge
-    redirect_to @member, notice: "Photo supprimée."
+    redirect_to @member, notice: "Photo supprimée avec succès!"
   end
 
 

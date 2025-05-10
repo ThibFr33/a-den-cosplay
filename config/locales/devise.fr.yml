@@ -1,0 +1,21 @@
+fr:
+  devise:
+    sessions:
+      signed_in: "Transmission sécurisée réussie. Bienvenue ."
+      signed_out: "Déconnexion effectuée. N'oubliez pas vos crédits."
+    passwords:
+      send_instructions: "Les instructions de réinitialisation de votre code d'accès ont été transmises."
+      updated: "Votre code d'accès a été réinitialisé. Renforcez votre sécurité."
+    registrations:
+      signed_up: "Bienvenue parmi les rangs de Dragon Krayt A'den."
+      updated: "Votre profil a été mis à jour. Préparez-vous pour la prochaine mission."
+      destroyed: "Votre compte a été supprimé. Ce n'est qu'un au revoir, Mandalorien."
+    confirmations:
+      confirmed: "Votre holotransmission a été confirmée. Accès activé."
+    failure:
+      invalid: "Coordonnées incorrectes. Vérifiez votre identifiant de chasseur de primes."
+      not_found_in_database: "Aucun profil correspondant n’a été localisé dans les archives."
+      already_authenticated: "Vous êtes déjà connecté, Mandalorien."
+      inactive: "Votre profil est inactif. Contactez le commandement."
+      last_attempt: "Dernière tentative avant verrouillage du système."
+      locked: "Profil verrouillé. Procédez à une vérification."
