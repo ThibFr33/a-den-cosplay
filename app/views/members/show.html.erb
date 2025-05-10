@@ -34,7 +34,15 @@
       <% if @member.reseau_social.present? %>
         <p class="card-text">
           <%= link_to @member.reseau_social, target: "_blank", rel: "noopener noreferrer", class: "text-decoration-none" do %>
-            <i class="bi bi-link-45deg"></i> <%= @member.reseau_social %>
+            <% if @member.reseau_social.include?("instagram.com") %>
+                  <i class="fa-brands fa-instagram fa-bounce fa-2x"></i>
+            <% elsif @member.reseau_social.include?("facebook.com") %>
+                  <i class="fab fa-facebook fa-bounce fa-2x"></i>
+            <% elsif @member.reseau_social.include?("twitter.com") %>
+                  <i class="fab fa-twitter fa-bounce fa-2x"></i>
+            <% else %>
+                  <i class="fas fa-globe fa-bounce fa-2x"></i> <!-- Icône générique -->
+            <% end %>
           <% end %>
         </p>
       <% end %>
