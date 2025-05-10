@@ -5,3 +5,12 @@ import "bootstrap"
 import "@popperjs/core"
 
 
+document.addEventListener("turbo:load", () => {
+  setTimeout(() => {
+    document.querySelectorAll(".alert").forEach((el) => {
+      el.classList.remove("show"); // supprime la classe "show"
+      el.classList.add("fade");    // pour la transition
+      setTimeout(() => el.remove(), 500); // supprime après l'animation
+    });
+  }, 5000);
+});

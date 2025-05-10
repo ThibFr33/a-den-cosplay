@@ -6,8 +6,8 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
-    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <style>
       @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&display=swap');
     </style>
@@ -19,25 +19,15 @@
 
     <%= render "layouts/flash_alert" %>
     <%= render "layouts/custom_navbar" %>
+    <%= render "layouts/flash" %>
     <% if user_signed_in? %>
       <%= button_to "Se déconnecter", destroy_user_session_path, method: :delete, form: { data: { turbo_confirm: "Es-tu sûr de vouloir te déconnecter ?" } } %>
     <% end %>
 
 
     <%= yield %>
-    <script>
-      document.addEventListener('DOMContentLoaded', () => {
-        const toastElements = document.querySelectorAll('.toast');
-        toastElements.forEach((toastEl) => {
-          const toast = new bootstrap.Toast(toastEl);
-          toast.show();
-        });
-      });
-    </script>
-
 
   <%= render "layouts/login_modal" %>
-  <%= render "layouts/flash_toast" %>
 
 
   </body>
