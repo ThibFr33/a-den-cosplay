@@ -1,0 +1,24 @@
+<div class="modal fade" id="addPhotoModal" tabindex="-1" aria-labelledby="addPhotoModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <h5 class="modal-title" id="addPhotoModalLabel">Ajouter une Photo</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermer"></button>
+      </div>
+
+      <div class="modal-body">
+        <%= form_with(model: [@member, @member.photos.build], url: member_photos_path(@member), local: false, html: { multipart: true }) do |form| %>
+          <div class="mb-3">
+            <%= form.label :photo, "Choisir une photo" %>
+            <%= form.file_field :photo, class: "form-control" %>
+          </div>
+          <div class="modal-footer">
+            <%= form.submit "Ajouter", class: "btn btn-primary" %>
+          </div>
+        <% end %>
+      </div>
+
+    </div>
+  </div>
+</div>

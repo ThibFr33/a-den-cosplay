@@ -1,21 +1,40 @@
-<h1>Contactez-nous</h1>
+<div class="container my-5" style="max-width: 700px;">
+  <div class="border rounded shadow p-4" style="background-color:rgba(0, 0, 0, 0.6) ; color: #eee;">
+    <h1 class="mb-4 text-warning" style="font-family: 'Orbitron', sans-serif;">Contactez nous!</h1>
 
-<%= form_with scope: :contact_form, url: contact_form_index_path, method: :post, local: true, class: "form-container" do |form| %>
-  <div class="form-group">
-    <%= form.label :prenom, class: "form-label" %>
-    <%= form.text_field :prenom, class: "form-input" %>
+    <% if @contact_form.errors.any? %>
+      <div class="alert alert-danger border border-warning">
+        <h5 class="alert-heading">Erreur dans la transmission :</h5>
+        <ul class="mb-0">
+          <% @contact_form.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <%= form_with model: @contact_form, url: contact_form_index_path, local: true do |form| %>
+      <div class="mb-3">
+        <%= form.label :prenom, class: "form-label text-warning" %>
+        <%= form.text_field :prenom, class: "form-control bg-dark text-light border-secondary" %>
+      </div>
+
+      <div class="mb-3">
+        <%= form.label :nom, class: "form-label text-warning" %>
+        <%= form.text_field :nom, class: "form-control bg-dark text-light border-secondary" %>
+      </div>
+
+      <div class="mb-3">
+        <%= form.label :email, class: "form-label text-warning" %>
+        <%= form.email_field :email, class: "form-control bg-dark text-light border-secondary" %>
+      </div>
+
+      <div class="mb-3">
+        <%= form.label :message, class: "form-label text-warning" %>
+        <%= form.text_area :message, class: "form-control bg-dark text-light border-secondary", rows: 6 %>
+      </div>
+
+      <%= form.submit "Envoyer la transmission", class: "btn btn-danger w-100" %>
+    <% end %>
   </div>
-  <div class="form-group">
-    <%= form.label :nom, class: "form-label" %>
-    <%= form.text_field :nom, class: "form-input" %>
-  </div>
-  <div class="form-group">
-    <%= form.label :email, class: "form-label" %>
-    <%= form.email_field :email, class: "form-input" %>
-  </div>
-  <div class="form-group">
-    <%= form.label :message, class: "form-label" %>
-    <%= form.text_area :message, class: "form-input" %>
-  </div>
-  <%= form.submit "Envoyer", class: "form-submit" %>
-<% end %>
+</div>

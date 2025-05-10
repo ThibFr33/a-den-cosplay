@@ -1,0 +1,49 @@
+/* Animation de fade-in pour l'ensemble */
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-in {
+  animation: fadeIn 2s ease-out forwards;
+}
+
+/* Animation de switch de police uniquement sur le titre */
+@keyframes switchToMandalorian {
+  0% {
+    font-family: 'Mandalore', sans-serif;
+    opacity: 1;
+  }
+  50% {
+    font-family: 'Mandalore', sans-serif;
+    opacity: 0;
+  }
+  51% {
+    font-family: 'Orbitron', sans-serif;
+    opacity: 0;
+  }
+  100% {
+    font-family: 'Orbitron', sans-serif;
+    opacity: 1;
+  }
+}
+
+.welcome-title {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 3rem;
+  text-align: center;
+  animation: switchToMandalorian 15s ease forwards;
+}
+
+@font-face {
+  font-family: 'Mandalore';
+  src: asset-url('mandalorian.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}

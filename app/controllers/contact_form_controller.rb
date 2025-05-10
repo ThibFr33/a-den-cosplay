@@ -15,11 +15,6 @@ class ContactFormController < ApplicationController
     else
       render :new
     end
-    @prenom = params[:contact_form][:prenom]
-    @nom = params[:contact_form][:nom]
-    @email = params[:contact_form][:email]
-    @message = params[:contact_form][:message]
-
     # Perform any necessary actions with the form data
   end
 

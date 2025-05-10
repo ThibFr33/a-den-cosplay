@@ -1,0 +1,7 @@
+<%= turbo_stream.update "carousel" do %>
+  <%= render "carousel", member: @member %>
+<% end %>
+
+<%= turbo_stream.update "flash" do %>
+  <%= render "layouts/flash", notice: "Photo supprimée avec succès." %>
+<% end %>
