@@ -34,6 +34,11 @@
         <%= form.text_area :message, class: "form-control bg-dark text-light border-secondary", rows: 6 %>
       </div>
 
+      <div class="mb-3">
+        <%= recaptcha_tags %>
+      </div>
+
+
       <%= form.submit "Envoyer la transmission", class: "btn btn-danger w-100" %>
     <% end %>
   </div>

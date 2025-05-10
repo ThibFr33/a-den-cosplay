@@ -54,6 +54,7 @@ gem 'sassc', '~> 2.4'
 
 gem 'image_processing', '~> 1.2'
 gem 'mini_magick', '~> 5.2'
+gem 'recaptcha', require: 'recaptcha/rails'
 
 
 group :development, :test do
