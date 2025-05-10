@@ -1,14 +1,13 @@
 class UserMailer < ApplicationMailer
-  default to: "thibs.cha@gmail.com"
+  default from: ENV["GMAIL_USERNAME"]
 
   def user_email(contact_form)
     @contact_form = contact_form
 
-    puts "DEBUG: prenom = #{@contact_form.prenom}, nom = #{@contact_form.nom}"
-
     mail(
-      from: @contact_form.email,
-      subject: "Nouveau message du formulaire de contact"
+      to: ENV["CONTACT_RECIPIENT_EMAIL"],
+      subject: "Nouveau message de contact",
+      reply_to: @contact_form.email
     )
   end
 end

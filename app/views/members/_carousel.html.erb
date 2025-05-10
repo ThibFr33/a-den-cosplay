@@ -1,0 +1,30 @@
+<% if @member.photos.attached? %>
+  <div id="memberPhotosCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="5000">
+    <div class="carousel-inner">
+      <% @member.photos.each_with_index do |photo, index| %>
+        <% next if photo.blob.nil? %>
+        <div id="photo_<%= photo.id %>" class="carousel-item <%= 'active' if index == 0 %>">
+          <%= image_tag url_for(photo), class: "d-block w-100", alt: @member.pseudo %>
+
+          <% if user_signed_in? && (current_user.admin? || current_user == @member.user) %>
+            <%= button_to "🗑 Supprimer", member_photo_path(@member, photo.id), method: :delete, data: { turbo_confirm: "Supprimer cette photo ?" }, class: "btn btn-danger btn-sm mt-2" %>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+
+    <% if @member.photos.count > 1 %>
+      <button class="carousel-control-prev" type="button" data-bs-target="#memberPhotosCarousel" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Précédent</span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#memberPhotosCarousel" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Suivant</span>
+      </button>
+    <% end %>
+
+  </div>
+<% else %>
+  <p class="text-center">Aucune photo disponible pour ce membre.</p>
+<% end %>
