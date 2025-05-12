@@ -8,14 +8,22 @@
       </div>
 
       <div class="modal-body">
-        <%= form_with(model: [@member, @member.photos.build], url: member_photos_path(@member), local: false, html: { multipart: true }) do |form| %>
+        <%= form_with(model: @member,
+                      url: add_photo_member_path(@member),
+                      method: :patch,
+                      local: true,
+                      html: { multipart: true }) do |f| %>
+
           <div class="mb-3">
-            <%= form.label :photo, "Choisir une photo" %>
-            <%= form.file_field :photo, class: "form-control" %>
+            <%= f.label :photos, "Choisir des photos" %>
+            <%= f.file_field :photos, multiple: true, class: "form-control" %>
           </div>
+
           <div class="modal-footer">
-            <%= form.submit "Ajouter", class: "btn btn-primary" %>
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+            <%= f.submit "Ajouter", class: "btn btn-primary" %>
           </div>
+
         <% end %>
       </div>
 

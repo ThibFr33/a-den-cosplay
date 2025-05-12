@@ -4,32 +4,30 @@
 
 
   <div class="card mx-auto" style="max-width: 600px;">
-    <% if @member.photos.attached? %>
-      <div id="memberPhotosCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="5000">
-        <div class="carousel-inner">
-          <% @member.photos.each_with_index do |photo, index| %>
-            <div class="carousel-item <%= 'active' if index == 0 %>">
-              <%= image_tag url_for(photo), class: "d-block w-100", alt: @member.pseudo %>
-             <% if user_signed_in? && (current_user.admin? || current_user == @member.user) %>
-              <%= link_to "🗑 Supprimer", member_photo_path(@member, photo.id), method: :delete, data: { confirm: "Supprimer cette photo ?" }, class: "btn btn-danger btn-sm mt-2" %>
-            <% end %>
+    <div id="carousel">
+      <%= render "carousel", member: @member %>
+    </div>
 
-            </div>
-          <% end %>
-        </div>
-        <button class="carousel-control-prev" type="button" data-bs-target="#memberPhotosCarousel" data-bs-slide="prev">
-          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-          <span class="visually-hidden">Précédent</span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#memberPhotosCarousel" data-bs-slide="next">
-          <span class="carousel-control-next-icon" aria-hidden="true"></span>
-          <span class="visually-hidden">Suivant</span>
-        </button>
+    <div class="card-body">
+      <div class="d-flex align-items-center mb-3">
+        <!-- Titre : prend tout l'espace disponible et centre son texte -->
+        <h2 class="card-title mb-0 flex-grow-1 text-center">
+          <%= @member.pseudo %>
+        </h2>
+
+        <!-- Bouton : à droite du container flex -->
+        <% if user_signed_in? && (current_user.admin? || current_user == @member.user) %>
+          <button type="button"
+                  class="btn btn-dark btn-sm rounded-circle shadow ms-2"
+                  data-bs-toggle="modal"
+                  data-bs-target="#addPhotoModal"
+                  title="Ajouter une photo">
+            <i class="fa-solid fa-plus fa-lg"></i>
+          </button>
+        <% end %>
       </div>
-    <% end %>
 
-    <div class="card-body text-center">
-      <h2 class="card-title mb-3"><%= @member.pseudo %></h2>
+
 
       <% if @member.reseau_social.present? %>
         <p class="card-text">
@@ -54,3 +52,4 @@
   </div>
 
 </div>
+<%= render "photo_form", member: @member %>
