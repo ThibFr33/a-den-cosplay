@@ -13,11 +13,14 @@
  *= require_tree .
  *= require_self
  */
- @import"custom_navbar";
- @import "member";
+ @import "variables";
  @import "bootstrap";
  @import "animations";
-
+ @import "components/member";
+ @import "components/custom_navbar";
+ @import "components/carousel";
+ @import "components/add_photo_button";
+ @import "components/contact_form";
 body {
   background-image: image-url("background.jpg");
   background-size: cover;  /* Ajuste l'image pour couvrir toute la page */
@@ -25,12 +28,12 @@ body {
   background-attachment: fixed; /* L'image reste fixe au scroll */
   background-repeat: no-repeat; /* Empêche la répétition */
   font-family: orbitron;
-  color: #CEB1B1;
+  color: $rose;
 }
 h1 {
   color: whitesmoke;
   padding-top: 50px;
 }
 a {
-  color: #CEB1B1;
+  color: $rose;
 }

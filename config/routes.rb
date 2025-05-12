@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   get 'home', to: 'pages#home', as: :home
   get 'about', to: 'pages#about', as: :about
   resources :members do
+    patch :add_photo, on: :member
     delete 'photos/:photo_id', to: 'members#destroy_photo', as: 'photo'
   end
   resources :events, only: [:index]

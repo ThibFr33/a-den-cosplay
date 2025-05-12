@@ -1,5 +1,9 @@
 
- <h1 > Nos membres </h1>
+ <h1 > Les neufs </h1>
+
+<% if user_signed_in? && current_user.admin? %>
+  <%= link_to "➕ Ajouter un membre", new_member_path, class: "btn btn-primary" %>
+<% end %>
 
 <div class="members-list">
   <% @members.each do |member| %>
@@ -8,10 +12,10 @@
         <% if member.photos.attached? %>
           <%= image_tag url_for(member.photos.first), class: "w-full h-48 object-cover", alt: member.pseudo, loading: "lazy" %>
         <% end %>
-      <% end %>
       <div class="p-4">
         <h2><%= member.pseudo %></h2>
       </div>
+      <% end %>
     </div>
   <% end %>
 </div>
