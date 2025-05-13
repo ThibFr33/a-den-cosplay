@@ -10,12 +10,10 @@
 
     <div class="card-body">
       <div class="d-flex align-items-center mb-3">
-        <!-- Titre : prend tout l'espace disponible et centre son texte -->
         <h2 class="card-title mb-0 flex-grow-1 text-center">
           <%= @member.pseudo %>
         </h2>
 
-        <!-- Bouton : à droite du container flex -->
         <% if user_signed_in? && (current_user.admin? || current_user == @member.user) %>
           <button type="button"
                   class="btn btn-dark btn-sm rounded-circle shadow ms-2"
