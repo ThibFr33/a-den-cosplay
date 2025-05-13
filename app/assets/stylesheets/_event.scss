@@ -5,12 +5,13 @@
   justify-content: space-evenly;
 }
 .event-card {
-  max-width: 500px;
-  display: flex;
-  align-items: center;
-  text-align: center;
-  flex-direction: column;
 
+  background-color:rgba(0, 0, 0, 0.6);
+  color: #eee;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
 .event-card:hover {
@@ -25,4 +26,24 @@
 }
 h1 {
   text-align: center;
+}
+.events-container {
+  display: flex;
+  gap: 2rem;
+  align-items: flex-start;
+  margin: 2rem 0;
+}
+.events-column {
+  flex: 1;
+}
+
+.events-column h2 {
+  margin-bottom: 1rem;
+  border-bottom: 2px solid var(--bs-secondary);
+  padding-bottom: 0.5rem;
+}
+@media (max-width: 768px) {
+  .events-container {
+    flex-direction: column;
+  }
 }

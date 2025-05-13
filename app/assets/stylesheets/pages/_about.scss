@@ -1,0 +1,16 @@
+
+
+.text-center {
+  text-align: justify;
+  color: whitesmoke;
+}
+.mythausaure-img {
+  text-align: center;
+}
+.myth-icon {
+  width: 100px;
+  height: 100px;
+  background-color: var(--bs-warning, #ffc107);
+  -webkit-mask: url("https://img.icons8.com/windows/32/mandalorian.png") no-repeat center/contain;
+    mask:       url("https://img.icons8.com/windows/32/mandalorian.png") no-repeat center/contain;
+}

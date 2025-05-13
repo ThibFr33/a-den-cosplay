@@ -19,3 +19,26 @@ fr:
       inactive: "Votre profil est inactif. Contactez le commandement."
       last_attempt: "Dernière tentative avant verrouillage du système."
       locked: "Profil verrouillé. Procédez à une vérification."
+
+  date:
+    month_names:
+      - ~
+      - "janvier"
+      - "février"
+      - "mars"
+      - "avril"
+      - "mai"
+      - "juin"
+      - "juillet"
+      - "août"
+      - "septembre"
+      - "octobre"
+      - "novembre"
+      - "décembre"
+    formats:
+      default: "%d/%m/%Y"
+      long:    "%d %B %Y"       # ex. "13 mai 2025"
+  time:
+    formats:
+      default: "%H:%M"
+      long:    "%d %B %Y %H:%M" # ex. "13 mai 2025 14:30"
