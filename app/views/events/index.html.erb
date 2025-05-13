@@ -2,7 +2,7 @@
 <div class="events-container">
 
   <div class="events-column past">
-    <h2>Événements passés</h2>
+    <h2 class= "text-warning">Événements passés</h2>
     <% if @past_events.any? %>
       <% @past_events.each do |event| %>
         <div class="event-card">
@@ -20,7 +20,7 @@
   </div>
 
   <div class="events-column upcoming">
-    <h2>Événements à venir</h2>
+    <h2 class= "text-warning">Événements à venir</h2>
     <% if @upcoming_events.any? %>
       <% @upcoming_events.each do |event| %>
         <div class="event-card">

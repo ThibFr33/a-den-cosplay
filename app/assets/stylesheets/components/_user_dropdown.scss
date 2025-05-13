@@ -1,0 +1,45 @@
+.user-nav {
+  position: relative;
+  display: inline-block;
+  font-family: sans-serif;
+
+  .dropbtn {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+    padding: .25rem;
+  }
+
+  .username {
+    font-weight: 500;
+  }
+
+  .dropdown-content {
+    position: absolute;
+    right: 0;
+    margin-top: .5rem;
+    background: #fff;
+    border-radius: 4px;
+    box-shadow: 0 4px 8px rgba(0,0,0,.1);
+    list-style: none;
+    padding: 0;
+    min-width: 160px;
+    z-index: 100;
+
+    &.hidden { display: none; }
+
+    .dropdown-item {
+      display: block;
+      padding: .75rem 1rem;
+      color: #333;
+      text-decoration: none;
+
+      &:hover {
+        background: #f0f0f0;
+      }
+    }
+  }
+}

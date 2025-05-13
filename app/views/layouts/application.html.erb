@@ -21,6 +21,7 @@
     <%= render "layouts/custom_navbar" %>
     <%= render "layouts/flash" %>
     <% if user_signed_in? %>
+      <%# <%= render "layouts/user_dropdown" %>
       <%= button_to "Se déconnecter", destroy_user_session_path, method: :delete, form: { data: { turbo_confirm: "Es-tu sûr de vouloir te déconnecter ?" } } %>
     <% end %>
 

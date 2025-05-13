@@ -16,11 +16,8 @@
  @import "variables";
  @import "bootstrap";
  @import "animations";
- @import "components/member";
- @import "components/custom_navbar";
- @import "components/carousel";
- @import "components/add_photo_button";
- @import "components/contact_form";
+ @import "components/*";
+
 body {
   background-image: image-url("background.jpg");
   background-size: cover;  /* Ajuste l'image pour couvrir toute la page */
