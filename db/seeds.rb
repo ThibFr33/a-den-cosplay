@@ -110,7 +110,7 @@ members_data = [
       "Boba Fett c'est le meilleur"
     TEXT
     reseau_social: 'https://www.instagram.com/mando.bobafett.cosplay/',
-    role: '',
+    role: 'Nazgul',
     photo_filename: 'booba_fett.jpg'
   },
   {
@@ -124,7 +124,7 @@ members_data = [
       elle impressionne par son authenticité et son dévouement.
     TEXT
     reseau_social: '',
-    role: '',
+    role: 'Nazgul',
     photo_filename: 'fennec_shand.jpg'
   },
 
@@ -138,7 +138,7 @@ members_data = [
       Il excelle également dans la stratégie, un véritable atout pour le clan.
     TEXT
     reseau_social: '',
-    role: '',
+    role: 'Nazgul',
     photo_filename: "buir burk'yc.jpg"
 },
 {

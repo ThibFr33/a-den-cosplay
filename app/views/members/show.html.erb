@@ -8,45 +8,49 @@
       <%= render "carousel", member: @member %>
     </div>
 
-    <div class="card-body">
-      <div class="d-flex align-items-center mb-3">
-        <h2 class="card-title mb-0 flex-grow-1 text-center">
-          <%= @member.pseudo %>
-        </h2>
+      <div class="card-body">
+        <!-- Ligne flex avec pseudo et bouton -->
+        <div class="d-flex align-items-center mb-0">
+          <h2 class="card-title mb-3 flex-grow-1 text-center">
+            <%= @member.pseudo %>
+          </h2>
+          <% if user_signed_in? && (current_user.admin? || current_user == @member.user) %>
+            <button type="button"
+                    class="btn btn-dark btn-sm rounded-circle shadow ms-2"
+                    data-bs-toggle="modal"
+                    data-bs-target="#addPhotoModal"
+                    title="Ajouter une photo">
+              <i class="fa-solid fa-plus fa-lg"></i>
+            </button>
+          <% end %>
+        </div>
 
-        <% if user_signed_in? && (current_user.admin? || current_user == @member.user) %>
-          <button type="button"
-                  class="btn btn-dark btn-sm rounded-circle shadow ms-2"
-                  data-bs-toggle="modal"
-                  data-bs-target="#addPhotoModal"
-                  title="Ajouter une photo">
-            <i class="fa-solid fa-plus fa-lg"></i>
-          </button>
+        <!-- Icône réseau social, juste sous le pseudo -->
+        <% if @member.reseau_social.present? %>
+          <div class="text-center mb-3">
+            <%= link_to @member.reseau_social,
+                        target: "_blank",
+                        rel: "noopener noreferrer",
+                        class: "text-decoration-none" do %>
+              <% case @member.reseau_social
+                when /instagram\.com/ then %>
+                  <i class="fa-brands fa-instagram fa-bounce fa-2x"></i>
+              <% when /facebook\.com/ then %>
+                  <i class="fab fa-facebook fa-bounce fa-2x"></i>
+              <% when /X\.com/ then %>
+                  <i class="fab fa-twitter fa-bounce fa-2x"></i>
+              <% else %>
+                  <i class="fas fa-globe fa-bounce fa-2x"></i>
+              <% end %>
+            <% end %>
+          </div>
+        <% end %>
+
+        <% if @member.presentation.present? %>
+          <p class="card-text text-center"><%= @member.presentation %></p>
         <% end %>
       </div>
 
-
-
-      <% if @member.reseau_social.present? %>
-        <p class="card-text">
-          <%= link_to @member.reseau_social, target: "_blank", rel: "noopener noreferrer", class: "text-decoration-none" do %>
-            <% if @member.reseau_social.include?("instagram.com") %>
-                  <i class="fa-brands fa-instagram fa-bounce fa-2x"></i>
-            <% elsif @member.reseau_social.include?("facebook.com") %>
-                  <i class="fab fa-facebook fa-bounce fa-2x"></i>
-            <% elsif @member.reseau_social.include?("twitter.com") %>
-                  <i class="fab fa-twitter fa-bounce fa-2x"></i>
-            <% else %>
-                  <i class="fas fa-globe fa-bounce fa-2x"></i> <!-- Icône générique -->
-            <% end %>
-          <% end %>
-        </p>
-      <% end %>
-
-      <% if @member.presentation.present? %>
-        <p class="card-text"><%= @member.presentation %></p>
-      <% end %>
-    </div>
   </div>
 
 </div>
