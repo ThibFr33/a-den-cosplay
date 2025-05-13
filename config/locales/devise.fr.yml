@@ -41,4 +41,4 @@ fr:
   time:
     formats:
       default: "%H:%M"
-      long:    "%d %B %Y %H:%M" # ex. "13 mai 2025 14:30"
+      long:    "%d %B %Y" # ex. "13 mai 2025 14:30"

@@ -1,0 +1,21 @@
+<nav class="user-nav" data-controller="dropdown">
+  <button
+    class="dropbtn"
+    data-action="click->dropdown#toggle"
+    aria-haspopup="true"
+    aria-expanded="false"
+    title="Menu utilisateur"
+  >
+
+    <span class="username"><%= current_user.username %></span>
+    <svg width="10" height="6" viewBox="0 0 10 6" aria-hidden="true">
+      <path d="M0 0l5 6 5-6z"/>
+    </svg>
+  </button>
+
+  <ul class="dropdown-content" data-dropdown-target="menu" hidden>
+    <li><%= link_to "Mon profil", profile_path, class: "dropdown-item" %></li>
+    <li><%= link_to "Modifier le profil", edit_profile_path, class: "dropdown-item" %></li>
+    <li><%= button_to "Se déconnecter", destroy_user_session_path, method: :delete, form: { data: { turbo_confirm: "Es-tu sûr de vouloir te déconnecter ?" } }, class: "dropdown-item" %></li>
+  </ul>
+</nav>
