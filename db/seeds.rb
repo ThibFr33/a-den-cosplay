@@ -1,85 +1,91 @@
-# frozen_string_literal: true
-
-# This file should ensure the existence of records required to run the application in every environment (production,
-# development, test). The code here should be idempotent so that it can be executed at any point in every environment.
-# The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
-#
-# Example:
-#
-#   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
-#     MovieGenre.find_or_create_by!(name: genre_name)
-#   end
+# db/seeds.rb
 # frozen_string_literal: true
 
 puts "🛠 Seed in progress..."
 
 # === Helpers ===
-
 def attach_member_photo(member, filename)
   path = Rails.root.join("app/assets/images/#{filename}")
   if File.exist?(path)
-    member.photos.attach(
-      io: File.open(path),
-      filename: filename,
-      content_type: "image/jpeg"
-    )
+    unless member.photos.attached? && member.photos.any? { |p| p.filename.to_s == filename }
+      member.photos.attach(
+        io: File.open(path),
+        filename: filename,
+        content_type: "image/jpeg"
+      )
+      puts "   📎 Photo attachée: #{filename} pour #{member.pseudo}"
+    end
   else
     puts "⚠️ Image manquante pour #{member.pseudo} (#{filename})"
   end
 end
 
-puts "⛔ Cleaning database..."
-
-User.destroy_all
-Member.destroy_all
-Event.destroy_all
-
-# === Create Events ===
-
+# === Seed Events ===
 puts "🎉 Seeding Events..."
+events_data = [
+  {
+    name: 'Bordeaux GeekFest',
+    photo: 'BGF2025.jpg',
+    localisation: 'Parc des Expositions de Bordeaux. Cr Jules Ladoumegue, 33300 Bordeaux',
+    description: "Le Bordeaux Geekfest c’est 200 exposants, 14 espaces et un grand nombre d’animations !",
+    start_date: '2025-05-24',
+    end_date: '2025-05-25',
+    url: 'https://www.bordeauxgeekfest.com/'
+  },
+  {
+    name: 'Geek Days',
+    photo: 'geek_days.jpg',
+    localisation: 'Centre Culturel de Villeneuve-sur-Lot, 23 rue Etienne Marcel, 47300 Villeneuve-sur-Lot',
+    description: <<~TEXT,
+      Les Geek Days sont le rendez-vous incontesté des jeunes et des familles du territoire,
+      leur permettant de se rencontrer autour d'une passion commune : les mangas, le gaming, le cosplay,
+      et bien plus encore. Cet événement gratuit vise aussi à sensibiliser sur les dangers d'une utilisation excessive des écrans,
+      tout en favorisant la mixité des publics.
+    TEXT
+    start_date: '2025-04-26',
+    end_date: '2025-04-26',
+    url: 'https://www.grand-villeneuvois.fr/geek-days-2-346.html'
+  }
+]
 
-Event.create!(
-  name: 'Bordeaux GeekFest',
-  photo: 'BGF2025.jpg',
-  localisation: 'Parc des Expositions de Bordeaux. Cr Jules Ladoumegue, 33300 Bordeaux',
-  description: "Le Bordeaux Geekfest c’est 200 exposants, 14 espaces et un grand nombre d’animations !",
-  start_date: '2025-05-24',
-  end_date: '2025-05-25',
-  url: 'https://www.bordeauxgeekfest.com/'
+events_data.each do |attrs|
+  event = Event.find_or_initialize_by(name: attrs[:name])
+  event.assign_attributes(attrs.except(:name))
+  event.save!
+  puts "   ✅ Event: #{event.name}"
+end
+
+# === Seed Admin User ===
+puts "🛡️ Seeding Admin User..."
+admin = User.find_or_initialize_by(email: ENV.fetch('ADMIN_EMAIL'))
+if admin.new_record?
+  admin.password = ENV.fetch('ADMIN_PASSWORD')
+  admin.username = "Gar'ad"
+  admin.admin    = true
+  admin.save!
+  puts "   ✅ Admin créé: #{admin.email}"
+else
+  puts "   🔄 Admin déjà existant: #{admin.email}"
+end
+
+# === Seed Admin Member ===
+puts "🔧 Seeding Admin Member..."
+admin_member = Member.find_or_initialize_by(user: admin)
+admin_member.assign_attributes(
+  pseudo: "Gar'ad",
+  presentation: " Depuis une dizaine d'années, Gar'ad s'est trouvé une passion pour le cosplay : la création
+                  de ses cosplays, l'interprétation des personnages mais surtout partager de bons moments avec
+                  ses camarades cosplayeurs !",
+  reseau_social: "",
+  role: 'Nazgul',
 )
+admin_member.save!
+attach_member_photo(admin_member, "gar'ad.jpg") if File.exist?(Rails.root.join("app/assets/images/gar'ad.jpg"))
+# Affiche le pseudo ET l'email de l'admin pour confirmation
+puts "   ✅ Admin Member upserted: #{admin_member.pseudo} (#{admin.email})"
 
-Event.create!(
-  name: 'Geek Days',
-  photo: 'geek_days.jpg',
-  localisation: 'Centre Culturel de Villeneuve-sur-Lot, 23 rue Etienne Marcel, 47300 Villeneuve-sur-Lot',
-  description: <<~TEXT,
-    Les Geek Days sont le rendez-vous incontesté des jeunes et des familles du territoire,
-    leur permettant de se rencontrer autour d'une passion commune : les mangas, le gaming, le cosplay,
-    et bien plus encore. Cet événement gratuit vise aussi à sensibiliser sur les dangers d'une utilisation excessive des écrans,
-    tout en favorisant la mixité des publics.
-  TEXT
-  start_date: '2025-04-26',
-  end_date: '2025-04-26',
-  url: 'https://www.grand-villeneuvois.fr/geek-days-2-346.html'
-)
-
-# === Create Admin User ===
-
-puts "🛡️ Creating Admin User..."
-
-admin = User.create!(
-  email: ENV.fetch('ADMIN_EMAIL'),
-  password: ENV.fetch('ADMIN_PASSWORD'),
-  username: "Gar'ad",
-  admin: true
-)
-
-puts "✅ Admin created"
-
-# === Create Regular Users and Members ===
-
-puts "👥 Seeding Members Users..."
-
+# === Seed Regular Users & Members ===
+puts "👥 Seeding Members & Users..."
 members_data = [
   {
     email: ENV.fetch("VOKSHA_EMAIL"),
@@ -91,7 +97,7 @@ members_data = [
       renforcer et réunir tous les mandos de la galaxie Nouvelle-Aquitaine
     TEXT
     reseau_social: 'https://www.instagram.com/revan_shan33/',
-    role: "Président",
+    role: "Nazgul",
     photo_filename: "vok'sha.jpg"
   },
   {
@@ -121,7 +127,8 @@ members_data = [
     role: '',
     photo_filename: 'fennec_shand.jpg'
   },
-  {
+
+{
     email: ENV.fetch("BUIR_EMAIL"),
     password: ENV.fetch("BUIR_PASSWORD"),
     username: "Buir Burk'yc",
@@ -133,27 +140,87 @@ members_data = [
     reseau_social: '',
     role: '',
     photo_filename: "buir burk'yc.jpg"
-  }
+},
+{
+  email: ENV.fetch("ADIKA_EMAIL"),
+  password: ENV.fetch("ADIKA_PASSWORD"),
+  username: "Ad'ika Tran",
+  pseudo: "Ad'ika Tran",
+  presentation: <<~TEXT,
+  Jeune Cosplayeuse qui a toujours envie d'en apprendre plus . Une bonne joie de vivre et
+  sera toujours disponible pour discuter.
+  TEXT
+  reseau_social: '',
+  role: 'Nazgul',
+  photo_filename: "ad'ika tran.jpg"
+},
+# {
+  #   email: ENV.fetch(""),
+  #   password: ENV.fetch(""),
+  #   username: "",
+  #   pseudo: "",
+  #   presentation: <<~TEXT,
+
+  #   TEXT
+  #   reseau_social: '',
+  #   role: 'Nazgul',
+  #   photo_filename: ".jpg"
+  # },
+  # {
+  #   email: ENV.fetch(""),
+  #   password: ENV.fetch(""),
+  #   username: "",
+  #   pseudo: "",
+  #   presentation: <<~TEXT,
+
+  #   TEXT
+  #   reseau_social: '',
+  #   role: 'Nazgul',
+  #   photo_filename: ".jpg"
+  # },
+
+  # {
+  #   email: ENV.fetch(""),
+  #   password: ENV.fetch(""),
+  #   username: "",
+  #   pseudo: "",
+  #   presentation: <<~TEXT,
+
+  #   TEXT
+  #   reseau_social: '',
+  #   role: 'Nazgul',
+  #   photo_filename: ".jpg"
+  # },
 ]
 
-members_data.each do |data|
-  user = User.create!(
-    email: data[:email],
-    password: data[:password],
-    username: data[:username],
-    admin: false
-  )
 
-  member = user.create_member!(
+
+
+
+
+members_data.each do |data|
+  user = User.find_or_initialize_by(email: data[:email])
+  if user.new_record?
+    user.password = data[:password]
+    user.username = data[:username]
+    user.admin    = false
+    user.save!
+    puts "   ✅ User créé: #{user.email}"
+  else
+    puts "   🔄 User existant: #{user.email}"
+  end
+
+  member = Member.find_or_initialize_by(user: user)
+  member.assign_attributes(
     pseudo: data[:pseudo],
     presentation: data[:presentation],
     reseau_social: data[:reseau_social],
     role: data[:role]
   )
+  member.save!
+  puts "   ✅ Member upserted: #{member.pseudo}"
 
   attach_member_photo(member, data[:photo_filename]) if data[:photo_filename].present?
-
-  puts "✅ Member created: #{member.pseudo}"
 end
 
 puts "🎉 Seeding completed successfully!"
