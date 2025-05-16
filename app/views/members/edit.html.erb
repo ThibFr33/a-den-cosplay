@@ -1,11 +1,21 @@
-<%= form_with model: @member, local: true, html: { multipart: true } do |form| %>
-  <div class="mb-3">
-    <%= form.label :photos, "Ajouter des photos" %><br>
-    <%= form.file_field :photos, multiple: true, direct_upload: true, class: "form-control" %>
-  </div>
+<div class="container">
+  <%= form_with model: @member, local: true do |f| %>
+    <div class="mb-3">
+      <%= f.label :pseudo %>
+      <%= f.text_field :pseudo, class: "form-control w-50" %>
+    </div>
 
-  <div class="mt-3">
-    <%= form.submit "Enregistrer", class: "btn btn-primary" %>
-  </div>
-<% end %>
+    <div class="mb-3">
+      <%= f.label :presentation %>
+      <%= f.text_area :presentation, class: "form-control w-50" %>
+    </div>
 
+    <div class="mb-3">
+      <%= f.label :reseau_social %>
+      <%= f.text_field :reseau_social, class: "form-control w-50" %>
+    </div>
+
+    <%= f.submit "Mettre à jour", class: "btn btn-primary" %>
+  <% end %>
+
+</div>

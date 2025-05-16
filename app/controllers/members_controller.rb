@@ -5,22 +5,16 @@ class MembersController < ApplicationController
   before_action :set_member, only: [:edit, :update, :add_photo, :destroy_photo, :show]
   before_action :authorize_member!, only: [:edit, :update, :add_photo]
   before_action :authorize_admin, only: [:new, :create]
+  before_action :authorize_edit!, only: [:edit, :update]
 
 
-  def authorize_member!
-    unless current_user.admin? || current_user == @member.user
-      redirect_to members_path, alert: "Vous ne pouvez modifier que votre propre fiche."
-    end
-  end
+
 
   def index
     @members = Member.all
     @members = Member.order(pseudo: :asc)
   end
 
-  def edit
-    @member = Member.find(params[:id])
-  end
 
   def new
     @member = Member.new
@@ -39,26 +33,21 @@ class MembersController < ApplicationController
     end
   end
 
+  def edit
+    @member = Member.find(params[:id])
+  end
 
   def update
     @member = Member.find(params[:id])
-
-    unless current_user.admin? || current_user == @member.user
-      redirect_to root_path, alert: "Accès refusé."
-      return
-    end
-
-    if @member.update(member_params.except(:photos))
-      # 2. Puis on ajoute les nouvelles photos sans supprimer les anciennes
-      if params[:member][:photos]
-        @member.photos.attach(params[:member][:photos])
-      end
-
-      redirect_to @member, notice: "Profil mis à jour avec succès."
+    if @member.update(member_params)
+      redirect_to @member, notice: "Profil membre mis à jour avec succès."
     else
+      flash.now[:alert] = "Erreur lors de la mise à jour."
       render :edit, status: :unprocessable_entity
     end
   end
+
+
 
   def destroy_photo
     @member = Member.find(params[:id])
@@ -101,6 +90,19 @@ class MembersController < ApplicationController
 
   def set_member
     @member = Member.find(params[:id])
+  end
+
+  def authorize_member!
+    unless current_user.admin? || current_user == @member.user
+      redirect_to members_path, alert: "Vous ne pouvez modifier que votre propre fiche."
+    end
+  end
+
+  def authorize_edit!
+    member = Member.find(params[:id])
+    unless current_user.admin? || current_user == member.user
+      redirect_to root_path, alert: "Accès refusé."
+    end
   end
 
 end
