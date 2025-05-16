@@ -17,6 +17,10 @@ Rails.application.routes.draw do
   resources :events, only: [:index]
   resources :contact_form, only: %i[new create]
 
+  get   "profile/edit", to: "profiles#edit",   as: :edit_profile
+  patch "profile",      to: "profiles#update", as: :profile
+
+
   # Defines the root path route ("/")
   root 'pages#home'
 end
