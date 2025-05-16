@@ -2,7 +2,7 @@
  <h1 class= "text-warning" > Les membres </h1>
 
 <% if user_signed_in? && current_user.admin? %>
-  <%= link_to "➕ Ajouter un membre", new_member_path, class: "btn btn-primary" %>
+  <%= link_to "➕ Ajouter un membre", new_member_path, class: "btn btn-warning" %>
 <% end %>
 
 <div class="members-list">
