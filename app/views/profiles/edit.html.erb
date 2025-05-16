@@ -1,0 +1,28 @@
+<h1>Modifier mon profil</h1>
+
+<%= form_with model: @user, url: profile_path, method: :patch, local: true do |f| %>
+  <h2>Compte</h2>
+
+  <%= f.label :email %>
+  <%= f.email_field :email, class: "form-control" %>
+
+  <%= f.label :password, "Nouveau mot de passe" %>
+  <%= f.password_field :password, class: "form-control" %>
+
+  <%= f.label :password_confirmation %>
+  <%= f.password_field :password_confirmation, class: "form-control" %>
+
+  <h2>Profil</h2>
+  <%= fields_for :member, @member do |m| %>
+    <%= m.label :pseudo %>
+    <%= m.text_field :pseudo, class: "form-control" %>
+
+    <%= m.label :presentation %>
+    <%= m.text_area :presentation, class: "form-control" %>
+
+    <%= m.label :reseau_social %>
+    <%= m.text_field :reseau_social, class: "form-control" %>
+  <% end %>
+
+  <%= f.submit "Mettre à jour", class: "btn btn-primary mt-3" %>
+<% end %>
