@@ -4,11 +4,24 @@
     data-action="click->dropdown#toggle"
     aria-haspopup="true"
     aria-expanded="false"
+
+
   >
-    <span class="username"><%= current_user.username %></span>
-    <svg width="10" height="6" viewBox="0 0 10 6" aria-hidden="true">
-      <path d="M0 0l5 6 5-6z" />
-    </svg>
+   <% if current_user.member.photos.attached? %>
+      <%= image_tag(
+            current_user.member.photos.first.variant(resize_to_fill: [50, 50]),
+            class: "avatar rounded-circle me-2",
+            alt: current_user.username
+          ) %>
+    <% else %>
+      <%= image_tag(
+            "default_avatar.png",
+            class: "avatar rounded-circle me-2",
+            alt: "Avatar par défaut",
+            size: "32x32"
+          ) %>
+    <% end %>
+
   </button>
 
   <ul class="dropdown-content" data-dropdown-target="menu">

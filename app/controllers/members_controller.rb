@@ -49,13 +49,14 @@ class MembersController < ApplicationController
 
 
 
-  def destroy_photo
-    @member = Member.find(params[:id])
-    photo = @member.photos.find(params[:photo_id])
-    photo.purge
-    redirect_to @member, notice: "Photo supprimée avec succès!"
-  end
-
+def destroy_photo
+    attachment = @member.photos.attachments.find(params[:photo_id])
+    attachment.purge
+    respond_to do |format|
+      format.html       { redirect_to @member, notice: "Photo supprimée !" }
+      format.turbo_stream { flash.now[:notice] = "Photo supprimée !" }
+    end
+end
 
 
 
@@ -89,7 +90,8 @@ class MembersController < ApplicationController
   end
 
   def set_member
-    @member = Member.find(params[:id])
+    member_id = params[:member_id] || params[:id]
+    @member   = Member.find(member_id)
   end
 
   def authorize_member!

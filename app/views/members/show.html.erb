@@ -1,7 +1,8 @@
 <div class="container mt-5">
-  <% if current_user.admin? %>
-    <%= link_to " Modifier ce membre", edit_member_path(@member), class: "btn btn-warning btn-sm" %>
+  <% if user_signed_in? && current_user.admin? %>
+    <%= link_to "Modifier ce membre", edit_member_path(@member), class: "btn btn-warning btn-sm" %>
   <% end %>
+
   <h1 class="mb-4 text-center">Vous avez choisi :</h1>
 
 
@@ -22,7 +23,7 @@
                     data-bs-toggle="modal"
                     data-bs-target="#addPhotoModal"
                     title="Ajouter une photo">
-              <i class="fa-solid fa-plus fa-lg"></i>
+              <i class="fa-solid fa-camera"></i>
             </button>
           <% end %>
         </div>
