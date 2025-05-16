@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
 class MembersController < ApplicationController
-  before_action :authenticate_user!, only: [:edit, :update, :add_photo]
+  before_action :authenticate_user!, only: [:edit, :update, :add_photo, :destroy_photo]
   before_action :set_member, only: [:edit, :update, :add_photo, :destroy_photo, :show]
-  before_action :authorize_member!, only: [:edit, :update, :add_photo]
+  before_action :authorize_member!, only: [:edit, :update, :add_photo, :destroy_photo]
   before_action :authorize_admin, only: [:new, :create]
   before_action :authorize_edit!, only: [:edit, :update]
 
