@@ -6,6 +6,7 @@ ruby '3.3.5'
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem 'rails', '~> 7.1.5'
+gem 'dotenv-rails'
 
 gem 'pg', '~> 1.1'
 
@@ -50,7 +51,6 @@ gem 'bootsnap', require: false
 # gem "image_processing", "~> 1.2"
 gem 'bootstrap', '~> 5.3'
 gem 'sassc-rails'
-gem 'dotenv-rails'
 
 gem 'sassc', '~> 2.4'
 
