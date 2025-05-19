@@ -1,45 +1,53 @@
+/* Container centré avec max-width */
+.members-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+
+/* Grid 2× sur mobile, 5× sur desktop */
 .members-list {
-  display: flex;
-  flex-wrap: wrap;
-  padding-top: 50px;
-  gap: 80px;
-  justify-content: space-evenly;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;    // au lieu de 80px pour rester en rem
+  padding-top: 2rem;
+
+  @media (min-width: 992px) {
+    grid-template-columns: repeat(5, 1fr);
+  }
 }
+
+/* Cartes */
 .member-card {
-  width: 200px;
   text-align: center;
   color: #CEB1B1;
-}
-.member-card h2 {
-  color: whitesmoke;
-  text-align: center;
-}
-.member-card img {
-  object-fit: cover;
-  width: 100%;
-  border-radius: 10px;
-  height: 250px;
-}
-.member-card:hover {
-  transform: scale(1.1);
-  animation-name: on-hover;
-  animation-duration: 5s;
-  animation-fill-mode: forwards;
-}
-@keyframes on-hover {
-  0% {
-    height: auto;
-    opacity: 0.7;
-  }
- 100% {
+  transition: transform 0.3s ease;
+
+  img {
     width: 200px;
-    height: auto;
+    height: 250px;
+    object-fit: cover;
+    border-radius: 10px;
+  }
+
+  h2 {
+    color: whitesmoke;
+    margin-top: 0.5rem;
+  }
+
+  &:hover {
+    transform: scale(1.05);
   }
 }
-.member-card a{
-  color: #CEB1B1;
+
+/* Lien */
+.member-card a {
+  color: inherit;
   text-decoration: none;
 }
-.card-title {
-  color: #ffc107;
+
+/* Keyframe remaniée (optionnel) */
+@keyframes on-hover {
+  from { opacity: 0.7; }
+  to   { opacity: 1;   }
 }
