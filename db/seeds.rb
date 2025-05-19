@@ -99,7 +99,6 @@ members_data = [
       renforcer et réunir tous les mandos de la galaxie Nouvelle-Aquitaine
     TEXT
     reseau_social: 'https://www.instagram.com/revan_shan33/',
-    role: "Nazgul",
     photo_filename: "vok'sha.jpg"
   },
   {
@@ -112,7 +111,6 @@ members_data = [
       "Boba Fett c'est le meilleur"
     TEXT
     reseau_social: 'https://www.instagram.com/mando.bobafett.cosplay/',
-    role: 'Nazgul',
     photo_filename: 'booba_fett.jpg'
   },
   {
@@ -121,12 +119,11 @@ members_data = [
     username: "Oca Skord",
     pseudo: "Oca Skord",
     presentation: <<~TEXT,
-      Que serait Boba Fett sans sa partenaire Fennec. Christine incarne Fennec Shand avec élégance et
+      Que serait Boba Fett sans sa partenaire Fennec. Oca incarne Fennec Shand avec élégance et
       précision, reproduisant chaque détail de son costume emblématique. Malgré sa nouveauté dans le milieu,
       elle impressionne par son authenticité et son dévouement.
     TEXT
     reseau_social: '',
-    role: 'Nazgul',
     photo_filename: 'fennec_shand.jpg'
   },
 
@@ -140,7 +137,6 @@ members_data = [
       Il excelle également dans la stratégie, un véritable atout pour le clan.
     TEXT
     reseau_social: '',
-    role: 'Nazgul',
     photo_filename: "buir burk'yc.jpg"
 },
 {
@@ -153,7 +149,6 @@ members_data = [
   sera toujours disponible pour discuter.
   TEXT
   reseau_social: '',
-  role: 'Nazgul',
   photo_filename: "ad'ika tran.jpg"
 },
 # {
