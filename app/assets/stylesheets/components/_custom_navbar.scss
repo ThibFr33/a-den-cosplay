@@ -1,23 +1,95 @@
-.nav {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  list-style-type: none;
-  padding: 0;
-  margin: 0;
+// .nav {
+//   display: flex;
+//   justify-content: space-around;
+//   align-items: center;
+//   list-style-type: none;
+//   padding: 0;
+//   margin: 0;
+// }
+
+// .nav-item {
+//   padding: 10px;
+// }
+
+
+// Après @import "bootstrap";
+
+.custom-navbar {
+  background-color: transparent !important;
+  box-shadow: none;
+
 }
 
-.nav-item {
-  padding: 10px;
+// Optionnel : customiser l’icône hamburger en Mandalorian sombre
+.custom-navbar .navbar-toggler {
+  border: none;
+}
+.custom-navbar .navbar-toggler-icon {
+  background-image: url("data:image/svg+xml;charset=utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><path fill='%23FFD700' d='M32 2L12 22v20l20 20 20-20V22L32 2z'/><circle fill='%23000' cx='32' cy='32' r='6'/></svg>") !important;
+  background-size: 1.5rem 1.5rem;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
-.nav-link {
-  color: white !important;
-  text-decoration: none;
-  font-size: 2rem !important;
-  transition: color 0.3s ease !important;
+// Gap et centrage pour desktop (≥768px)
+@media (min-width: 768px) {
+  .custom-navbar .navbar-nav {
+    display: flex;
+    gap: 2rem;
+  }
+  .custom-navbar .nav-link {
+    font-size: 1.8rem !important;
+    color: white !important;
+      color: white !important;
+    text-decoration: none;
+    font-size: 2rem !important;
+    transition: color 0.3s ease !important;
 
-  &:hover {
-    color: #00bfff !important;
+    &:hover {
+      color: #00bfff !important;
+    }
+  }
+}
+
+// Collapse full-width sous la barre
+
+
+// Menu vertical mobile
+@media (max-width: 767px) {
+  .custom-navbar .navbar-nav {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .custom-navbar .nav-item {
+    margin: 0;
+  }
+  .custom-navbar .nav-link {
+    font-size: 1rem !important;
+    padding: 0.75rem 1rem;
+    border-top: 1px solid rgba(0,0,0,0.1);
+    color: #ffc107
+  }
+  .navbar-brand {
+    color: #ffc107;
+  }
+  // .custom-navbar .collapse.navbar-collapse {
+  // position: absolute;
+  // top: 100%;
+  // left: 0;
+  // right: 0;
+  // background-color: transparent !important;
+  // z-index: 1000;
+
+  .custom-navbar .collapse.navbar-collapse {
+  position: static !important;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.2);
+  padding: 0.5rem 0;
+  box-shadow: none;
+  border-radius: 10px;
+  }
+
+  .custom-navbar {
+    border-bottom: 1px solid rgba(255,215,0,0.2);
   }
 }

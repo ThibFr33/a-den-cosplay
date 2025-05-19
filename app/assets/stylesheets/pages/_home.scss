@@ -1,8 +1,16 @@
 .home-logo {
-  max-width: 400px;
+  /* Jamais moins de 150px, idéal à 40vw, jamais plus de 400px */
+  width: clamp(150px, 40vw, 400px);
+  height: auto;                  /* garde les proportions */
   filter: drop-shadow(0 0 15px rgba(255, 215, 0, 0.5));
   animation: logoFadeIn 2s ease-in-out forwards;
 }
+
+.home-container {
+  justify-content: flex-start;      /* plus de centering vertical */
+  padding-top: 10vh;                /* ajuste selon l’effet désiré */
+}
+
 
 @keyframes logoFadeIn {
   from {
@@ -33,12 +41,14 @@
 
 .welcome-title {
   font-family: 'Orbitron', sans-serif;
-  font-size: 3.2rem;
+  /* Jamais moins de 1.8rem, idéal à 6vw, jamais plus de 3.2rem */
+  font-size: clamp(1.8rem, 6vw, 3.2rem);
   text-align: center;
   animation: switchToMandalorian 7s ease forwards;
-  text-shadow: 0 0 10px rgba(255, 215, 0, 0.6), 0 0 20px rgba(255, 215, 0, 0.4);
+  text-shadow: 0 0 10px rgba(255, 215, 0, 0.6),
+               0 0 20px rgba(255, 215, 0, 0.4);
   letter-spacing: 2px;
-  padding: 1rem;
+  padding: clamp(0.5rem, 2vw, 1rem);  /* padding également fluide */
   border: 1px solid rgba(255, 215, 0, 0.2);
   border-radius: 8px;
   background-color: rgba(0, 0, 0, 0.4);
