@@ -50,6 +50,7 @@ gem 'bootsnap', require: false
 # gem "image_processing", "~> 1.2"
 gem 'bootstrap', '~> 5.3'
 gem 'sassc-rails'
+gem 'dotenv-rails'
 
 gem 'sassc', '~> 2.4'
 
@@ -59,7 +60,6 @@ gem 'recaptcha', require: 'recaptcha/rails'
 
 
 group :development, :test do
-  gem 'dotenv-rails'
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem 'debug', platforms: %i[mri windows]
 end
