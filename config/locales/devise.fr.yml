@@ -19,6 +19,10 @@ fr:
       inactive: "Votre profil est inactif. Contactez le commandement."
       last_attempt: "Dernière tentative avant verrouillage du système."
       locked: "Profil verrouillé. Procédez à une vérification."
+      unconfirmed: "Vous devez confirmer votre compte avant de continuer."
+    user:
+      unconfirmed: "Vous devez confirmer votre compte avant de continuer."
+
 
   date:
     month_names:
