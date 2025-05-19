@@ -83,3 +83,17 @@
   font-weight: normal;
   font-style: normal;
 }
+.instagram-footer-mobile {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 999;
+}
+
+@media (min-width: 576px) {
+  .instagram-footer-mobile {
+    display: none !important; // cache sur tablette/desktop
+  }
+}
+
