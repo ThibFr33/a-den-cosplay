@@ -11,6 +11,9 @@
 # It's strongly recommended that you check this file into your version control system.
 
 ActiveRecord::Schema[7.1].define(version: 2025_05_16_205439) do
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "action_mailbox_inbound_emails", force: :cascade do |t|
     t.integer "status", default: 0, null: false
     t.string "message_id", null: false
@@ -67,7 +70,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_05_16_205439) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "reseau_social"
-    t.integer "user_id"
+    t.bigint "user_id"
     t.string "role"
     t.index ["user_id"], name: "index_members_on_user_id"
   end
