@@ -105,7 +105,7 @@ members_data = [
     email: ENV.fetch("BOBA_EMAIL"),
     password: ENV.fetch("BOBA_PASSWORD"),
     username: "Mando bobafett",
-    pseudo: "Mando bobafett",
+    pseudo: "Dragon Fett",
     presentation: <<~TEXT,
       Notre cosplayer 100% mandalorien pur souche à l'humour déjanté sera prêt à tout pour vous faire dire :
       "Boba Fett c'est le meilleur"
