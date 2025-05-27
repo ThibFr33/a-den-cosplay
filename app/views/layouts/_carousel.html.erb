@@ -35,7 +35,6 @@
       </button>
     <% end %>
 
-    <!-- Miniatures/thumbnails -->
     <div class="d-flex justify-content-center align-items-center mt-2">
       <% object.photos.attachments.each_with_index do |attachment, index| %>
         <img src="<%= url_for(attachment) %>"

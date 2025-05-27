@@ -60,4 +60,8 @@
   </div>
 
 </div>
-<%= render "photo_form", member: @member %>
+<%= render "layouts/add_photo_modal",
+           object: @member,
+           modal_id: "addPhotoModal",
+           form_url: add_photo_member_path(@member),
+           title: "Ajouter une photo à ce membre" %>

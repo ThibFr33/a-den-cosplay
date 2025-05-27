@@ -5,7 +5,7 @@
   justify-content: space-evenly;
 }
 .event-card {
-
+  text-align: center;
   background-color:rgba(0, 0, 0, 0.6);
   color: #eee;
   padding: 1rem;
@@ -22,7 +22,8 @@
 .event-card img {
   max-width: 100%;
   height: auto;
-  max-height: 300px;
+  max-height: 100%;
+  object-fit: cover;
 }
 h1 {
   text-align: center;
