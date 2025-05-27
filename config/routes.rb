@@ -16,7 +16,12 @@ Rails.application.routes.draw do
     patch :add_photo, on: :member
     delete 'photos/:photo_id', to: 'members#destroy_photo', as: 'photo'
   end
-  resources :events, only: [:index]
+  resources :events do
+    member do
+      post :add_photo
+    end
+  end
+
   resources :contact_form, only: %i[new create]
 
   get   "profile/edit", to: "profiles#edit",   as: :edit_profile
