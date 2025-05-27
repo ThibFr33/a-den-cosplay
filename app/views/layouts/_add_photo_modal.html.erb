@@ -1,16 +1,31 @@
-<div class="modal fade" id="addPhotoModal" tabindex="-1" aria-labelledby="addPhotoModalLabel" aria-hidden="true">
+<%#
+  Usage exemple :
+    render "shared/photo_modal",
+           object: @member,
+           modal_id: "addPhotoModal",
+           form_url: add_photo_member_path(@member),
+           title: "Ajouter une photo à ce membre"
+
+    render "shared/photo_modal",
+           object: @event,
+           modal_id: "addEventPhotoModal",
+           form_url: add_photo_event_path(@event),
+           title: "Ajouter une photo à cet événement"
+%>
+
+<div class="modal fade" id="<%= modal_id %>" tabindex="-1" aria-labelledby="<%= modal_id %>Label" aria-hidden="true">
   <div class="modal-dialog modal-sm">
     <div class="modal-content">
 
       <div class="modal-header">
-        <h5 class="modal-title" id="addPhotoModalLabel">Ajouter une Photo</h5>
+        <h5 class="modal-title" id="<%= modal_id %>Label"><%= title || "Ajouter une photo" %></h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermer"></button>
       </div>
 
       <div class="modal-body">
-        <%= form_with(model: @member,
-                      url: add_photo_member_path(@member),
-                      method: :patch,
+        <%= form_with(model: object,
+                      url: form_url,
+                      method: :patch, # ou :post selon tes routes
                       local: true,
                       html: { multipart: true }) do |f| %>
 
@@ -26,7 +41,6 @@
 
         <% end %>
       </div>
-
     </div>
   </div>
 </div>

@@ -18,7 +18,7 @@ Rails.application.routes.draw do
   end
   resources :events do
     member do
-      post :add_photo
+      patch :add_photo
     end
   end
 
