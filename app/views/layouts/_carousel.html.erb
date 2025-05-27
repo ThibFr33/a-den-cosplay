@@ -1,0 +1,50 @@
+
+<% if object.photos.attached? %>
+  <div id="carousel-<%= object.id %>" class="carousel slide mb-3" data-bs-ride="carousel" data-bs-interval="5000">
+    <div class="carousel-inner">
+      <% object.photos.attachments.each_with_index do |attachment, index| %>
+        <div class="carousel-item <%= 'active' if index.zero? %>">
+          <%= image_tag url_for(attachment), class: "d-block w-100", alt: (object.try(:pseudo) || "photo") %>
+          <%# Bouton suppression %>
+          <% if defined?(current_user) && user_signed_in? &&
+                ((object.respond_to?(:user) && current_user == object.user) || (current_user.respond_to?(:admin?) && current_user.admin?)) &&
+                local_assigns[:delete_path] %>
+            <%= link_to "Supprimer cette photo",
+                        delete_path.call(object, attachment),
+                        data: {
+                          turbo_method: :delete,
+                          turbo_confirm: "Vous allez supprimer cette photo, êtes-vous sûr(e) ?",
+                          turbo_stream: false
+                        },
+                        class: "btn btn-danger btn-sm mt-2" %>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+
+    <% if object.photos.count > 1 %>
+      <button class="carousel-control-prev" type="button"
+              data-bs-target="#carousel-<%= object.id %>" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Précédent</span>
+      </button>
+      <button class="carousel-control-next" type="button"
+              data-bs-target="#carousel-<%= object.id %>" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Suivant</span>
+      </button>
+    <% end %>
+
+    <!-- Miniatures/thumbnails -->
+    <div class="d-flex justify-content-center align-items-center mt-2">
+      <% object.photos.attachments.each_with_index do |attachment, index| %>
+        <img src="<%= url_for(attachment) %>"
+             data-bs-target="#carousel-<%= object.id %>"
+             data-bs-slide-to="<%= index %>"
+             class="rounded shadow-sm mx-1 <%= 'border border-warning border-3' if index.zero? %>"
+             style="width: 64px; height: 48px; object-fit: cover; cursor: pointer;"
+             alt="Aperçu <%= index+1 %>">
+      <% end %>
+    </div>
+  </div>
+<% end %>

@@ -8,7 +8,10 @@
 
   <div class="card mx-auto" style="max-width: 600px; background-color:rgba(0, 0, 0, 0.6) ; color: #eee;">
     <div id="carousel">
-      <%= render "carousel", member: @member %>
+      <%= render "layouts/carousel",
+      object: @member,
+      delete_path: ->(member, attachment) { member_photo_path(member, attachment.id) } %>
+
     </div>
 
       <div class="card-body">

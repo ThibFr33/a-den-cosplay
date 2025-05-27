@@ -22,12 +22,28 @@ def attach_member_photo(member, filename)
   end
 end
 
-# === Seed Events ===
+def attach_event_photo(event, filename)
+  path = Rails.root.join("app/assets/images/#{filename}")
+  if File.exist?(path)
+    unless event.photos.attached? && event.photos.any? { |p| p.filename.to_s == filename }
+      event.photos.attach(
+        io: File.open(path),
+        filename: filename,
+        content_type: "image/jpeg"
+      )
+      puts "    Photo attachée: #{filename} pour #{event.name}"
+    end
+  else
+    puts " Image manquante pour #{member.pseudo} (#{filename})"
+  end
+end
+
 puts "🎉 Seeding Events..."
+
 events_data = [
   {
     name: 'Bordeaux GeekFest',
-    photo: 'BGF2025.jpg',
+    photos: ['BGF2025.jpg'],
     localisation: 'Parc des Expositions de Bordeaux. Cr Jules Ladoumegue, 33300 Bordeaux',
     description: "Le Bordeaux Geekfest c’est 200 exposants, 14 espaces et un grand nombre d’animations !",
     start_date: '2025-05-24',
@@ -36,7 +52,7 @@ events_data = [
   },
   {
     name: 'Geek Days',
-    photo: 'geek_days.jpg',
+    photos: ['geek_days.jpg'],
     localisation: 'Centre Culturel de Villeneuve-sur-Lot, 23 rue Etienne Marcel, 47300 Villeneuve-sur-Lot',
     description: <<~TEXT,
       Les Geek Days sont le rendez-vous incontesté des jeunes et des familles du territoire,
@@ -48,14 +64,20 @@ events_data = [
     end_date: '2025-04-26',
     url: 'https://www.grand-villeneuvois.fr/geek-days-2-346.html'
   }
+  # Ajoute d'autres events ici...
 ]
 
 events_data.each do |attrs|
+  photo_filenames = attrs.delete(:photos) || []
   event = Event.find_or_initialize_by(name: attrs[:name])
-  event.assign_attributes(attrs.except(:name))
+  event.assign_attributes(attrs)
   event.save!
-  puts "   ✅ Event: #{event.name}"
+  puts "  Event: #{event.name}"
+  photo_filenames.each do |filename|
+    attach_event_photo(event, filename)
+  end
 end
+
 
 # === Seed Admin User ===
 puts "🛡️ Seeding Admin User..."

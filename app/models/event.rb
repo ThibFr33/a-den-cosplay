@@ -2,6 +2,7 @@
 
 class Event < ApplicationRecord
   validates :url, presence: true
+  has_many_attached :photos
   scope :past,     -> { where('start_date < ?', Date.current).order(start_date: :desc) }
   scope :upcoming, -> { where('start_date >= ?', Date.current).order(start_date: :asc) }
 

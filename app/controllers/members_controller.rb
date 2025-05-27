@@ -15,6 +15,9 @@ class MembersController < ApplicationController
     @members = Member.order(pseudo: :asc)
   end
 
+  def show
+    @member = Member.find(params[:id])
+  end
 
   def new
     @member = Member.new
@@ -73,9 +76,6 @@ end
   end
 
 
-  def show
-    @member = Member.find(params[:id])
-  end
 
   private
 
