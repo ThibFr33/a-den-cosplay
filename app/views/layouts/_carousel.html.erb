@@ -35,15 +35,15 @@
       </button>
     <% end %>
 
-    <div class="d-flex justify-content-center align-items-center mt-2">
+    <div class="d-flex flex-wrap justify-content-center align-items-center gap-2 mt-2 carousel-thumbnails">
       <% object.photos.attachments.each_with_index do |attachment, index| %>
-        <img src="<%= url_for(attachment) %>"
-             data-bs-target="#carousel-<%= object.id %>"
-             data-bs-slide-to="<%= index %>"
-             class="rounded shadow-sm mx-1 <%= 'border border-warning border-3' if index.zero? %>"
-             style="width: 64px; height: 48px; object-fit: cover; cursor: pointer;"
-             alt="Aperçu <%= index+1 %>">
+            <img src="<%= url_for(attachment) %>"
+            data-bs-target="#carousel-<%= object.id %>"
+            data-bs-slide-to="<%= index %>"
+            class="rounded shadow-sm <%= 'border border-warning border-3' if index.zero? %>"
+            alt="Aperçu <%= index+1 %>">
       <% end %>
     </div>
+
   </div>
 <% end %>

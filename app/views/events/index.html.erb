@@ -10,8 +10,6 @@
             <%= image_tag url_for(event.photo), alt: event.name %>
           <% end %>
           <h3><%= event.name %></h3>
-          <p><%= l(event.start_date, format: :long) %></p>
-          <p><%= event.description %></p>
           <%= link_to event_path(event) do %>
             <p>Voir plus...</p>
           <% end %>
@@ -31,8 +29,6 @@
             <%= image_tag url_for(event.photo), alt: event.name %>
           <% end %>
           <h3><%= event.name %></h3>
-          <p><%= l(event.start_date, format: :long) %></p>
-          <p><%= event.description %></p>
         </div>
       <% end %>
     <% else %>
