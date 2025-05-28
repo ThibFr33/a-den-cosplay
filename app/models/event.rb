@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Event < ApplicationRecord
-  validates :url, presence: true
+  validates :name, :localisation, :description, :url, :start_date, :end_date, presence: true
   has_many_attached :photos
   scope :past,     -> { where('start_date < ?', Date.current).order(start_date: :desc) }
   scope :upcoming, -> { where('start_date >= ?', Date.current).order(start_date: :asc) }

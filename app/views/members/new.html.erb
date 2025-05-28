@@ -2,65 +2,67 @@
   <div class="w-100 px-3" style="max-width: 600px;">
     <h1 class="text-center mb-4">Créer un nouveau membre</h1>
 
-        <%= form_with(model: @member, local: true) do |form| %>
-          <% if @member.errors.any? %>
-            <div id="error_explanation">
-              <h2><%= pluralize(@member.errors.count, "erreur") %> empêchent la création :</h2>
-              <ul>
-                <% @member.errors.full_messages.each do |message| %>
-                  <li><%= message %></li>
-                <% end %>
-              </ul>
-            </div>
-          <% end %>
+    <%= form_with(model: @member, local: true, html: { multipart: true }) do |form| %>
+      <% if @member.errors.any? %>
+        <div class="alert alert-danger">
+          <h2><%= pluralize(@member.errors.count, "erreur") %> empêchent la création :</h2>
+          <ul>
+            <% @member.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
 
+      <h4 class="mb-3">Informations du membre</h4>
+      <div class="mb-3">
+        <%= form.label :pseudo %>
+        <%= form.text_field :pseudo, class: "form-control" %>
+      </div>
+
+      <div class="mb-3">
+        <%= form.label :reseau_social %>
+        <%= form.text_field :reseau_social, class: "form-control" %>
+      </div>
+
+      <div class="mb-3">
+        <%= form.label :presentation %>
+        <%= form.text_area :presentation, class: "form-control" %>
+      </div>
+      <div class="mb-3">
+        <%= form.label :role, "Rôle du membre" %>
+        <%= form.text_field :role, class: "form-control" %>
+      </div>
+
+      <div class="mb-3">
+        <%= form.label :photos, "Photos du membre" %>
+        <%= form.file_field :photos, multiple: true, class: "form-control" %>
+      </div>
+
+      <% if current_user&.admin? %>
+        <h4 class="mb-3">Informations de connexion</h4>
+        <%= form.fields_for :user do |user_form| %>
           <div class="mb-3">
-            <%= form.label :pseudo %>
-            <%= form.text_field :pseudo, class: "form-control" %>
+            <%= user_form.label :email %>
+            <%= user_form.email_field :email, class: "form-control" %>
           </div>
 
           <div class="mb-3">
-            <%= form.label :reseau_social %>
-            <%= form.text_field :reseau_social, class: "form-control" %>
+            <%= user_form.label :password %>
+            <%= user_form.password_field :password, class: "form-control" %>
           </div>
 
           <div class="mb-3">
-            <%= form.label :presentation %>
-            <%= form.text_area :presentation, class: "form-control" %>
+            <%= user_form.label :password_confirmation %>
+            <%= user_form.password_field :password_confirmation, class: "form-control" %>
+            <small>(laisser vide pour générer automatiquement)</small>
           </div>
-          <div class="mb-3">
-            <%= form.label :role, "Rôle du membre" %>
-            <%= form.text_field :role, class: "form-control" %>
-          </div>
-
-
-          <div class="mb-3">
-            <%= form.label :photos, "Photo du membre" %>
-            <%= form.file_field :photos, multiple: true, class: "form-control" %>
-          </div>
-        <% unless current_user && !current_user.admin? %>
-          <h3>Informations de connexion</h3>
-
-          <%= form.fields_for :user do |user_form| %>
-            <div class="mb-3">
-              <%= user_form.label :email %>
-              <%= user_form.email_field :email, class: "form-control" %>
-            </div>
-
-            <div class="mb-3">
-              <%= user_form.label :password %>
-              <%= user_form.password_field :password, class: "form-control" %>
-            </div>
-
-            <div class="mb-3">
-              <%= user_form.label :password_confirmation %>
-              <%= user_form.password_field :password_confirmation, class: "form-control" %>
-              <small>(laisser vide pour générer automatiquement)</small>
-            </div>
-          <% end %>
-
-          <%= form.submit "Créer le membre", class: "btn btn-success" %>
         <% end %>
       <% end %>
+
+      <div class="text-center mt-3">
+        <%= form.submit "Créer le membre", class: "btn btn-success" %>
+      </div>
+    <% end %>
   </div>
 </div>

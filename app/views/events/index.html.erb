@@ -1,13 +1,25 @@
-<!-- app/views/events/index.html.erb -->
-<div class="events-container">
+  <div class="container">
+    <h1 class="text-center my-5 text-warning">Nos sorties</h1>
+      <% if user_signed_in? && current_user.admin? %>
+        <div class="d-flex justify-content-end mb-3">
+          <%= link_to "➕ Ajouter un évènement", new_event_path,
+                      class: "btn btn-warning" %>
+        </div>
+      <% end %>
+  </div>
 
+<div class="events-container my-5">
   <div class="events-column past">
     <h2 class= "text-warning">Événements passés</h2>
     <% if @past_events.any? %>
       <% @past_events.each do |event| %>
         <div class="event-card">
           <%= link_to event.url, target: "_blank", rel: "noopener noreferrer" do %>
-            <%= image_tag url_for(event.photo), alt: event.name %>
+            <% if event.photos.attached? %>
+                <%= image_tag url_for(event.photos.first), alt: event.name %>
+              <% else %>
+                <%= image_tag "default_event.png", alt: "Événement", class: "img-fluid" %>
+            <% end %>
           <% end %>
           <h3><%= event.name %></h3>
           <%= link_to event_path(event) do %>
@@ -26,7 +38,11 @@
       <% @upcoming_events.each do |event| %>
         <div class="event-card">
           <%= link_to event.url, target: "_blank", rel: "noopener noreferrer" do %>
-            <%= image_tag url_for(event.photo), alt: event.name %>
+            <% if event.photos.attached? %>
+                <%= image_tag url_for(event.photos.first), alt: event.name %>
+              <% else %>
+                <%= image_tag "default_event.png", alt: "Événement", class: "img-fluid" %>
+            <% end %>
           <% end %>
           <h3><%= event.name %></h3>
         </div>
