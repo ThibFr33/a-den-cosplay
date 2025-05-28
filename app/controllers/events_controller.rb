@@ -14,6 +14,20 @@ class EventsController < ApplicationController
     @event = Event.find(params[:id])
   end
 
+  def new
+    @event = Event.new
+  end
+
+  def create
+    @event = Event.new(event_params)
+    if @event.save
+      redirect_to @event, notice: "L'événement a été créé avec succès."
+    else
+      render :new, status: :unprocessable_entity
+    end
+  end
+
+
   def add_photo
 
     @event = Event.find(params[:id])
@@ -25,5 +39,12 @@ class EventsController < ApplicationController
       redirect_to @event, alert: "Aucune photo sélectionnée."
     end
   end
+
+  private
+
+  def event_params
+    params.require(:event).permit(:name, :localisation, :description, :url, :start_date, :end_date, photos: [])
+  end
+
 
 end

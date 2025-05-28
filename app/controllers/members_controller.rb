@@ -25,13 +25,22 @@ class MembersController < ApplicationController
   end
 
   def create
+    if params[:member][:user_attributes][:password].blank?
+      generated_password = Devise.friendly_token.first(12)
+      params[:member][:user_attributes][:password] = generated_password
+      params[:member][:user_attributes][:password_confirmation] = generated_password
+    end
+
     @member = Member.new(member_params)
-
-
     if @member.save
-      redirect_to @member, notice: "Une nouvelle recrue fait son apparition"
+      if generated_password
+        UserMailer.with(user: @member.user, password: generated_password).welcome.deliver_later
+      else
+        UserMailer.with(user: @member.user).welcome.deliver_later
+      end
+
+      redirect_to @member, notice: "Une nouvelle recrue fait son apparition. Un mail de connexion a été envoyé."
     else
-      # Pour voir les erreurs dans la vue `new`
       render :new, status: :unprocessable_entity
     end
   end

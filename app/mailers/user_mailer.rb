@@ -10,4 +10,10 @@ class UserMailer < ApplicationMailer
       reply_to: @contact_form.email
     )
   end
+
+  def send_password
+    @user = params[:user]
+    @password = params[:password]
+    mail(to: @user.email, subject: "Votre mot de passe temporaire")
+  end
 end
