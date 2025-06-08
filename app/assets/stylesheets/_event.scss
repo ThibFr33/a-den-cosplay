@@ -24,19 +24,19 @@ h1 {
 }
 .events-container {
   display: flex;
-  gap: 2rem;
+  justify-content: center;
+  gap: 100px;
   align-items: flex-start;
   margin: 2rem 0;
   max-width: 1400px;
+  width: 100%;
 }
 .events-column {
   flex: 1;
 }
 
 .events-column h2 {
-  margin-bottom: 1rem;
-  border-bottom: 2px solid var(--bs-secondary);
-  padding-bottom: 0.5rem;
+  text-align: center;
 }
 @media (max-width: 768px) {
   .events-container {

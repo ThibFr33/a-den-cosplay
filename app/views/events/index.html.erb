@@ -7,49 +7,28 @@
         </div>
       <% end %>
   </div>
+  <div class="d-flex justify-content-center">
+    <div class="events-container my-5">
+      <div class="events-column past">
+        <h2 class= "text-warning">Événements passés</h2>
+        <% if @past_events.any? %>
+          <% @past_events.each do |event| %>
+            <%= render "layouts/event-card", event: event %>
+          <% end %>
+        <% else %>
+          <p class="text-center">Aucun événement passé.</p>
+        <% end %>
+      </div>
 
-<div class="events-container my-5">
-  <div class="events-column past">
-    <h2 class= "text-warning">Événements passés</h2>
-    <% if @past_events.any? %>
-      <% @past_events.each do |event| %>
-        <div class="event-card">
-          <%= link_to event.url, target: "_blank", rel: "noopener noreferrer" do %>
-            <% if event.photos.attached? %>
-                <%= image_tag url_for(event.photos.first), alt: event.name %>
-              <% else %>
-                <%= image_tag "default_event.png", alt: "Événement", class: "img-fluid" %>
-            <% end %>
+      <div class="events-column upcoming">
+        <h2 class= "text-warning">Événements à venir</h2>
+        <% if @upcoming_events.any? %>
+          <% @upcoming_events.each do |event| %>
+            <%= render "layouts/event-card", event: event %>
           <% end %>
-          <h3><%= event.name %></h3>
-          <%= link_to event_path(event) do %>
-            <p>Voir plus...</p>
-          <% end %>
-        </div>
-      <% end %>
-    <% else %>
-      <p>Aucun événement passé.</p>
-    <% end %>
+        <% else %>
+          <p class="text-center">Aucun événement à venir.</p>
+        <% end %>
+      </div>
+    </div>
   </div>
-
-  <div class="events-column upcoming">
-    <h2 class= "text-warning">Événements à venir</h2>
-    <% if @upcoming_events.any? %>
-      <% @upcoming_events.each do |event| %>
-        <div class="event-card">
-          <%= link_to event.url, target: "_blank", rel: "noopener noreferrer" do %>
-            <% if event.photos.attached? %>
-                <%= image_tag url_for(event.photos.first), alt: event.name %>
-              <% else %>
-                <%= image_tag "default_event.png", alt: "Événement", class: "img-fluid" %>
-            <% end %>
-          <% end %>
-          <h3><%= event.name %></h3>
-        </div>
-      <% end %>
-    <% else %>
-      <p>Aucun événement à venir.</p>
-    <% end %>
-  </div>
-
-</div>
