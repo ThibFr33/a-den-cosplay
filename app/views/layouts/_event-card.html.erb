@@ -1,0 +1,13 @@
+<div class="event-card">
+          <%= link_to event.url, target: "_blank", rel: "noopener noreferrer" do %>
+            <% if event.photos.attached? %>
+                <%= image_tag url_for(event.photos.first), alt: event.name %>
+              <% else %>
+                <%= image_tag "default_event.png", alt: "Événement", class: "img-fluid" %>
+            <% end %>
+          <% end %>
+          <h3><%= event.name %></h3>
+          <%= link_to event_path(event) do %>
+            <p>Voir plus...</p>
+          <% end %>
+        </div>
