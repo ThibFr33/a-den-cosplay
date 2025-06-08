@@ -46,3 +46,19 @@ fr:
     formats:
       default: "%H:%M"
       long:    "%d %B %Y" # ex. "13 mai 2025 14:30"
+
+  activemodel:
+    errors:
+      models:
+        contact_form:
+          attributes:
+            prenom:
+              blank: " ne peut pas être vide."
+            nom:
+              blank: " ne peut pas être vide."
+            email:
+              blank: " ne peut pas être vide."
+              invalid: " est invalide."
+            message:
+              blank: " ne peut pas être vide."
+              too_short: "  est trop court (minimum %{count} caractères)."
