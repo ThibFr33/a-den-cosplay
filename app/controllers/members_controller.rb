@@ -7,9 +7,6 @@ class MembersController < ApplicationController
   before_action :authorize_admin, only: [:new, :create]
   before_action :authorize_edit!, only: [:edit, :update]
 
-
-
-
   def index
     @members = Member.all
     @members = Member.order(pseudo: :asc)
@@ -30,7 +27,6 @@ class MembersController < ApplicationController
       params[:member][:user_attributes][:password] = generated_password
       params[:member][:user_attributes][:password_confirmation] = generated_password
     end
-
     @member = Member.new(member_params)
     if @member.save
       if generated_password
@@ -38,7 +34,6 @@ class MembersController < ApplicationController
       else
         UserMailer.with(user: @member.user).welcome.deliver_later
       end
-
       redirect_to @member, notice: "Une nouvelle recrue fait son apparition. Un mail de connexion a été envoyé."
     else
       render :new, status: :unprocessable_entity
@@ -59,18 +54,14 @@ class MembersController < ApplicationController
     end
   end
 
-
-
-def destroy_photo
+  def destroy_photo
     attachment = @member.photos.attachments.find(params[:photo_id])
     attachment.purge
     respond_to do |format|
-      format.html       { redirect_to @member, notice: "Photo supprimée !" }
+      format.html { redirect_to @member, notice: "Photo supprimée !" }
       format.turbo_stream { flash.now[:notice] = "Photo supprimée !" }
     end
-end
-
-
+  end
 
   def add_photo
 
@@ -83,8 +74,6 @@ end
       redirect_to @member, alert: "Aucune photo sélectionnée."
     end
   end
-
-
 
   private
 
@@ -115,5 +104,4 @@ end
       redirect_to root_path, alert: "Accès refusé."
     end
   end
-
 end

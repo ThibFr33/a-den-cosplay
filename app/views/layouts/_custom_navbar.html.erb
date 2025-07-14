@@ -1,10 +1,9 @@
 <header class="custom-navbar navbar navbar-expand-md  bg-transparent">
   <div class="container">
-    <!-- Logo / Brand (tu peux le masquer sur desktop si besoin) -->
     <%= link_to "Dragon Krayt A'den", root_path,
           class: "navbar-brand d-block d-md-none"%>
 
-    <!-- Bouton hamburger (apparaît <768px) -->
+    <%# Bouton hamburger (apparaît <768px) %>
     <button class="navbar-toggler" type="button"
             data-bs-toggle="collapse"
             data-bs-target="#mainNav"
@@ -14,7 +13,7 @@
       <span class="navbar-toggler-icon"></span>
     </button>
 
-    <!-- Menu collapsible -->
+    <%# Menu collapsible %>
     <div class="collapse navbar-collapse" id="mainNav">
       <ul class="navbar-nav mx-auto justify-content-center">
         <li class="nav-item"><%= link_to "Accueil", home_path, class: "nav-link" %></li>
