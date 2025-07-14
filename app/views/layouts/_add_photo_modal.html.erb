@@ -1,18 +1,3 @@
-<%#
-  Usage exemple :
-    render "shared/photo_modal",
-           object: @member,
-           modal_id: "addPhotoModal",
-           form_url: add_photo_member_path(@member),
-           title: "Ajouter une photo à ce membre"
-
-    render "shared/photo_modal",
-           object: @event,
-           modal_id: "addEventPhotoModal",
-           form_url: add_photo_event_path(@event),
-           title: "Ajouter une photo à cet événement"
-%>
-
 <div class="modal fade" id="<%= modal_id %>" tabindex="-1" aria-labelledby="<%= modal_id %>Label" aria-hidden="true">
   <div class="modal-dialog modal-sm">
     <div class="modal-content">
@@ -25,7 +10,7 @@
       <div class="modal-body">
         <%= form_with(model: object,
                       url: form_url,
-                      method: :patch, # ou :post selon tes routes
+                      method: :patch,
                       local: true,
                       html: { multipart: true }) do |f| %>
 

@@ -10,14 +10,11 @@ class ContactFormController < ApplicationController
 
     if verify_recaptcha(model: @contact_form) && @contact_form.valid?
       UserMailer.user_email(@contact_form).deliver_now
-      # ici tu pourrais envoyer un email ou faire autre chose
      redirect_to new_contact_form_path, notice: "Message envoyé avec succès."
     else
       flash.now[:alert] = "Le formulaire n'a pas pu être envoyé. Vérifiez les erreurs."
       render :new
     end
-
-    # Perform any necessary actions with the form data
   end
 
   private

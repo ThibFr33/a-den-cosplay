@@ -21,10 +21,10 @@
 
 body {
   background-image: image-url("background.jpg");
-  background-size: cover;  /* Ajuste l'image pour couvrir toute la page */
-  background-position: center; /* Centre l'image */
-  background-attachment: fixed; /* L'image reste fixe au scroll */
-  background-repeat: no-repeat; /* Empêche la répétition */
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
   font-family: orbitron;
   color: $rose;
 }

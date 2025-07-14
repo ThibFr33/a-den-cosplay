@@ -1,26 +1,8 @@
-// .nav {
-//   display: flex;
-//   justify-content: space-around;
-//   align-items: center;
-//   list-style-type: none;
-//   padding: 0;
-//   margin: 0;
-// }
-
-// .nav-item {
-//   padding: 10px;
-// }
-
-
-// Après @import "bootstrap";
-
 .custom-navbar {
   background-color: transparent !important;
   box-shadow: none;
 
 }
-
-// Optionnel : customiser l’icône hamburger en Mandalorian sombre
 .custom-navbar .navbar-toggler {
   border: none;
 }
@@ -50,10 +32,6 @@
     }
   }
 }
-
-// Collapse full-width sous la barre
-
-
 // Menu vertical mobile
 @media (max-width: 767px) {
   .custom-navbar .navbar-nav {
@@ -72,14 +50,6 @@
   .navbar-brand {
     color: #ffc107;
   }
-  // .custom-navbar .collapse.navbar-collapse {
-  // position: absolute;
-  // top: 100%;
-  // left: 0;
-  // right: 0;
-  // background-color: transparent !important;
-  // z-index: 1000;
-
   .custom-navbar .collapse.navbar-collapse {
   position: static !important;
   width: 100%;

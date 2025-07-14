@@ -15,7 +15,7 @@
     </div>
 
       <div class="card-body">
-        <!-- Ligne flex avec pseudo et bouton -->
+        <%# Ligne flex avec pseudo et bouton %>
         <div class="d-flex align-items-center mb-0">
           <h2 class="card-title mb-3 flex-grow-1 text-center">
             <%= @member.pseudo %>
@@ -31,7 +31,7 @@
           <% end %>
         </div>
 
-        <!-- Icône réseau social, juste sous le pseudo -->
+         <%# Icône réseau social, juste sous le pseudo %>
         <% if @member.reseau_social.present? %>
           <div class="text-center mb-3">
             <%= link_to @member.reseau_social,
