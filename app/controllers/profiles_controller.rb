@@ -10,9 +10,9 @@ class ProfilesController < ApplicationController
     @user = current_user
 
     if @user.update(user_params)
-      redirect_to member_path(@user.member), notice: "Profil mis à jour avec succès."
+      redirect_to member_path(@user.member), notice: 'Profil mis à jour avec succès.'
     else
-      flash.now[:alert] = "Erreur lors de la mise à jour."
+      flash.now[:alert] = 'Erreur lors de la mise à jour.'
       render :edit, status: :unprocessable_entity
     end
   end

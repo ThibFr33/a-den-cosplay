@@ -56,6 +56,14 @@
           <p class="card-text text-center"><%= @member.presentation %></p>
         <% end %>
       </div>
+      <% if user_signed_in? && current_user.admin? %>
+        <%= button_to "Supprimer ce membre",
+            member_path(@member),
+            method: :delete,
+            data: { turbo_confirm: "Supprimer ce membre et son compte utilisateur ? Action irréversible." },
+            class: "btn btn-danger" %>
+      <% end %>
+
 
   </div>
 

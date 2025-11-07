@@ -40,6 +40,15 @@ class EventsController < ApplicationController
     end
   end
 
+  def destroy_photo
+    attachment = @event.photos.attachments.find(params[:photo_id])
+    attachment.purge
+    respond_to do |format|
+      format.html { redirect_to @event, notice: "Photo supprimée !" }
+      format.turbo_stream { flash.now[:notice] = "Photo supprimée !" }
+    end
+  end
+
   private
 
   def event_params

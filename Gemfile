@@ -57,6 +57,8 @@ gem 'sassc', '~> 2.4'
 gem 'image_processing', '~> 1.2'
 gem 'mini_magick', '~> 5.2'
 gem 'recaptcha', require: 'recaptcha/rails'
+gem 'devise_invitable', '~> 2.0'
+
 
 
 group :development, :test do

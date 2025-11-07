@@ -11,9 +11,9 @@ class UserMailer < ApplicationMailer
     )
   end
 
-  def send_password
+  def welcome
     @user = params[:user]
     @password = params[:password]
-    mail(to: @user.email, subject: "Votre mot de passe temporaire")
+    mail(to: @user.email, subject: "Bienvenue")
   end
 end

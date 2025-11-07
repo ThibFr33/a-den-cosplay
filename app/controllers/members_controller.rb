@@ -2,9 +2,9 @@
 
 class MembersController < ApplicationController
   before_action :authenticate_user!, only: [:edit, :update, :add_photo, :destroy_photo]
-  before_action :set_member, only: [:edit, :update, :add_photo, :destroy_photo, :show]
+  before_action :set_member, only: [:edit, :update, :add_photo, :destroy_photo, :show, :destroy]
   before_action :authorize_member!, only: [:edit, :update, :add_photo, :destroy_photo]
-  before_action :authorize_admin, only: [:new, :create]
+  before_action :authorize_admin, only: [:new, :create, :destroy]
   before_action :authorize_edit!, only: [:edit, :update]
 
   def index
@@ -22,20 +22,21 @@ class MembersController < ApplicationController
   end
 
   def create
-    if params[:member][:user_attributes][:password].blank?
-      generated_password = Devise.friendly_token.first(12)
-      params[:member][:user_attributes][:password] = generated_password
-      params[:member][:user_attributes][:password_confirmation] = generated_password
+    email = member_params.dig(:user_attributes, :email).to_s.strip
+
+    user = User.invite!(email: email)
+    if user.invalid?
+      @member = Member.new; @member.build_user(email: email)
+      @member.errors.add(:base, user.errors.full_messages.to_sentence)
+      return render :new, status: :unprocessable_entity
     end
-    @member = Member.new(member_params)
+    attrs   = member_params.to_h.except("user_attributes")
+    @member = Member.new(attrs.merge(user: user))
+
     if @member.save
-      if generated_password
-        UserMailer.with(user: @member.user, password: generated_password).welcome.deliver_later
-      else
-        UserMailer.with(user: @member.user).welcome.deliver_later
-      end
-      redirect_to @member, notice: "Une nouvelle recrue fait son apparition. Un mail de connexion a été envoyé."
+      redirect_to @member, notice: "Invitation envoyée."
     else
+      @member.build_user(email: email) unless @member.user
       render :new, status: :unprocessable_entity
     end
   end
@@ -54,6 +55,27 @@ class MembersController < ApplicationController
     end
   end
 
+  def destroy
+    # petites sécurités utiles
+    if current_user == @member.user
+      return redirect_to @member, alert: "Vous ne pouvez pas vous supprimer vous-même ici."
+    end
+    if @member.user.admin? && User.where(admin: true).count <= 1
+      return redirect_to @member, alert: "Impossible de supprimer le dernier administrateur."
+    end
+    user = @member.user
+    if user.destroy   # <= une seule ligne fait tout le boulot
+      redirect_to members_path, notice: "Membre et compte utilisateur supprimés."
+    else
+      redirect_to @member, alert: user.errors.full_messages.to_sentence
+    end
+  end
+
+
+
+
+
+
   def destroy_photo
     attachment = @member.photos.attachments.find(params[:photo_id])
     attachment.purge
@@ -64,9 +86,7 @@ class MembersController < ApplicationController
   end
 
   def add_photo
-
     @member = Member.find(params[:id])
-
     if params[:member] && params[:member][:photos].present?
       @member.photos.attach(params[:member][:photos])
       redirect_to @member, notice: "Photos ajoutées !"
@@ -74,6 +94,8 @@ class MembersController < ApplicationController
       redirect_to @member, alert: "Aucune photo sélectionnée."
     end
   end
+
+
 
   private
 
@@ -84,7 +106,7 @@ class MembersController < ApplicationController
   end
 
   def member_params
-    params.require(:member).permit(:pseudo, :reseau_social, :presentation, :role, photos: [], user_attributes: [:email, :password, :password_confirmation])
+    params.require(:member).permit(:pseudo, :reseau_social, :presentation, :role, photos: [], user_attributes: [:email])
   end
 
   def set_member
@@ -105,3 +127,5 @@ class MembersController < ApplicationController
     end
   end
 end
+
+
