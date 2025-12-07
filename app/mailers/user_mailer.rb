@@ -10,10 +10,4 @@ class UserMailer < ApplicationMailer
       reply_to: @contact_form.email
     )
   end
-
-  def welcome
-    @user = params[:user]
-    @password = params[:password]
-    mail(to: @user.email, subject: "Bienvenue")
-  end
 end

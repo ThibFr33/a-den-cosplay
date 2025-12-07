@@ -1,30 +1,68 @@
-<div class="container ">
-  <h1>Modifier mon profil</h1>
+<div class="container mt-5" style="max-width: 800px;">
+  <div class="card shadow p-4" style="background: rgba(0,0,0,0.75); color:#eee; border-radius:15px;">
+
+    <h2 class="text-center mb-4">Modifier mon profil</h2>
 
     <%= form_with model: @user, url: profile_path, method: :patch, local: true do |f| %>
-      <h2>Compte</h2>
 
-      <%= f.label :email %>
-      <%= f.email_field :email, class: "form-control w-50" %>
+      <!-- SECTION USER -->
+      <h4 class="text-warning mb-3">
+        <i class="fa-solid fa-user"></i> Informations du compte
+      </h4>
 
-      <%= f.label :password, "Nouveau mot de passe" %>
-      <%= f.password_field :password, class: "form-control w-50" %>
+      <div class="mb-3">
+        <%= f.label :email, "Adresse E-mail", class: "form-label label-ghost " %>
+        <%= f.email_field :email, class: "form-control" %>
+      </div>
 
-      <%= f.label :password_confirmation %>
-      <%= f.password_field :password_confirmation, class: "form-control w-50" %>
+      <div class="row">
+        <div class="col-md-6 mb-3">
+          <%= f.label :password, "Nouveau mot de passe", class: "form-label label-ghost" %>
+          <small class="text-muted d-block label-ghost ">(laisser vide pour ne pas changer)</small>
+          <%= f.password_field :password, class: "form-control" %>
+        </div>
 
-      <h2>Profil</h2>
-      <%= f.fields_for :member, @member do |m| %>
-        <%= m.label :pseudo %>
-        <%= m.text_field :pseudo, class: "form-control w-50" %>
+        <div class="col-md-6 mb-3">
+          <%= f.label :password_confirmation,"Confirmation du mot de passe", class: "form-label label-ghost" %>
+          <%= f.password_field :password_confirmation, class: "form-control" %>
+        </div>
+      </div>
 
-        <%= m.label :presentation %>
-        <%= m.text_area :presentation, class: "form-control w-50" %>
+      <div class="mb-4">
+        <%= f.label :current_password, "Mot de passe actuel", class: "form-label label-ghost" %>
+        <small class="text-muted d-block text-warning label-ghost">(obligatoire pour valider les modifications)</small>
+        <%= f.password_field :current_password, class: "form-control" %>
+      </div>
 
-        <%= m.label :reseau_social %>
-        <%= m.text_field :reseau_social, class: "form-control w-50" %>
+      <!-- SECTION MEMBER -->
+      <h4 class="text-warning mb-3">
+        <i class="fa-solid fa-id-card"></i> Profil cosplayeur
+      </h4>
+
+      <%= f.fields_for :member do |m| %>
+
+        <div class="mb-3">
+          <%= m.label :pseudo, class: "form-label label-ghost" %>
+          <%= m.text_field :pseudo, class: "form-control" %>
+        </div>
+
+        <div class="mb-3">
+          <%= m.label :presentation, class: "form-label label-ghost" %>
+          <%= m.text_area :presentation, rows: 4, class: "form-control" %>
+        </div>
+
+        <div class="mb-3">
+          <%= m.label :reseau_social, "Réseau social", class: "form-label label-ghost" %>
+          <%= m.text_field :reseau_social, class: "form-control" %>
+        </div>
+
       <% end %>
 
-      <%= f.submit "Mettre à jour", class: "btn btn-primary mt-3" %>
+      <!-- SUBMIT -->
+      <div class="d-grid mt-4">
+        <%= f.submit "Mettre à jour", class: "btn btn-warning btn-lg fw-bold" %>
+      </div>
+
     <% end %>
+  </div>
 </div>

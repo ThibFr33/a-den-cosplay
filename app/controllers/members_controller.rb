@@ -71,11 +71,6 @@ class MembersController < ApplicationController
     end
   end
 
-
-
-
-
-
   def destroy_photo
     attachment = @member.photos.attachments.find(params[:photo_id])
     attachment.purge
@@ -94,8 +89,6 @@ class MembersController < ApplicationController
       redirect_to @member, alert: "Aucune photo sélectionnée."
     end
   end
-
-
 
   private
 
@@ -127,5 +120,4 @@ class MembersController < ApplicationController
     end
   end
 end
-
 

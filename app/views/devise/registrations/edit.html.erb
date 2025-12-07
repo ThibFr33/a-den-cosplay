@@ -1,43 +1,89 @@
-<h2>Edit <%= resource_name.to_s.humanize %></h2>
+<div class="container mt-5" style="max-width: 800px;">
+  <div class="card shadow p-4" style="background: rgba(0,0,0,0.7); color:#eee; border-radius:15px;">
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-  <%= render "devise/shared/error_messages", resource: resource %>
+    <h2 class="text-center mb-4">Modifier mon profil</h2>
 
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
+    <%= form_with model: @user, url: profile_path, method: :patch, local: true do |f| %>
 
-  <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-    <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
-  <% end %>
+      <!-- SECTION USER -->
+      <h4 class="text-warning mb-3">Informations du compte</h4>
 
-  <div class="field">
-    <%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
-    <%= f.password_field :password, autocomplete: "new-password" %>
-    <% if @minimum_password_length %>
-      <br />
-      <em><%= @minimum_password_length %> characters minimum</em>
+      <div class="mb-3">
+        <%= f.label :email, class: "form-label" %>
+        <%= f.email_field :email, class: "form-control" %>
+      </div>
+
+      <div class="row">
+        <div class="col-md-6 mb-3">
+          <%= f.label :password, class: "form-label" %>
+          <small class="text-muted d-block">(laisser vide pour ne pas changer)</small>
+          <%= f.password_field :password, class: "form-control" %>
+        </div>
+
+        <div class="col-md-6 mb-3">
+          <%= f.label :password_confirmation, class: "form-label" %>
+          <%= f.password_field :password_confirmation, class: "form-control" %>
+        </div>
+      </div>
+
+      <div class="mb-4">
+        <%= f.label :current_password, class: "form-label" %>
+        <small class="text-muted d-block">(obligatoire pour valider)</small>
+        <%= f.password_field :current_password, class: "form-control" %>
+      </div>
+
+      <!-- SECTION MEMBER -->
+      <h4 class="text-warning mb-3">Profil cosplayeur</h4>
+
+      <%= f.fields_for :member do |m| %>
+
+        <div class="mb-3">
+          <%= m.label :pseudo, class: "form-label" %>
+          <%= m.text_field :pseudo, class: "form-control" %>
+        </div>
+
+        <div class="mb-3">
+          <%= m.label :presentation, class: "form-label" %>
+          <%= m.text_area :presentation, rows: 4, class: "form-control" %>
+        </div>
+
+        <div class="mb-3">
+          <%= m.label :reseau_social, "Réseau social", class: "form-label" %>
+          <%= m.text_field :reseau_social, class: "form-control" %>
+        </div>
+
+        <!-- Upload de photos -->
+        <div class="mb-3">
+          <%= m.label :photos, "Ajouter des photos", class: "form-label" %>
+          <%= m.file_field :photos, multiple: true, class: "form-control" %>
+        </div>
+
+      <% end %>
+
+      <!-- BUTTON -->
+      <div class="d-grid mt-4">
+        <%= f.submit "Mettre à jour", class: "btn btn-warning btn-lg fw-bold" %>
+      </div>
     <% end %>
   </div>
 
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+  <!-- SECTION PHOTOS EXISTANTES -->
+  <div class="card shadow p-4 mt-4" style="background: rgba(0,0,0,0.7); color:#eee; border-radius:15px;">
+    <h4 class="text-center mb-3">Vos photos actuelles</h4>
+
+    <div class="d-flex flex-wrap gap-3 justify-content-center">
+      <% @member.photos.each do |photo| %>
+        <div class="position-relative">
+          <%= image_tag photo.variant(resize_to_fill: [200, 200]).processed, class: "rounded shadow" %>
+
+          <!-- Bouton supprimer icône -->
+          <%= link_to member_photo_path(@member, photo.id),
+                      data: { turbo_method: :delete, turbo_confirm: "Supprimer cette photo ?" },
+                      class: "position-absolute top-0 end-0 m-1 text-danger fs-4" do %>
+            <i class="fa-solid fa-xmark"></i>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
   </div>
-
-  <div class="field">
-    <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
-    <%= f.password_field :current_password, autocomplete: "current-password" %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit "Update" %>
-  </div>
-<% end %>
-
-<h3>Cancel my account</h3>
-
-<div>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?", turbo_confirm: "Are you sure?" }, method: :delete %></div>
-
-<%= link_to "Back", :back %>
+</div>

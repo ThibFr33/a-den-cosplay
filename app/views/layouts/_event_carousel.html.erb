@@ -1,0 +1,40 @@
+<% if event.photos.attached? %>
+  <div id="carousel-event-<%= event.id %>" class="carousel slide" data-bs-ride="carousel">
+
+    <div class="carousel-inner">
+      <% event.photos.each_with_index do |attachment, index| %>
+        <div class="carousel-item <%= 'active' if index.zero? %>">
+
+          <%= image_tag attachment.variant(resize_to_limit: [1200, 900]).processed,
+              class: "d-block w-100 rounded" %>
+          <div class="text-center mt-2">
+            <% if user_signed_in? && current_user.admin? %>
+              <%= link_to photo_event_path(event, attachment.id),
+                          data: { turbo_method: :delete, turbo_confirm: "Supprimer cette photo ?" },
+                          class: "btn btn-warning btn-sm mt-2" do %>
+
+                <i class="fa-solid fa-trash-can"></i>
+
+              <% end %>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+
+    <% if event.photos.count > 1 %>
+      <button class="carousel-control-prev" type="button"
+              data-bs-target="#carousel-event-<%= event.id %>" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Précédent</span>
+      </button>
+
+      <button class="carousel-control-next" type="button"
+              data-bs-target="#carousel-event-<%= event.id %>" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Suivant</span>
+      </button>
+    <% end %>
+
+  </div>
+<% end %>

@@ -2,7 +2,7 @@
     <h1 class="text-center my-5 text-warning">Nos sorties</h1>
       <% if user_signed_in? && current_user.admin? %>
         <div class="d-flex justify-content-end mb-3">
-          <%= link_to "➕ Ajouter un évènement", new_event_path,
+          <%= link_to "Ajouter un évènement", new_event_path,
                       class: "btn btn-warning" %>
         </div>
       <% end %>

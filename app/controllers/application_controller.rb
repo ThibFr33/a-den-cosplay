@@ -14,6 +14,11 @@ class ApplicationController < ActionController::Base
     root_path(login_failed: true)
   end
 
+  def after_resetting_password_path_for(resource)
+    root_path()   # Ouvre ta modale login
+  end
+
+
   def configure_permitted_parameters
     devise_parameter_sanitizer.permit(:sign_up, keys: [:username])
     devise_parameter_sanitizer.permit(:account_update, keys: [:username])

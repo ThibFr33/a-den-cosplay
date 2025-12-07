@@ -1,17 +1,13 @@
-# frozen_string_literal: true
-
 class EventsController < ApplicationController
-  def index
-    today = Date.current
+  before_action :set_event, except: [:index, :new, :create]
 
+  def index
     @past_events = Event.past
     @upcoming_events = Event.upcoming
-    @events = Event.all
     @events = Event.order(start_date: :asc)
   end
 
   def show
-    @event = Event.find(params[:id])
   end
 
   def new
@@ -27,11 +23,7 @@ class EventsController < ApplicationController
     end
   end
 
-
   def add_photo
-
-    @event = Event.find(params[:id])
-
     if params[:event] && params[:event][:photos].present?
       @event.photos.attach(params[:event][:photos])
       redirect_to @event, notice: "Photos ajoutées !"
@@ -41,12 +33,9 @@ class EventsController < ApplicationController
   end
 
   def destroy_photo
-    attachment = @event.photos.attachments.find(params[:photo_id])
+    attachment = @event.photos.find(params[:photo_id])
     attachment.purge
-    respond_to do |format|
-      format.html { redirect_to @event, notice: "Photo supprimée !" }
-      format.turbo_stream { flash.now[:notice] = "Photo supprimée !" }
-    end
+    redirect_to @event, notice: "Photo supprimée !"
   end
 
   private
@@ -55,5 +44,7 @@ class EventsController < ApplicationController
     params.require(:event).permit(:name, :localisation, :description, :url, :start_date, :end_date, photos: [])
   end
 
-
+  def set_event
+    @event = Event.find(params[:id])
+  end
 end

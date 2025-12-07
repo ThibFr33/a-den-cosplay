@@ -5,7 +5,7 @@ export default class extends Controller {
   static targets = ["menu"]
 
   connect() {
-    console.log("▶ DropdownController connecté sur :", this.element)
+    console.log(" DropdownController connecté sur :", this.element)
 
     this.outsideClick = (event) => {
       if (!this.element.contains(event.target)) {

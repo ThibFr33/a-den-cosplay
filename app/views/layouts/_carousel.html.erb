@@ -1,13 +1,22 @@
-
 <% if object.photos.attached? %>
   <div id="carousel-<%= object.id %>" class="carousel slide mb-3" data-bs-ride="carousel" data-bs-interval="5000">
     <div class="carousel-inner">
       <% object.photos.attachments.each_with_index do |attachment, index| %>
         <div class="carousel-item <%= 'active' if index.zero? %>">
-          <%= image_tag url_for(attachment), class: "d-block w-100", alt: (object.try(:pseudo) || "photo") %>
+          <%= image_tag attachment.variant(
+      resize_to_limit: [600, 900],
+      saver: { quality: 90 },
+      format: :webp
+    ).processed,
+    class: "d-block w-100 rounded",
+    alt: object.try(:pseudo) || "photo" %>
+
+
+
           <%# Bouton suppression %>
           <% if defined?(current_user) && user_signed_in? &&
-                ((object.respond_to?(:user) && current_user == object.user) || (current_user.respond_to?(:admin?) && current_user.admin?)) &&
+                ((object.respond_to?(:user) && current_user == object.user) ||
+                 (current_user.respond_to?(:admin?) && current_user.admin?)) &&
                 local_assigns[:delete_path] %>
             <%= link_to "Supprimer cette photo",
                         delete_path.call(object, attachment),
@@ -37,11 +46,14 @@
 
     <div class="d-flex flex-wrap justify-content-center align-items-center gap-2 mt-2 carousel-thumbnails">
       <% object.photos.attachments.each_with_index do |attachment, index| %>
-            <img src="<%= url_for(attachment) %>"
-            data-bs-target="#carousel-<%= object.id %>"
-            data-bs-slide-to="<%= index %>"
-            class="rounded shadow-sm <%= 'border border-warning border-3' if index.zero? %>"
-            alt="Aperçu <%= index+1 %>">
+        <%= image_tag attachment.variant(resize_to_fill: [200, 200]).processed,
+              data: {
+                bs_target: "#carousel-#{object.id}",
+                bs_slide_to: index
+              },
+              class: ["rounded", "shadow-sm", ("border border-warning border-3" if index.zero?)].compact.join(" "),
+              alt: "Aperçu #{index + 1}" %>
+
       <% end %>
     </div>
 

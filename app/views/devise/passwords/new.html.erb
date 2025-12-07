@@ -1,5 +1,5 @@
 <div class="container mt-5" style="max-width: 420px;">
-  <div class="card border-0 shadow-lg" style="background: #1a1d20; border-radius: 1.5rem;">
+  <div class="card border-0 shadow-lg" style="background: rgba(0, 0, 0, 0.6); border-radius: 1.5rem;">
     <div class="card-body py-4 px-4">
       <h2 class="card-title text-center mb-4" style="color: #FFD600; font-family: 'Orbitron', 'Montserrat', sans-serif; letter-spacing: 1.5px;">
         Mot de passe oublié&nbsp;?
@@ -17,10 +17,6 @@
           <%= f.submit "Envoyer les instructions", class: "btn btn-warning btn-lg rounded-pill fw-bold", style: "letter-spacing:1px;" %>
         </div>
       <% end %>
-
-      <div class="text-center mt-2">
-        <%= render "devise/shared/links" %>
-      </div>
     </div>
   </div>
 </div>

@@ -1,0 +1,40 @@
+<% if member.photos.attached? %>
+  <div id="carousel-member-<%= member.id %>" class="carousel slide">
+
+    <div class="carousel-inner">
+      <% member.photos.each_with_index do |attachment, index| %>
+        <div class="carousel-item <%= 'active' if index.zero? %>">
+
+          <%= image_tag attachment.variant(resize_to_limit: [1200, 900]).processed,
+              class: "d-block w-100 rounded" %>
+
+          <%# Bouton suppression : membre propriétaire OU admin %>
+          <div class="text-end mt-4">
+            <% if user_signed_in? && (current_user == member.user || current_user.admin?) %>
+              <%= link_to "Supprimer cette photo",
+                member_photo_path(member, attachment.id),
+                data: { turbo_method: :delete, turbo_confirm: "Supprimer cette photo ?" },
+                class: "btn btn-danger btn-sm mt-2" %>
+            <% end %>
+          </div>
+
+        </div>
+      <% end %>
+    </div>
+
+    <% if member.photos.count > 1 %>
+      <button class="carousel-control-prev" type="button"
+              data-bs-target="#carousel-member-<%= member.id %>" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Précédent</span>
+      </button>
+
+      <button class="carousel-control-next" type="button"
+              data-bs-target="#carousel-member-<%= member.id %>" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Suivant</span>
+      </button>
+    <% end %>
+
+  </div>
+<% end %>

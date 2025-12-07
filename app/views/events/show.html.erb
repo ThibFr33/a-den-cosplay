@@ -2,7 +2,7 @@
   <div class="event-card">
     <div class="card-body">
       <div id="carousel">
-        <%= render "layouts/carousel", object: @event %>
+        <%= render "layouts/event_carousel", event: @event %>
         <%# delete_path: ->(event, attachment) { photo_event_path(event, attachment.id) } %>
       </div>
       <h1><%= @event.name %></h1>
