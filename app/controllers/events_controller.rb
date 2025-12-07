@@ -5,6 +5,7 @@ class EventsController < ApplicationController
     @past_events = Event.past
     @upcoming_events = Event.upcoming
     @events = Event.order(start_date: :asc)
+    @expiring_events = Event.expiring_soon
   end
 
   def show
@@ -22,6 +23,25 @@ class EventsController < ApplicationController
       render :new, status: :unprocessable_entity
     end
   end
+
+  def edit
+  end
+
+  def update
+    if @event.update(event_params)
+      redirect_to @event, notice: "L'événement a bien été mis à jour."
+    else
+      render :edit, status: :unprocessable_entity
+    end
+  end
+
+  def destroy
+    @event.photos.each(&:purge)
+    @event.destroy
+
+    redirect_to events_path, notice: "L'événement a été supprimé avec succès."
+  end
+
 
   def add_photo
     if params[:event] && params[:event][:photos].present?

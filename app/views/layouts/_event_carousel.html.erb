@@ -11,6 +11,7 @@
             <% if user_signed_in? && current_user.admin? %>
               <%= link_to photo_event_path(event, attachment.id),
                           data: { turbo_method: :delete, turbo_confirm: "Supprimer cette photo ?" },
+                          title: "Supprimer cette photo",
                           class: "btn btn-warning btn-sm mt-2" do %>
 
                 <i class="fa-solid fa-trash-can"></i>
