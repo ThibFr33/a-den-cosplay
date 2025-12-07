@@ -1,17 +1,4 @@
 <div class="container mt-5">
-  <div class="admin-btns">
-    <% if user_signed_in? && current_user.admin? %>
-      <%= link_to "Modifier ce membre", edit_member_path(@member), class: "btn btn-warning btn-sm" %>
-    <% end %>
-    <% if user_signed_in? && current_user.admin? %>
-          <%= button_to "Supprimer ce membre",
-              member_path(@member),
-              method: :delete,
-              data: { turbo_confirm: "Supprimer ce membre et son compte utilisateur ? Action irréversible." },
-              class: "btn btn-danger" %>
-    <% end %>
-  </div>
-
   <h1 class="mb-4 text-center">Vous avez choisi :</h1>
 
 
@@ -21,6 +8,23 @@
       member: @member,
       delete_path: ->(member, attachment) { member_photo_path(member, attachment.id) } %>
 
+    </div>
+    <div class="admin-btns">
+      <% if user_signed_in? && current_user.admin? %>
+        <%= link_to edit_member_path(@member), class: "btn btn-warning btn" do %>
+          <i class="fa-solid fa-pen"></i> Modifier ce membre
+        <% end %>
+      <% end %>
+      <% if user_signed_in? && current_user.admin? %>
+            <%= button_to member_path(@member),
+                  method: :delete,
+                  data: { turbo_confirm: "Supprimer ce membre et son compte utilisateur ? Action irréversible." },
+                  class: "btn btn-danger" do %>
+              <i class="fa-solid fa-trash"></i> Supprimer ce membre
+            <% end %>
+
+
+      <% end %>
     </div>
 
       <div class="card-body">

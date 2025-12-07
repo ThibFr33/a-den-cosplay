@@ -1,12 +1,26 @@
   <div class="container">
     <h1 class="text-center my-5 text-warning">Nos sorties</h1>
       <% if user_signed_in? && current_user.admin? %>
-        <div class="d-flex justify-content-end mb-3">
+        <div class="d-flex justify-content-start mb-3">
           <%= link_to "Ajouter un évènement", new_event_path,
                       class: "btn btn-warning" %>
         </div>
       <% end %>
   </div>
+  <% if user_signed_in? && current_user.admin? && @expiring_events.any? %>
+    <div class="alert alert-warning shadow p-3 rounded mt-3">
+      <h5 class="mb-2"><i class="fa-solid fa-triangle-exclamation"></i> Événements expirant bientôt</h5>
+
+      <% @expiring_events.each do |event| %>
+        <p>
+          <strong><%= event.name %></strong> sera supprimé automatiquement le
+          <%= (event.end_date + 2.years).strftime("%d/%m/%Y") %>.
+          <%= link_to "Voir", event_path(event), class: "btn btn-sm btn-outline-dark ms-2" %>
+        </p>
+      <% end %>
+    </div>
+  <% end %>
+
   <div class="d-flex justify-content-center">
     <div class="events-container my-5">
       <div class="events-column past">

@@ -49,8 +49,31 @@
 }
 .admin-btns {
   display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 2em;
+  padding: 2em;
+  margin: 0 auto;
+  border-radius: 10px;
+}
+
+.edit-member {
+  display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: start;
-  gap: 2em;
+  background-color: rgba(0, 0, 0, 0.6);
+  margin-top: 5em;
+  padding: 2em;
+  width: 60%;
+  align-items: stretch;
+  border-radius: 10px;
+}
+.edit-member > form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 80%;
+  align-items: stretch;
+  margin: 0 auto;
 }

@@ -1,21 +1,22 @@
-<div class="container">
+<div class="container edit-member">
+  <h2 class="label-ghost text-center">Modifier le profil membre</h2>
   <%= form_with model: @member, local: true do |f| %>
     <div class="mb-3">
-      <%= f.label :pseudo %>
-      <%= f.text_field :pseudo, class: "form-control w-50" %>
+      <%= f.label :pseudo, class: "label-ghost" %>
+      <%= f.text_field :pseudo, class: "form-control w-100" %>
     </div>
 
     <div class="mb-3">
-      <%= f.label :presentation %>
-      <%= f.text_area :presentation, class: "form-control w-50" %>
+      <%= f.label :presentation, class: "label-ghost" %>
+      <%= f.text_area :presentation, class: "form-control w-100" %>
     </div>
 
-    <div class="mb-3">
-      <%= f.label :reseau_social %>
-      <%= f.text_field :reseau_social, class: "form-control w-50" %>
+    <div class="mb-5">
+      <%= f.label :reseau_social, class: "label-ghost" %>
+      <%= f.text_field :reseau_social, class: "form-control w-100" %>
     </div>
 
-    <%= f.submit "Mettre à jour", class: "btn btn-primary" %>
+    <%= f.submit "Mettre à jour", class: "btn btn-warning" %>
   <% end %>
 
 </div>
