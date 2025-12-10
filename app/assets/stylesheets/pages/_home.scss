@@ -7,8 +7,8 @@
 }
 
 .home-container {
-  justify-content: flex-start;      /* plus de centering vertical */
-  padding-top: 10vh;                /* ajuste selon l’effet désiré */
+  justify-content: flex-start;      /* plus de centering vertical *//* ajuste selon l’effet désiré */
+  min-height: 40vh;
 }
 
 
@@ -96,4 +96,3 @@
     display: none !important; // cache sur tablette/desktop
   }
 }
-

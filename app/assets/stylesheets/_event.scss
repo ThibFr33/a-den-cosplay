@@ -19,8 +19,19 @@
   object-fit: cover;
   margin: 0 auto;
 }
+.event-list-title {
+  text-align: center;
+  margin-top: 2em;
+}
+
 h1 {
   text-align: center;
+}
+.index-event-container {
+  margin: 0 auto;
+  padding: 2rem 1rem;
+  max-width: 1400px;
+
 }
 .events-container {
   display: flex;
@@ -38,8 +49,44 @@ h1 {
 .events-column h2 {
   text-align: center;
 }
+
+.add-event-btn {
+  display: flex;
+  justify-content: start;
+  margin-bottom: 1em
+}
+
+.add-event-container {
+  width: 60%;
+  background-color: rgba(0, 0, 0, 0.6);
+  margin: 0 auto;
+  padding: 3em;
+  border-radius: 10px;
+}
+
 @media (max-width: 768px) {
   .events-container {
     flex-direction: column;
+    align-items: center; /* recentre les colonnes */
+    gap: 50px;
+  }
+
+  .events-column {
+    width: 100%;
+    max-width: 500px; /* largeur raisonnable pour centrer les cartes */
+  }
+
+  .event-card {
+    width: 80%;
+    margin: 0 auto;
+    margin-bottom: 2em;
+  }
+
+  .add-event-btn {
+    justify-content: center;
+  }
+
+  .add-event-container {
+    width: 90%;
   }
 }

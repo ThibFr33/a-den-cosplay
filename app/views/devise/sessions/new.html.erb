@@ -34,15 +34,6 @@
                 style: "box-shadow:none;" %>
         </div>
 
-        <% if devise_mapping.rememberable? %>
-          <div class="form-check mb-3">
-            <%= f.check_box :remember_me, class: "form-check-input" %>
-            <%= f.label :remember_me, "Se souvenir de moi",
-                  class: "form-check-label",
-                  style: "color:#ccc;" %>
-          </div>
-        <% end %>
-
         <div class="d-grid mb-3">
           <%= f.submit "Se connecter",
                 class: "btn btn-warning btn-lg rounded-pill fw-bold",
@@ -61,4 +52,3 @@
     </div>
   </div>
 </div>
-

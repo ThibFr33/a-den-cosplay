@@ -1,12 +1,11 @@
-  <div class="container">
-    <h1 class="text-center my-5 text-warning">Nos sorties</h1>
-      <% if user_signed_in? && current_user.admin? %>
-        <div class="d-flex justify-content-start mb-3">
-          <%= link_to "Ajouter un évènement", new_event_path,
-                      class: "btn btn-warning" %>
-        </div>
+<div class="container index-event-container">
+  <h2 class="event-list-title text-warning">Nos Sorties</h2>
+    <% if user_signed_in? && current_user.admin? %>
+      <div class="add-event-btn">
+        <%= link_to "Ajouter un évènement", new_event_path,
+                    class: "btn btn-warning" %>
+      </div>
       <% end %>
-  </div>
   <% if user_signed_in? && current_user.admin? && @expiring_events.any? %>
     <div class="alert alert-warning shadow p-3 rounded mt-3">
       <h5 class="mb-2"><i class="fa-solid fa-triangle-exclamation"></i> Événements expirant bientôt</h5>
@@ -46,3 +45,4 @@
       </div>
     </div>
   </div>
+</div>

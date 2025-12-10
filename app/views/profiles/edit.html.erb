@@ -1,7 +1,7 @@
 <div class="container mt-5" style="max-width: 800px;">
   <div class="card shadow p-4" style="background: rgba(0,0,0,0.75); color:#eee; border-radius:15px;">
 
-    <h2 class="text-center mb-4">Modifier mon profil</h2>
+    <h2 class="text-center mb-4 text-warning">Modifier mon profil</h2>
 
     <%= form_with model: @user, url: profile_path, method: :patch, local: true do |f| %>
 

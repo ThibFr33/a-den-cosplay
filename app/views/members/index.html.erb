@@ -1,5 +1,5 @@
 <div class="container my-5 members-container">
-  <h1 class="text-center mb-4 text-warning">Nos Membres</h1>
+  <h2 class="text-center mb-4 text-warning">Nos Membres</h2>
   <% if user_signed_in? && current_user.admin? %>
     <div class="d-flex justify-content-start mb-3">
       <%= link_to "Ajouter un membre", new_member_path,

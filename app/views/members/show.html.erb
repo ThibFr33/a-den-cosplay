@@ -9,23 +9,21 @@
       delete_path: ->(member, attachment) { member_photo_path(member, attachment.id) } %>
 
     </div>
-    <div class="admin-btns">
-      <% if user_signed_in? && current_user.admin? %>
-        <%= link_to edit_member_path(@member), class: "btn btn-warning btn" do %>
-          <i class="fa-solid fa-pen"></i> Modifier ce membre
-        <% end %>
-      <% end %>
-      <% if user_signed_in? && current_user.admin? %>
-            <%= button_to member_path(@member),
-                  method: :delete,
-                  data: { turbo_confirm: "Supprimer ce membre et son compte utilisateur ? Action irréversible." },
-                  class: "btn btn-danger" do %>
-              <i class="fa-solid fa-trash"></i> Supprimer ce membre
-            <% end %>
+    <% if user_signed_in? && current_user.admin? %>
+      <div class="admin-btns">
+          <%= link_to edit_member_path(@member), class: "btn btn-warning btn" do %>
+            <i class="fa-solid fa-pen"></i> Modifier ce membre
+          <% end %>
+          <%= button_to member_path(@member),
+                method: :delete,
+                data: { turbo_confirm: "Supprimer ce membre et son compte utilisateur ? Action irréversible." },
+                class: "btn btn-danger" do %>
+            <i class="fa-solid fa-trash"></i> Supprimer ce membre
+          <% end %>
+      </div>
+    <% end %>
 
 
-      <% end %>
-    </div>
 
       <div class="card-body">
         <%# Ligne flex avec pseudo et bouton %>
@@ -53,13 +51,13 @@
                         class: "text-decoration-none" do %>
               <% case @member.reseau_social
                 when /instagram\.com/ then %>
-                  <i class="fa-brands fa-instagram fa-bounce fa-2x"></i>
+                  <i class="fa-brands fa-instagram fa-bounce fa-2x" style="color:#ffc107"></i>
               <% when /facebook\.com/ then %>
-                  <i class="fab fa-facebook fa-bounce fa-2x"></i>
+                  <i class="fab fa-facebook fa-bounce fa-2x" style="color:#ffc107"></i>
               <% when /X\.com/ then %>
-                  <i class="fab fa-twitter fa-bounce fa-2x"></i>
+                  <i class="fab fa-twitter fa-bounce fa-2x" style="color:#ffc107"></i>
               <% else %>
-                  <i class="fas fa-globe fa-bounce fa-2x"></i>
+                  <i class="fas fa-globe fa-bounce fa-2x" style="color:#ffc107"></i>
               <% end %>
             <% end %>
           </div>

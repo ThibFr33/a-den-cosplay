@@ -1,0 +1,51 @@
+<div class="container mt-5" style="max-width: 450px;">
+  <div class="card border-0 shadow-lg" style="background: #000; border-radius: 1.5rem;">
+    <div class="card-body py-4 px-4">
+
+      <h2 class="text-center mb-4"
+          style="color: #FFD600; font-family: 'Orbitron', sans-serif; letter-spacing: 1.5px;">
+        Définissez votre mot de passe
+      </h2>
+
+      <%= form_for(resource, as: resource_name, url: invitation_path(resource_name), html: { method: :put }) do |f| %>
+
+        <%= render "devise/shared/error_messages", resource: resource %>
+
+        <%= f.hidden_field :invitation_token, readonly: true %>
+
+        <% if f.object.class.require_password_on_accepting %>
+
+          <div class="mb-3">
+            <%= f.label :password, "Mot de passe",
+                  class: "form-label",
+                  style: "color:#FFD600;" %>
+
+            <%= f.password_field :password,
+                  autocomplete: "new-password",
+                  class: "form-control bg-dark text-light border-0 rounded-pill",
+                  style: "box-shadow:none;" %>
+          </div>
+
+          <div class="mb-3">
+            <%= f.label :password_confirmation, "Confirmation du mot de passe",
+                  class: "form-label",
+                  style: "color:#FFD600;" %>
+
+            <%= f.password_field :password_confirmation,
+                  autocomplete: "new-password",
+                  class: "form-control bg-dark text-light border-0 rounded-pill",
+                  style: "box-shadow:none;" %>
+          </div>
+
+        <% end %>
+
+        <div class="d-grid mt-4">
+          <%= f.submit "Définir mon mot de passe",
+                class: "btn btn-warning btn-lg rounded-pill fw-bold",
+                style: "letter-spacing:1px;" %>
+        </div>
+
+      <% end %>
+    </div>
+  </div>
+</div>

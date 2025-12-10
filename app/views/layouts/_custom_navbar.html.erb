@@ -1,9 +1,11 @@
-<header class="custom-navbar navbar navbar-expand-md  bg-transparent">
+<header class="custom-navbar navbar navbar-expand-md bg-transparent">
   <div class="container">
-    <%= link_to "Dragon Krayt A'den", root_path,
-          class: "navbar-brand d-block d-md-none"%>
 
-    <%# Bouton hamburger (apparaît <768px) %>
+    <%# Brand visible uniquement sur mobile %>
+    <%= link_to "Dragon Krayt A'den", root_path,
+          class: "navbar-brand d-block d-md-none" %>
+
+    <%# Bouton hamburger pour mobile %>
     <button class="navbar-toggler" type="button"
             data-bs-toggle="collapse"
             data-bs-target="#mainNav"
@@ -13,17 +15,33 @@
       <span class="navbar-toggler-icon"></span>
     </button>
 
-    <%# Menu collapsible %>
-    <div class="collapse navbar-collapse" id="mainNav">
-      <ul class="navbar-nav mx-auto justify-content-center">
-        <li class="nav-item"><%= link_to "Accueil", home_path, class: "nav-link" %></li>
-        <li class="nav-item"><%= link_to "Le Clan", about_path, class: "nav-link" %></li>
-        <li class="nav-item"><%= link_to "Membres", members_path, class: "nav-link" %></li>
-        <li class="nav-item"><%= link_to "Evènements", events_path, class: "nav-link" %></li>
-        <li class="nav-item"><%= link_to "Nous contacter", new_contact_form_path, class: "nav-link" %></li>
+    <%# MENU COLLAPSABLE %>
+    <div class="collapse navbar-collapse justify-content-center" id="mainNav">
+
+      <ul class="navbar-nav text-center">
+        <li class="nav-item">
+          <%= link_to "Accueil", home_path, class: "nav-link" %>
+        </li>
+
+        <li class="nav-item">
+          <%= link_to "Le Clan", about_path, class: "nav-link" %>
+        </li>
+
+        <li class="nav-item">
+          <%= link_to "Membres", members_path, class: "nav-link" %>
+        </li>
+
+        <li class="nav-item">
+          <%= link_to "Evènements", events_path, class: "nav-link" %>
+        </li>
+
+        <li class="nav-item">
+          <%= link_to "Nous contacter", new_contact_form_path, class: "nav-link" %>
+        </li>
+
         <% unless user_signed_in? %>
           <% if controller_name == "members" && action_name == "show" %>
-            <li class="nav-item">
+            <li class="nav-item mt-2">
               <button class="btn" data-bs-toggle="modal" data-bs-target="#loginModal">
                 <%= image_tag "https://img.icons8.com/windows/32/mandalorian.png",
                               alt: "Se connecter",
@@ -32,10 +50,12 @@
             </li>
           <% end %>
         <% end %>
+
         <% if user_signed_in? %>
           <%= render "layouts/user_dropdown" %>
         <% end %>
       </ul>
+
     </div>
   </div>
 </header>

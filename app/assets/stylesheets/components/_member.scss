@@ -7,11 +7,11 @@
 /* Grid 2× sur mobile, 5× sur desktop */
 .members-list {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(1, 1fr);
   gap: 2rem;
   padding-top: 2rem;
 
-  @media (min-width: 992px) {
+  @media (min-width: 768px) {
     grid-template-columns: repeat(5, 1fr);
   }
 }
@@ -76,4 +76,27 @@
   width: 80%;
   align-items: stretch;
   margin: 0 auto;
+}
+.add-member {
+  display: flex;
+  justify-content: center;
+  margin: 0 auto;
+  background-color: rgba(0, 0, 0, 0.6);
+  width: 60%;
+  color: ghostwhite;
+  border-radius: 10px;
+  margin-bottom: 4em;
+}
+.add-member h4 {
+  color: #ffc107;
+}
+@media (max-width: 768px) {
+
+  .edit-member{
+    width: 90%;
+    margin-top: 1em;
+  }
+  .edit-member > form {
+    width: 100%;
+  }
 }
