@@ -1,6 +1,7 @@
 .custom-navbar {
   background-color: transparent !important;
   box-shadow: none;
+  margin-top: 1em;
   margin-bottom: 1em !important;
 }
 
@@ -16,28 +17,50 @@
   background-repeat: no-repeat;
 }
 
-/* --- DESKTOP (≥768px) --- */
-/* Gap et centrage pour desktop */
-@media (min-width: 768px) {
+/* ----- DESKTOP (≥ 992px) ----- */
+.custom-navbar .navbar-nav {
+  display: flex;
+  gap: 4em;
+  align-items: center;
+}
+
+.custom-navbar-nav .custom-nav-link {
+  font-size: 16px !important;
+  letter-spacing: 4px !important;
+  color: white !important;
+  transition: color 0.3s ease !important;
+  font-weight: bold;
+}
+
+.custom-navbar-nav .custom-nav-link:hover {
+  color: #ffc107 !important;
+}
+
+/* ============================================================
+     TABLETTE : entre 576px et 991px
+   ============================================================ */
+@media (min-width: 576px) and (max-width: 991px) {
+
+  /* On garde un menu horizontal mais plus compact */
   .custom-navbar .navbar-nav {
-    display: flex;
     gap: 2rem;
   }
 
-  .custom-navbar .nav-link {
-    font-size: 2rem !important;
-    color: white !important;
-    text-decoration: none;
-    transition: color 0.3s ease !important;
+  .custom-navbar-nav .custom-nav-link {
+    font-size: 14px !important;  /* un peu plus petit */
+    letter-spacing: 2px !important;
   }
 
-  .custom-navbar .nav-link:hover {
-    color: #00bfff !important;
+  .navbar-brand {
+    font-size: 1.1rem;
+    color: #ffc107 !important;
   }
 }
 
-/* --- MOBILE (≤767px) --- */
-@media (max-width: 767px) {
+/* ============================================================
+     MOBILE : ≤ 575px
+   ============================================================ */
+@media (max-width: 575px) {
 
   /* Menu vertical fluide */
   .custom-navbar .navbar-nav {
@@ -45,18 +68,20 @@
     width: 100%;
     padding: 0;
     text-align: center;
+    gap: 1em;
   }
 
-  .custom-navbar .nav-item {
+  .custom-navbar-nav .nav-item {
     margin: 0;
     width: 100%;
   }
 
-  .custom-navbar .nav-link {
-    font-size: 1.1rem !important;
-    padding: 0.85rem 1rem;
-    border-top: 1px solid rgba(255,255,255,0.1);
-    color: #ffc107 !important;
+  .custom-navbar-nav .nav-link {
+    font-size: 1rem !important;
+    padding: 0.75rem 1rem;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    color: #ffc107;
+    text-align: start;
   }
 
   /* Brand en mobile */
@@ -64,17 +89,18 @@
     color: #ffc107 !important;
   }
 
-  /* Le panneau collapsé : fond + padding + arrondis */
-  .custom-navbar .collapse.navbar-collapse {
+  /* Panneau collapsé */
+  .custom-navbar-nav .collapse.navbar-collapse {
     position: static !important;
     width: 100%;
-    background-color: rgba(0, 0, 0, 0.35);
+    background-color: rgba(0, 0, 0, 0.2);
     padding: 0.5rem 0;
     border-radius: 10px;
+    box-shadow: none;
   }
 
-  /* Ajout du margin-bottom mobile (sinon il saute) */
-  .custom-navbar {
+  /* Ajout du margin-bottom mobile */
+  .custom-navbar-nav {
     border-bottom: 1px solid rgba(255,215,0,0.2);
     margin-bottom: 1em !important;
   }

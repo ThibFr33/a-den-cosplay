@@ -3,7 +3,7 @@
 
     <%# Brand visible uniquement sur mobile %>
     <%= link_to "Dragon Krayt A'den", root_path,
-          class: "navbar-brand d-block d-md-none" %>
+          class: "navbar-brand custom-navbar-brand d-block d-md-none" %>
 
     <%# Bouton hamburger pour mobile %>
     <button class="navbar-toggler" type="button"
@@ -18,34 +18,34 @@
     <%# MENU COLLAPSABLE %>
     <div class="collapse navbar-collapse justify-content-center" id="mainNav">
 
-      <ul class="navbar-nav text-center">
+      <ul class="navbar-nav text-center custom-navbar-nav">
         <li class="nav-item">
-          <%= link_to "Accueil", home_path, class: "nav-link" %>
+          <%= link_to "Accueil", home_path, class: "nav-link custom-nav-link" %>
         </li>
 
         <li class="nav-item">
-          <%= link_to "Le Clan", about_path, class: "nav-link" %>
+          <%= link_to "Le Clan", about_path, class: "nav-link custom-nav-link" %>
         </li>
 
         <li class="nav-item">
-          <%= link_to "Membres", members_path, class: "nav-link" %>
+          <%= link_to "Membres", members_path, class: "nav-link custom-nav-link" %>
         </li>
 
         <li class="nav-item">
-          <%= link_to "Evènements", events_path, class: "nav-link" %>
+          <%= link_to "Evènements", events_path, class: "nav-link custom-nav-link" %>
         </li>
 
         <li class="nav-item">
-          <%= link_to "Nous contacter", new_contact_form_path, class: "nav-link" %>
+          <%= link_to "Nous contacter", new_contact_form_path, class: "nav-link custom-nav-link" %>
         </li>
 
         <% unless user_signed_in? %>
           <% if controller_name == "members" && action_name == "show" %>
             <li class="nav-item mt-2">
-              <button class="btn" data-bs-toggle="modal" data-bs-target="#loginModal">
+              <button class="btn custom-mandalorian-btn"
+                      data-bs-toggle="modal" data-bs-target="#loginModal">
                 <%= image_tag "https://img.icons8.com/windows/32/mandalorian.png",
-                              alt: "Se connecter",
-                              class: "mandalorian-btn" %>
+                              alt: "Se connecter" %>
               </button>
             </li>
           <% end %>

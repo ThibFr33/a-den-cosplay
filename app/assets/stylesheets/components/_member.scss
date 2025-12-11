@@ -4,19 +4,27 @@
   padding: 2rem 1rem;
 }
 
-/* Grid 2× sur mobile, 5× sur desktop */
+/* Grid responsive : 1 → 2 → 5 colonnes */
 .members-list {
   display: grid;
-  grid-template-columns: repeat(1, 1fr);
   gap: 2rem;
   padding-top: 2rem;
 
-  @media (min-width: 768px) {
+  /* 📱 très petit mobile : 1 colonne */
+  grid-template-columns: repeat(1, 1fr);
+
+  /* 📱 mobile / petite tablette : 2 colonnes */
+  @media (min-width: 576px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  /* 🖥️ desktop : 5 colonnes */
+  @media (min-width: 992px) {
     grid-template-columns: repeat(5, 1fr);
   }
 }
 
-// Cartes
+/* Cartes */
 .member-card {
   text-align: center;
   color: #CEB1B1;
@@ -38,15 +46,18 @@
     transform: scale(1.05);
   }
 }
-// Lien
+
+/* Lien */
 .member-card a {
   color: inherit;
   text-decoration: none;
 }
+
 @keyframes on-hover {
   from { opacity: 0.7; }
   to   { opacity: 1;   }
 }
+
 .admin-btns {
   display: flex;
   flex-direction: row;
@@ -69,6 +80,7 @@
   align-items: stretch;
   border-radius: 10px;
 }
+
 .edit-member > form {
   display: flex;
   flex-direction: column;
@@ -77,6 +89,7 @@
   align-items: stretch;
   margin: 0 auto;
 }
+
 .add-member {
   display: flex;
   justify-content: center;
@@ -87,16 +100,23 @@
   border-radius: 10px;
   margin-bottom: 4em;
 }
+
 .add-member h4 {
   color: #ffc107;
 }
-@media (max-width: 768px) {
 
-  .edit-member{
+/* Mobile / tablette : ajuster les formulaires */
+@media (max-width: 768px) {
+  .edit-member {
     width: 90%;
     margin-top: 1em;
   }
+
   .edit-member > form {
     width: 100%;
+  }
+
+  .add-member {
+    width: 90%;
   }
 }

@@ -9,15 +9,21 @@
   background-color:rgba(0, 0, 0, 0.6);
   color: #eee;
   padding: 1rem;
+  width: 45%;
+  margin: 0 auto;
   margin-bottom: 1rem;
   border-radius: 0.5rem;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 4px #ffc107;
 }
 .event-card img {
   width: 60%;
   height: auto;
   object-fit: cover;
   margin: 0 auto;
+}
+.event-name {
+  margin: 0.5em;
+
 }
 .event-list-title {
   text-align: center;

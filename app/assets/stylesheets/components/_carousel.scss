@@ -1,15 +1,46 @@
+/* Wrapper global autour du carousel */
+.member-carousel-wrapper {
+  max-width: 900px;
+  margin: 0 auto 1.5rem;
+  background-color: rgba(0, 0, 0, 0.55);
+  border-radius: 12px;
+  padding: 1rem;
+}
+
+/* On ne force plus de height fixe sur .carousel-item */
 .carousel-item {
-  height: 700px !important;
+  /* on laisse Bootstrap gérer la transition */
 }
 
-.carousel-item img {
-  object-fit: contain;
+/* Conteneur qui gère le ratio et le centrage de l'image */
+.carousel-image-wrapper {
+  position: relative;
   width: 100%;
-  height: 100%;
-  object-position: center !important;
-  background-color: rgba(0, 0, 0, 0.0);
-
+  max-height: 70vh;              /* jamais plus de 70% de la hauteur écran */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
 }
+
+/* Image du membre dans le carousel */
+.member-carousel-img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;           /* on garde toute l’image sans crop */
+  border-radius: 10px;
+}
+
+/* Bouton supprimer en overlay */
+.member-carousel-delete {
+  position: absolute;
+  bottom: 1rem;
+  right: 1rem;
+  z-index: 5;
+  box-shadow: 0 0 8px rgba(0,0,0,0.7);
+}
+
+/* Thumbnails si tu les utilises ailleurs, on garde ton style */
 .carousel-thumbnails img {
   width: 64px;
   max-width: 22vw;
@@ -21,6 +52,14 @@
 }
 
 @media (max-width: 575px) {
+  .member-carousel-wrapper {
+    padding: 0.5rem;
+  }
+
+  .carousel-image-wrapper {
+    max-height: 60vh;        /* un peu plus compact sur mobile */
+  }
+
   .carousel-thumbnails img {
     width: 44px;
     height: 32px;

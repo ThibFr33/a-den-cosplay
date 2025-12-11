@@ -6,7 +6,8 @@ class ApplicationController < ActionController::Base
   protected
 
   def after_sign_in_path_for(resource)
-    flash[:notice] = " Transmission sécurisée réussie! Bienvenue sur Dragon Krayt A'den, #{resource.username} !"
+    pseudo = resource.member&.pseudo || resource.email
+    flash[:notice] = " Transmission sécurisée réussie! Bienvenue sur Dragon Krayt A'den, #{pseudo} !"
     stored_location_for(resource) || request.referer || root_path
   end
 
