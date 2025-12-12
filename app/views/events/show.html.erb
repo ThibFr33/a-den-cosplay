@@ -15,23 +15,23 @@
               <i class="fa-solid fa-camera"></i>
             </button>
           <% end %>
-        <div  class="admin-btns">
           <% if user_signed_in? && current_user.admin? %>
-            <%= link_to edit_event_path(@event),
-                  class: "btn btn-warning me-2" do %>
-              <i class="fa-solid fa-pen"></i> Modifier
+            <div  class="admin-btns">
+              <%= link_to edit_event_path(@event),
+                    class: "btn btn-warning me-2" do %>
+                <i class="fa-solid fa-pen"></i> Modifier
+              <% end %>
             <% end %>
-          <% end %>
 
-          <% if user_signed_in? && current_user.admin? %>
-            <%= button_to event_path(@event),
-                  method: :delete,
-                  data: { turbo_confirm: "Supprimer cet événement et toutes ses photos ? Action irréversible." },
-                  class: "btn btn-danger me-2" do %>
-              <i class="fa-solid fa-trash"></i> Supprimer
-            <% end %>
+            <% if user_signed_in? && current_user.admin? %>
+              <%= button_to event_path(@event),
+                    method: :delete,
+                    data: { turbo_confirm: "Supprimer cet événement et toutes ses photos ? Action irréversible." },
+                    class: "btn btn-danger me-2" do %>
+                <i class="fa-solid fa-trash"></i> Supprimer
+              <% end %>
+            </div>
           <% end %>
-        </div>
 
 
 
