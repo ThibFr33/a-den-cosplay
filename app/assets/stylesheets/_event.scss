@@ -9,14 +9,15 @@
   background-color:rgba(0, 0, 0, 0.6);
   color: #eee;
   padding: 1rem;
-  width: 45%;
+  width: 65%;
   margin: 0 auto;
   margin-bottom: 1rem;
+  margin-top: 1rem;
   border-radius: 0.5rem;
   box-shadow: 0 4px 4px #ffc107;
 }
 .event-card img {
-  width: 60%;
+  width: 100%;
   height: auto;
   object-fit: cover;
   margin: 0 auto;
@@ -37,6 +38,7 @@ h1 {
   margin: 0 auto;
   padding: 2rem 1rem;
   max-width: 1400px;
+
 
 }
 .events-container {

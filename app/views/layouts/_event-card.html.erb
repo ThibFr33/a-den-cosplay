@@ -1,12 +1,15 @@
 <div class="event-card">
-  <%= link_to event.url, target: "_blank", rel: "noopener noreferrer" do %>
-    <% if event.photos.attached? %>
-        <%= image_tag url_for(event.photos.first), alt: event.name %>
-      <% else %>
-        <%= image_tag "default_event.png", alt: "Événement", class: "img-fluid" %>
+  <div>
+    <%= link_to event.url, target: "_blank", rel: "noopener noreferrer" do %>
+      <% if event.photos.attached? %>
+          <%= image_tag url_for(event.photos.first), alt: event.name %>
+        <% else %>
+          <%= image_tag "default_event.png", alt: "Événement", class: "img-fluid" %>
+      <% end %>
     <% end %>
-  <% end %>
-  <h3 class="event-name"><%= event.name %></h3>
+  </div>
+    <h3 class="event-name"><%= event.name %></h3>
+
   <%= link_to event_path(event) do %>
     <button class="btn btn-warning">Accéder à la fiche détaillée</button>
   <% end %>
