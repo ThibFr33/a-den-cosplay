@@ -8,9 +8,11 @@ class MembersController < ApplicationController
   before_action :authorize_edit!, only: [:edit, :update]
 
   def index
-    @members = Member.all
-    @members = Member.order(pseudo: :asc)
+    @bureau_members = Member.bureau_ordered
+    @members = Member.non_bureau.order(:pseudo)
   end
+
+
 
   def show
     @member = Member.find(params[:id])
@@ -105,9 +107,21 @@ class MembersController < ApplicationController
     end
   end
 
+  # def member_params
+  #   params.require(:member).permit(:pseudo, :reseau_social, :presentation, :role, photos: [], user_attributes: [:id, :email, :admin])
+  # end
   def member_params
-    params.require(:member).permit(:pseudo, :reseau_social, :presentation, :role, photos: [], user_attributes: [:id, :email, :admin])
+    permitted = [:pseudo, :reseau_social, :presentation, photos: []]
+
+    # rôle honorifique : uniquement admin
+    permitted << :role if current_user&.admin?
+
+    permitted_user = [:id, :email]
+    permitted_user << :admin if current_user&.admin?
+
+    params.require(:member).permit(*permitted, user_attributes: permitted_user)
   end
+
 
   def set_member
     member_id = params[:member_id] || params[:id]

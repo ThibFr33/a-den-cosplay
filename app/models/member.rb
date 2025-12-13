@@ -1,20 +1,78 @@
-# frozen_string_literal: true
-
 class Member < ApplicationRecord
   has_many_attached :photos
   belongs_to :user
   accepts_nested_attributes_for :user
+
   validates :user_id, uniqueness: true
   validates :pseudo, uniqueness: true
+
+  enum role: {
+    president: "president",
+    co_president: "co_president",
+    tresorier: "tresorier",
+    secretaire: "secretaire",
+    webmaster: "webmaster",
+    event_manager: "event_manager",
+    member: "member",
+    adherent: "adherent",
+    guest: "guest"
+  }, _suffix: true
+
+  ROLE_LABELS = {
+    president: "Président",
+    co_president: "Co-Président",
+    tresorier: "Trésorier",
+    secretaire: "Secrétaire",
+    webmaster: "Webmaster",
+    event_manager: "Responsable évènementiel",
+    member: "Membre",
+    adherent: "Adhérent",
+    guest: "Invité d'honneur"
+  }.freeze
+
+  # Rôles à mettre en avant (bureau)
+  BUREAU_ROLES = %w[
+    president
+    co_president
+    tresorier
+    secretaire
+    webmaster
+    event_manager
+  ].freeze
+
+  # Ordre d'affichage du bureau
+  BUREAU_ORDER = BUREAU_ROLES
+
+  scope :bureau, -> { where(role: BUREAU_ROLES) }
+  scope :non_bureau, -> { where.not(role: BUREAU_ROLES) }
+
+  scope :bureau_ordered, -> {
+    where(role: BUREAU_ORDER).order(
+      Arel.sql(
+        "CASE role " \
+        + BUREAU_ORDER.each_with_index.map { |r, i| "WHEN '#{r}' THEN #{i}" }.join(" ") \
+        + " END"
+      )
+    )
+  }
+
+  validates :role, presence: true
   before_save :capitalize_pseudo
 
-private
+  # Pour le select dans les vues
+  def self.roles_for_select
+    roles.keys.map { |r| [ROLE_LABELS[r.to_sym], r] }
+  end
+
+  # Pour afficher le rôle proprement
+  def role_label
+    ROLE_LABELS[role.to_sym]
+  end
+
+  private
 
   def capitalize_pseudo
     return if pseudo.blank?
-
-    # baisse tout puis remonte les bonnes lettres
     self.pseudo = pseudo.downcase.gsub(/(?:^|[ '\-])([a-z])/) { $1.upcase }
   end
-
 end
