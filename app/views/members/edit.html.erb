@@ -1,5 +1,6 @@
 <div class="container edit-member">
-  <h2 class="label-ghost text-center">Modifier le profil membre</h2>
+  <h2 class="text-warning text-center">Modifier le profil membre</h2>
+
   <%= form_with model: @member, local: true do |f| %>
     <div class="mb-3">
       <%= f.label :pseudo, class: "label-ghost" %>
@@ -11,6 +12,14 @@
       <%= f.text_area :presentation, class: "form-control w-100" %>
     </div>
 
+    <%# Rôle honorifique : visible uniquement pour admin %>
+    <% if current_user&.admin? %>
+      <div class="mb-3">
+        <%= f.label :role, class: "label-ghost" %>
+        <%= f.select :role, Member.roles_for_select, {}, class: "form-control w-100" %>
+      </div>
+    <% end %>
+
     <div class="mb-5">
       <%= f.label :reseau_social, class: "label-ghost" %>
       <%= f.text_field :reseau_social, class: "form-control w-100" %>
@@ -18,5 +27,4 @@
 
     <%= f.submit "Mettre à jour", class: "btn btn-warning" %>
   <% end %>
-
 </div>

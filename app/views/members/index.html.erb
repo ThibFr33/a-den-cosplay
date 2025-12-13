@@ -1,18 +1,51 @@
+<%# ===== SECTION BUREAU ===== %>
+<% if @bureau_members.any? %>
+  <div class="container my-5 members-container">
+    <h2 class="text-center mb-4 text-warning">Bureau</h2>
+
+    <div class="members-list">
+      <% @bureau_members.each do |member| %>
+        <div class="member-card">
+          <%= link_to member_path(member) do %>
+            <% if member.photos.attached? %>
+              <%= image_tag url_for(member.photos.first),
+                    alt: member.pseudo,
+                    loading: "lazy" %>
+            <% end %>
+
+            <h2><%= member.pseudo %></h2>
+            <p class="text-light small">
+              <%= member.role_label %>
+            </p>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+<% end %>
+
+<%# ===== SECTION MEMBRES ===== %>
 <div class="container my-5 members-container">
-  <h1 class="text-center mb-4 text-warning">Nos Membres</h1>
+  <h2 class="text-center mb-4 text-warning">Nos Membres</h2>
+
   <% if user_signed_in? && current_user.admin? %>
     <div class="d-flex justify-content-start mb-3">
-      <%= link_to "Ajouter un membre", new_member_path,
-                  class: "btn btn-warning" %>
+      <%= link_to "Ajouter un membre",
+            new_member_path,
+            class: "btn btn-warning" %>
     </div>
   <% end %>
+
   <div class="members-list">
     <% @members.each do |member| %>
       <div class="member-card">
         <%= link_to member_path(member) do %>
           <% if member.photos.attached? %>
-            <%= image_tag url_for(member.photos.first), alt: member.pseudo, loading: "lazy" %>
+            <%= image_tag url_for(member.photos.first),
+                  alt: member.pseudo,
+                  loading: "lazy" %>
           <% end %>
+
           <h2><%= member.pseudo %></h2>
         <% end %>
       </div>

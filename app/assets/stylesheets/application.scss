@@ -10,14 +10,35 @@
  * files in this directory. Styles in this file should be added after the last require_* statement.
  * It is generally better to create a new file per style scope.
  *
- *= require_tree .
- *= require_self
  */
- @import "bootstrap";
- @import "variables";
- @import "animations";
- @import "components/*";
- @import "pages/*";
+ // On supprime TOUS les require_ sprockets
+// Sprockets ne doit plus gérer le CSS, seulement SCSS
+
+@import "bootstrap";
+@import "variables";
+@import "event";
+@import "fonts";
+
+// Imports explicites
+@import "components/add_photo_button";
+@import "components/carousel";
+@import "components/contact_form";
+@import "components/custom_navbar";
+@import "components/footer";
+@import "components/member";
+@import "components/user_dropdown";
+
+@import "pages/about";
+@import "pages/home";
+
+// Ton CSS global ensuite
+html, body {
+  height: 100%;
+}
+
+.main-site {
+  background-color: rgba(0, 0 ,0, 0.6);
+}
 
 body {
   background-image: image-url("background.jpg");
@@ -26,18 +47,50 @@ body {
   background-attachment: fixed;
   background-repeat: no-repeat;
   font-family: orbitron;
-  color: $rose;
+  color: $white;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;  // équivaut à top:0; right:0; bottom:0; left:0;
+  background-image: image-url("background.jpg");
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+
+  filter: brightness(0.5);
+
+  z-index: -1;           // derrière tout le contenu
+  pointer-events: none;  // ne bloque jamais les clics
+}
+
+filter {
+  backdrop-filter: rgba(152, 36, 36, 0.342);
 }
 h1 {
   color: whitesmoke;
   padding-top: 50px;
 }
+
 a {
   color: $rose;
 }
+
 html {
   overflow-y: scroll;
 }
+
+main {
+  flex: 1;
+}
+
 .label-ghost {
   color: ghostwhite !important;
+}
+.fa-bounce {
+  --fa-animation-duration: 3.5s;
 }

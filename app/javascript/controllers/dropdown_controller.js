@@ -5,8 +5,6 @@ export default class extends Controller {
   static targets = ["menu"]
 
   connect() {
-    console.log(" DropdownController connecté sur :", this.element)
-
     this.outsideClick = (event) => {
       if (!this.element.contains(event.target)) {
         this.element.classList.remove("open")
@@ -23,7 +21,5 @@ export default class extends Controller {
   toggle(event) {
     event.stopPropagation()
     this.element.classList.toggle("open")
-
-    console.log("▶ toggle :", this.element.classList.contains("open") ? "OUVERT" : "FERMÉ")
   }
 }

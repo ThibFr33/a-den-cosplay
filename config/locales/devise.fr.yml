@@ -20,9 +20,23 @@ fr:
       last_attempt: "Dernière tentative avant verrouillage du système."
       locked: "Profil verrouillé. Procédez à une vérification."
       unconfirmed: "Vous devez confirmer votre compte avant de continuer."
+      timeout: "Votre session a expiré. Veuillez vous reconnecter."
+    mailer:
+      invitation_instructions:
+        subject: "Transmission d'invitation du Clan Dragon Krayt A'den"
+        hello: "Salutations, %{email}."
+        someone_invited_you: >
+          Une transmission officielle vous a été envoyée par le Clan Dragon Krayt A'den.
+          Vous êtes convié à rejoindre nos rangs. Pour confirmer votre arrivée au sein du clan,
+          veuillez suivre le lien d’activation ci-dessous.
+        accept: "Rejoindre le Clan"
+        accept_until: "Cette invitation restera valide jusqu’au %{due_date}."
+        ignore: >
+          Aucun dossier ne sera créé tant que vous n’aurez pas confirmé votre engagement
+          et défini votre mot de passe.
+
     user:
       unconfirmed: "Vous devez confirmer votre compte avant de continuer."
-
 
   date:
     month_names:
@@ -41,11 +55,22 @@ fr:
       - "décembre"
     formats:
       default: "%d/%m/%Y"
-      long:    "%d %B %Y"       # ex. "13 mai 2025"
+      long:    "%d %B %Y"
   time:
     formats:
       default: "%H:%M"
-      long:    "%d %B %Y" # ex. "13 mai 2025 14:30"
+      long:    "%d %B %Y"
+
+  activerecord:
+    errors:
+      models:
+        user:
+          attributes:
+            password:
+              too_short: "est trop court. Il doit contenir au minimum %{count} caractères."
+              missing_uppercase: "doit contenir au moins une lettre majuscule."
+              missing_digit: "doit contenir au moins un chiffre."
+              missing_special: "doit contenir au moins un caractère spécial."
 
   activemodel:
     errors:
@@ -61,4 +86,8 @@ fr:
               invalid: " est invalide."
             message:
               blank: " ne peut pas être vide."
-              too_short: "  est trop court (minimum %{count} caractères)."
+              too_short: " est trop court (minimum %{count} caractères)."
+
+  errors:
+    messages:
+      not_saved: "Impossible d’enregistrer ce compte."

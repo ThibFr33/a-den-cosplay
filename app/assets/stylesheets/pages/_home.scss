@@ -1,14 +1,15 @@
 .home-logo {
   /* Jamais moins de 150px, idéal à 40vw, jamais plus de 400px */
-  width: clamp(150px, 40vw, 400px);
+  width: clamp(150px, 40vw, 250px);
   height: auto;                  /* garde les proportions */
   filter: drop-shadow(0 0 15px rgba(255, 215, 0, 0.5));
   animation: logoFadeIn 2s ease-in-out forwards;
 }
 
 .home-container {
-  justify-content: flex-start;      /* plus de centering vertical */
-  padding-top: 10vh;                /* ajuste selon l’effet désiré */
+  justify-content: flex-start;      /* plus de centering vertical *//* ajuste selon l’effet désiré */
+  min-height: 40vh;
+  margin-top: 5em;
 }
 
 
@@ -42,11 +43,11 @@
 .welcome-title {
   font-family: 'Orbitron', sans-serif;
   /* Jamais moins de 1.8rem, idéal à 6vw, jamais plus de 3.2rem */
-  font-size: clamp(1.8rem, 6vw, 3.2rem);
+  font-size: clamp(1rem, 6vw, 2rem);
   text-align: center;
-  animation: switchToMandalorian 7s ease forwards;
-  text-shadow: 0 0 10px rgba(255, 215, 0, 0.6),
-               0 0 20px rgba(255, 215, 0, 0.4);
+  animation: switchToMandalorian 3s ease forwards;
+  text-shadow: 0 0 5px rgba(255, 215, 0, 0.6),
+               0 0 5px rgba(255, 215, 0, 0.4);
   letter-spacing: 2px;
   padding: clamp(0.5rem, 2vw, 1rem);  /* padding également fluide */
   border: 1px solid rgba(255, 215, 0, 0.2);
@@ -96,4 +97,3 @@
     display: none !important; // cache sur tablette/desktop
   }
 }
-

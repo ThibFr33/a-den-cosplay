@@ -8,9 +8,11 @@ class MembersController < ApplicationController
   before_action :authorize_edit!, only: [:edit, :update]
 
   def index
-    @members = Member.all
-    @members = Member.order(pseudo: :asc)
+    @bureau_members = Member.bureau_ordered
+    @members = Member.non_bureau.order(:pseudo)
   end
+
+
 
   def show
     @member = Member.find(params[:id])
@@ -22,24 +24,31 @@ class MembersController < ApplicationController
   end
 
   def create
-    email = member_params.dig(:user_attributes, :email).to_s.strip
+    user_attrs = member_params[:user_attributes] || {}
 
-    user = User.invite!(email: email)
+    email = user_attrs[:email].to_s.strip
+    admin_flag = (user_attrs[:admin] == "true")  # "true" => true, sinon false
+
+    user = User.invite!(email: email, admin: admin_flag)
+
     if user.invalid?
-      @member = Member.new; @member.build_user(email: email)
+      @member = Member.new
+      @member.build_user(email: email, admin: admin_flag)
       @member.errors.add(:base, user.errors.full_messages.to_sentence)
       return render :new, status: :unprocessable_entity
     end
-    attrs   = member_params.to_h.except("user_attributes")
+
+    attrs = member_params.to_h.except("user_attributes")
     @member = Member.new(attrs.merge(user: user))
 
     if @member.save
       redirect_to @member, notice: "Invitation envoyée."
     else
-      @member.build_user(email: email) unless @member.user
+      @member.build_user(email: email, admin: admin_flag) unless @member.user
       render :new, status: :unprocessable_entity
     end
   end
+
 
   def edit
     @member = Member.find(params[:id])
@@ -98,9 +107,21 @@ class MembersController < ApplicationController
     end
   end
 
+  # def member_params
+  #   params.require(:member).permit(:pseudo, :reseau_social, :presentation, :role, photos: [], user_attributes: [:id, :email, :admin])
+  # end
   def member_params
-    params.require(:member).permit(:pseudo, :reseau_social, :presentation, :role, photos: [], user_attributes: [:email])
+    permitted = [:pseudo, :reseau_social, :presentation, photos: []]
+
+    # rôle honorifique : uniquement admin
+    permitted << :role if current_user&.admin?
+
+    permitted_user = [:id, :email]
+    permitted_user << :admin if current_user&.admin?
+
+    params.require(:member).permit(*permitted, user_attributes: permitted_user)
   end
+
 
   def set_member
     member_id = params[:member_id] || params[:id]
@@ -120,4 +141,3 @@ class MembersController < ApplicationController
     end
   end
 end
-
