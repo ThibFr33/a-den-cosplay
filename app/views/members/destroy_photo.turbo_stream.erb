@@ -1,5 +1,5 @@
 <%= turbo_stream.update "carousel" do %>
-  <%= render "layouts/carousel", object: @member, delete_path: ->(member, attachment) { member_photo_path(member, attachment.id) } %>
+  <%= render "layouts/member_carousel", member: @member %>
 <% end %>
 
 

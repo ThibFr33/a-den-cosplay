@@ -53,10 +53,25 @@ class EventsController < ApplicationController
   end
 
   def destroy_photo
-    attachment = @event.photos.find(params[:photo_id])
+    attachment = @event.photos.find_by(id: params[:photo_id])
+
+    unless attachment
+      flash.now[:alert] = "Photo introuvable."
+      render turbo_stream: turbo_stream.update("flash", partial: "layouts/flash")
+      return
+    end
+
     attachment.purge
-    redirect_to @event, notice: "Photo supprimée !"
+    flash.now[:notice] = "Photo supprimée avec succès."
+
+    render turbo_stream: [
+      turbo_stream.update("event-carousel", partial: "layouts/event_carousel", locals: { event: @event }),
+      turbo_stream.update("flash", partial: "layouts/flash")
+    ]
   end
+
+
+
 
   private
 

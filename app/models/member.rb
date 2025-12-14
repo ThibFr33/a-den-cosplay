@@ -2,9 +2,10 @@ class Member < ApplicationRecord
   has_many_attached :photos
   belongs_to :user
   accepts_nested_attributes_for :user
-
   validates :user_id, uniqueness: true
   validates :pseudo, uniqueness: true
+  before_validation :normalize_reseau_social_url
+  validate :reseau_social_must_be_http_url
 
   enum role: {
     president: "president",
@@ -73,6 +74,31 @@ class Member < ApplicationRecord
 
   def capitalize_pseudo
     return if pseudo.blank?
-    self.pseudo = pseudo.downcase.gsub(/(?:^|[ '\-])([a-z])/) { $1.upcase }
+
+    self.pseudo = pseudo
+      .downcase
+      .gsub(/(^|[ \-])([a-zà-ÿ])/i) { "#{$1}#{$2.upcase}" }
+  end
+
+  def normalize_reseau_social_url
+    return if reseau_social.blank?
+
+    self.reseau_social = reseau_social.strip
+    self.reseau_social = self.reseau_social.delete(" ")
+
+
+    # si l'utilisateur colle "instagram.com/..." sans scheme
+    unless reseau_social.match?(/\Ahttps?:\/\//i)
+      self.reseau_social = "https://#{reseau_social}"
+    end
+  end
+
+  def reseau_social_must_be_http_url
+      return if reseau_social.blank?
+
+      uri = URI.parse(reseau_social) rescue nil
+
+      ok = uri&.is_a?(URI::HTTP) && uri.host.present?
+      errors.add(:reseau_social, "doit être une URL http(s) valide") unless ok
   end
 end

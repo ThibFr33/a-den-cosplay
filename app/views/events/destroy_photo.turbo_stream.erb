@@ -1,8 +1,8 @@
-<%= turbo_stream.update "carousel" do %>
-  <%= render "layouts/carousel", object: @event, delete_path: ->(event, attachment) { event_photo_path(event, attachment.id) } %>
+<%= turbo_stream.update "event-carousel" do %>
+  <%= render "layouts/event_carousel", event: @event %>
 <% end %>
 
 
 <%= turbo_stream.update "flash" do %>
-  <%= render "layouts/flash", notice: "Photo supprimée avec succès." %>
+  <%= render "layouts/flash_alert", notice: "Photo supprimée avec succès." %>
 <% end %>
