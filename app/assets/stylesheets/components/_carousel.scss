@@ -11,7 +11,7 @@
 .carousel-image-wrapper {
   position: relative;
   width: 100%;
-  max-height: 90vh;
+  max-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -41,6 +41,6 @@
   }
 
   .carousel-image-wrapper {
-    max-height: 60vh;        /* un peu plus compact sur mobile */
+    max-height: 100vh;
   }
 }
