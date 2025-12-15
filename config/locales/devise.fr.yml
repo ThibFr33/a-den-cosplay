@@ -1,17 +1,32 @@
 fr:
   devise:
     sessions:
-      signed_in: "Transmission sécurisée réussie. Bienvenue ."
+      signed_in: "Transmission sécurisée réussie. Bienvenue."
       signed_out: "Déconnexion effectuée. N'oubliez pas vos crédits."
+
     passwords:
       send_instructions: "Les instructions de réinitialisation de votre code d'accès ont été transmises."
+      send_paranoid_instructions: "Si cette holomail existe dans nos archives, les instructions ont été transmises."
       updated: "Votre code d'accès a été réinitialisé. Renforcez votre sécurité."
+      updated_not_active: "Votre code d'accès a été réinitialisé."
+
     registrations:
       signed_up: "Bienvenue parmi les rangs de Dragon Krayt A'den."
       updated: "Votre profil a été mis à jour. Préparez-vous pour la prochaine mission."
       destroyed: "Votre compte a été supprimé. Ce n'est qu'un au revoir, Mandalorien."
+      signed_up_but_unconfirmed: "Confirmation requise : consultez votre holomail."
+      update_needs_confirmation: "Confirmation requise pour valider ce changement."
+
     confirmations:
       confirmed: "Votre holotransmission a été confirmée. Accès activé."
+      send_instructions: "Les instructions de confirmation ont été transmises."
+      send_paranoid_instructions: "Si cette holomail existe dans nos archives, les instructions ont été transmises."
+
+    unlocks:
+      send_instructions: "Les instructions de déverrouillage ont été transmises."
+      send_paranoid_instructions: "Si ce profil existe, les instructions ont été transmises."
+      unlocked: "Profil déverrouillé. Accès rétabli."
+
     failure:
       invalid: "Coordonnées incorrectes. Vérifiez votre identifiant de chasseur de primes."
       not_found_in_database: "Aucun profil correspondant n’a été localisé dans les archives."
@@ -21,6 +36,8 @@ fr:
       locked: "Profil verrouillé. Procédez à une vérification."
       unconfirmed: "Vous devez confirmer votre compte avant de continuer."
       timeout: "Votre session a expiré. Veuillez vous reconnecter."
+      unauthenticated: "Accès refusé. Identification requise."
+
     mailer:
       invitation_instructions:
         subject: "Transmission d'invitation du Clan Dragon Krayt A'den"
@@ -35,8 +52,8 @@ fr:
           Aucun dossier ne sera créé tant que vous n’aurez pas confirmé votre engagement
           et défini votre mot de passe.
 
-    user:
-      unconfirmed: "Vous devez confirmer votre compte avant de continuer."
+  user:
+    unconfirmed: "Vous devez confirmer votre compte avant de continuer."
 
   date:
     month_names:
@@ -55,11 +72,12 @@ fr:
       - "décembre"
     formats:
       default: "%d/%m/%Y"
-      long:    "%d %B %Y"
+      long: "%d %B %Y"
+
   time:
     formats:
       default: "%H:%M"
-      long:    "%d %B %Y"
+      long: "%d %B %Y"
 
   activerecord:
     errors:
@@ -71,6 +89,14 @@ fr:
               missing_uppercase: "doit contenir au moins une lettre majuscule."
               missing_digit: "doit contenir au moins un chiffre."
               missing_special: "doit contenir au moins un caractère spécial."
+            password_confirmation:
+              confirmation: "ne correspond pas au code d'accès."
+    attributes:
+      user:
+        email: "Email"
+        password: "Code d’accès"
+        password_confirmation: "Confirmation du code d’accès"
+        current_password: "Code d’accès actuel"
 
   activemodel:
     errors:
@@ -90,4 +116,9 @@ fr:
 
   errors:
     messages:
+      confirmation: "ne correspond pas."
       not_saved: "Impossible d’enregistrer ce compte."
+     format: "%{attribute} %{message}"
+      messages:
+        confirmation: "ne correspond pas."
+        not_saved: "Impossible d’enregistrer ce compte."
