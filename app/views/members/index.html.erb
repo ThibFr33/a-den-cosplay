@@ -38,7 +38,14 @@
 
   <div class="members-list">
     <% @members.each do |member| %>
-      <div class="member-card">
+      <div class="member-card position-relative">
+        <% if member.adherent_role? %>
+          <div class="adherent-badge">
+            <%= image_tag "badge-adherent.png",
+                  alt: "Adhérent",
+                  title: "Adhérent Dragon Krayt A'den" %>
+          </div>
+        <% end %>
         <%= link_to member_path(member) do %>
           <% if member.photos.attached? %>
             <%= image_tag url_for(member.photos.first),
@@ -51,4 +58,30 @@
       </div>
     <% end %>
   </div>
+
+  <% if @guests.any? %>
+    <div class="container my-5 members-container">
+      <h2 class="text-center mb-4 text-warning">Invités d'honneur</h2>
+
+      <div class="members-list">
+        <% @guests.each do |member| %>
+          <div class="member-card">
+            <%= link_to member_path(member) do %>
+              <% if member.photos.attached? %>
+                <%= image_tag url_for(member.photos.first),
+                      alt: member.pseudo,
+                      loading: "lazy" %>
+              <% end %>
+
+              <h2><%= member.pseudo %></h2>
+              <p class="text-light small">
+                <%= member.role_label %>
+              </p>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+
 </div>

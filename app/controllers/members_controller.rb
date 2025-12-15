@@ -8,8 +8,9 @@ class MembersController < ApplicationController
   before_action :authorize_edit!, only: [:edit, :update]
 
   def index
+    @guests = Member.guest_role.order(created_at: :asc)
     @bureau_members = Member.bureau_ordered
-    @members = Member.non_bureau.order(:pseudo)
+    @members = Member.non_bureau.where.not(role: "guest").order(:pseudo)
   end
 
 
