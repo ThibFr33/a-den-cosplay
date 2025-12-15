@@ -6,7 +6,7 @@ fr:
 
     passwords:
       send_instructions: "Les instructions de réinitialisation de votre code d'accès ont été transmises."
-      send_paranoid_instructions: "Si cette holomail existe dans nos archives, les instructions ont été transmises."
+      send_paranoid_instructions: "Si cet holomail existe dans nos archives, les instructions ont été transmises."
       updated: "Votre code d'accès a été réinitialisé. Renforcez votre sécurité."
       updated_not_active: "Votre code d'accès a été réinitialisé."
 
@@ -94,9 +94,9 @@ fr:
     attributes:
       user:
         email: "Email"
-        password: "Code d’accès"
-        password_confirmation: "Confirmation du code d’accès"
-        current_password: "Code d’accès actuel"
+        password: "Mot de passe"
+        password_confirmation: "Confirmation du mot de passe"
+        current_password: "Mot de passe actuel"
 
   activemodel:
     errors:
@@ -115,10 +115,7 @@ fr:
               too_short: " est trop court (minimum %{count} caractères)."
 
   errors:
+    format: "%{attribute} %{message}"
     messages:
       confirmation: "ne correspond pas."
       not_saved: "Impossible d’enregistrer ce compte."
-     format: "%{attribute} %{message}"
-      messages:
-        confirmation: "ne correspond pas."
-        not_saved: "Impossible d’enregistrer ce compte."
