@@ -74,7 +74,7 @@
     <div class="d-flex flex-wrap gap-3 justify-content-center">
       <% @member.photos.each do |photo| %>
         <div class="position-relative">
-          <%= image_tag photo.variant(resize_to_fill: [200, 200]).processed, class: "rounded shadow" %>
+          <%= image_tag photo.variant(resize_to_fill: [200, 200]), class: "rounded shadow" %>
 
           <!-- Bouton supprimer icône -->
           <%= link_to member_photo_path(@member, photo.id),

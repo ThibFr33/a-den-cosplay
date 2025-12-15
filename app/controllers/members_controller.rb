@@ -8,8 +8,9 @@ class MembersController < ApplicationController
   before_action :authorize_edit!, only: [:edit, :update]
 
   def index
+    @guests = Member.guest_role.order(created_at: :asc)
     @bureau_members = Member.bureau_ordered
-    @members = Member.non_bureau.order(:pseudo)
+    @members = Member.non_bureau.where.not(role: "guest").order(:pseudo)
   end
 
 
@@ -81,12 +82,21 @@ class MembersController < ApplicationController
   end
 
   def destroy_photo
-    attachment = @member.photos.attachments.find(params[:photo_id])
-    attachment.purge
-    respond_to do |format|
-      format.html { redirect_to @member, notice: "Photo supprimée !" }
-      format.turbo_stream { flash.now[:notice] = "Photo supprimée !" }
+    attachment = @member.photos.attachments.find_by(id: params[:photo_id])
+
+    unless attachment
+      flash.now[:alert] = "Photo introuvable."
+      render turbo_stream: turbo_stream.update("flash", partial: "layouts/flash_alert")
+      return
     end
+
+    attachment.purge
+    flash.now[:notice] = "Photo supprimée !"
+
+    render turbo_stream: [
+      turbo_stream.update("member-carousel", partial: "layouts/member_carousel", locals: { member: @member }),
+      turbo_stream.update("flash", partial: "layouts/flash_alert")
+    ]
   end
 
   def add_photo

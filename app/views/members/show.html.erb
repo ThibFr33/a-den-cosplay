@@ -1,9 +1,8 @@
 <div class="container mt-5">
   <div class="card mx-auto" style="max-width: 600px; background-color:rgba(0, 0, 0, 0.6) ; color: #eee;">
-    <div id="carousel">
+    <div id="member-carousel">
       <%= render "layouts/member_carousel",
-      member: @member,
-      delete_path: ->(member, attachment) { member_photo_path(member, attachment.id) } %>
+      member: @member %>
 
     </div>
     <% if user_signed_in? && current_user.admin? %>

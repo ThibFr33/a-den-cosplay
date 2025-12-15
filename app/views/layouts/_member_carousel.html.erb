@@ -7,7 +7,7 @@
           <div class="carousel-item <%= 'active' if index.zero? %>">
 
             <div class="carousel-image-wrapper">
-              <%= image_tag attachment.variant(resize_to_limit: [1200, 900]).processed,
+              <%= image_tag attachment.variant(resize_to_limit: [1200, 900]),
                     class: "member-carousel-img" %>
 
               <% if user_signed_in? && (current_user == member.user || current_user.admin?) %>
