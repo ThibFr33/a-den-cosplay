@@ -47,8 +47,11 @@
       <%= f.file_field :photos, multiple: true, class: "form-control" %>
     </div>
 
-    <div class="text-center mt-4">
+    <div class="text-center mt-4 d-flex justify-content-center gap-3">
       <%= f.submit "Créer l'événement", class: "btn btn-warning" %>
+        <%= link_to "Annuler",
+        events_path,
+        class: "btn btn-secondary" %>
     </div>
   <% end %>
 </div>

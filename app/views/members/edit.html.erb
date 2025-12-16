@@ -25,6 +25,13 @@
       <%= f.text_field :reseau_social, class: "form-control w-100" %>
     </div>
 
-    <%= f.submit "Mettre à jour", class: "btn btn-warning" %>
+    <div class="d-flex gap-3 justify-content-center">
+      <%= f.submit "Mettre à jour", class: "btn btn-warning" %>
+
+      <%= link_to "Annuler",
+            member_path(@member),
+            class: "btn btn-secondary" %>
+    </div>
+
   <% end %>
 </div>
